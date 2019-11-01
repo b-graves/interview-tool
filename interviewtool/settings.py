@@ -77,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'interviewtool.interviewtool.wsgi.application'
+WSGI_APPLICATION = 'interviewtool.wsgi.application'
 
 
 # Database
