@@ -25,7 +25,7 @@ SECRET_KEY = 'ms*c6j2x7xk^p-6*24%5gdkd^#r1cnrl99v7qiis($s)9@fjp2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['bengraves-interview-tool.herokuapp.com']
 
 
 # Application definition
@@ -127,3 +127,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROUTE = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
