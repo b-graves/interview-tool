@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
 
+import { Page, Toolbar, Button } from 'react-onsenui';
+
 export class Login extends Component {
     state = {
         username: '',
@@ -27,28 +29,9 @@ export class Login extends Component {
             return <Redirect to="/" />
         }
         return (
-            <div>
-                <h2>Login</h2>
-                <form onSubmit={this.onSubmit}>
-                    <label>Username</label>
-                    <input 
-                        type="text"
-                        name="username"
-                        onChange={this.onChange}
-                        value={this.state.username}
-                    />
-                    <label>Password</label>
-                    <input 
-                        type="password"
-                        name="password"
-                        onChange={this.onChange}
-                        value={this.state.password}
-                    />
-                    <input type="submit" />
-                    Don't have an account? <Link to="/register">Register</Link>
-                </form>
-                
-            </div>
+            <Page>
+                <Button onClick={this.handleClick}>Tap me!</Button>
+            </Page>
         )
     }
 }
