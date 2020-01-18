@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
 
-import { Page, Toolbar, Button } from 'react-onsenui';
+import { Card } from 'react-onsenui';
+
+import { Page, Input, Toolbar } from 'react-onsenui';
 
 export class Login extends Component {
     state = {
@@ -19,18 +21,54 @@ export class Login extends Component {
 
     onSubmit = e => {
         e.preventDefault();
+        console.log(this.state)
         this.props.login(this.state.username, this.state.password)
     }
 
-    onChange = e => this.setState({ [e.target.name]: e.target.value});
+    onChange = e => this.setState({ [e.target.id]: e.target.value });
 
     render() {
-        if (this.props.isAuthenticated){
+        if (this.props.isAuthenticated) {
             return <Redirect to="/" />
         }
         return (
-            <Page>
-                <Button onClick={this.handleClick}>Tap me!</Button>
+            <Page renderToolbar={() =>
+                <Toolbar>
+                    <div className="left" style={{ marginLeft: "15px" }}>
+                        Interview Tool
+                  </div>
+                </Toolbar>}>
+                <div style={{ textAlign: "center", marginTop: "20%" }}>
+                    <h2>Login</h2>
+                    <form onSubmit={this.onSubmit}>
+                        <p>
+                            <Input
+                                type="text"
+                                placeholder="Username"
+                                inputId="username"
+                                modifier='underbar'
+                                onChange={this.onChange}
+                                value={this.state.username}
+                            />
+                        </p>
+                        <p>
+                            <Input
+                                type="password"
+                                placeholder="Password"
+                                inputId="password"
+                                modifier='underbar'
+                                onChange={this.onChange}
+                                value={this.state.password}
+                            />
+                        </p>
+                        <p>
+                            <button type="submit" className="button">Submit</button>
+                        </p>
+                        <p>
+                            Don't have an account? <Link to="/register">Register</Link>
+                        </p>
+                    </form>
+                </div>
             </Page>
         )
     }

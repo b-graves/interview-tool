@@ -1,1 +1,1 @@
-import App from './components/App';
+import Authentication from './components/Authentication';
