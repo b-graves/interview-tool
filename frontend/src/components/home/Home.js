@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Navigator, Page, Button, Toolbar, BackButton } from 'react-onsenui';
-import Dashboard from '../interviews/Dashboard';
+import Dashboard from '../plans/Dashboard';
 
 export class Home extends Component {
     pushPage() {
@@ -9,10 +9,12 @@ export class Home extends Component {
 
     render() {
         return (
-            <Page>
-                {/* <Toolbar>
-                    <div className="center">Home</div>
-                </Toolbar> */}
+            <Page renderToolbar={() =>
+                <Toolbar>
+                    <div className="center">
+                        Interview Tool
+                    </div>
+                </Toolbar>}>
                 <Button onClick={this.pushPage.bind(this)}>Push page</Button>
             </Page>
         );

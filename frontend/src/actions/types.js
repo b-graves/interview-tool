@@ -1,7 +1,7 @@
-// INTERVIEWS
-export const GET_INTERVIEWS = "GET_INTERVIEWS";
-export const DELETE_INTERVIEW = "DELETE_INTERVIEW";
-export const ADD_INTERVIEW = "ADD_INTERVIEW";
+// PLANS
+export const GET_PLANS = "GET_PLANS";
+export const DELETE_PLAN = "DELETE_PLAN";
+export const ADD_PLAN = "ADD_PLAN";
 
 // ALERTS
 export const GET_ERRORS = "GET_ERRORS";

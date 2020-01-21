@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from interviews.models import Interview
+from interviews.models import Plan
 
-# Interview Serializer
-class InterviewSerializer(serializers.ModelSerializer):
+# Plan Serializer
+class PlanSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Interview
+        model = Plan
         fields = '__all__'
         

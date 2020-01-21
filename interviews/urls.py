@@ -1,7 +1,7 @@
 from rest_framework import routers
-from .api import InterviewViewSet
+from .api import PlanViewSet
 
 router = routers.DefaultRouter()
-router.register('api/interviews', InterviewViewSet, 'interviews')
+router.register('api/plans', PlanViewSet, 'plans')
 
 urlpatterns = router.urls

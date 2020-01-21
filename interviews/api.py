@@ -1,17 +1,17 @@
-from interviews.models import Interview
+from interviews.models import Plan
 from rest_framework import viewsets, permissions
-from .serializers import InterviewSerializer
+from .serializers import PlanSerializer
 
-# Interview Viewset
-class InterviewViewSet(viewsets.ModelViewSet):
-    queryset = Interview.objects.all()
+# Plan Viewset
+class PlanViewSet(viewsets.ModelViewSet):
+    queryset = Plan.objects.all()
     permission_classes = [
         permissions.IsAuthenticated
     ]
-    serializer_class = InterviewSerializer
+    serializer_class = PlanSerializer
 
     def get_queryset(self):
-        return self.request.user.interviews.all()
+        return self.request.user.plans.all()
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
