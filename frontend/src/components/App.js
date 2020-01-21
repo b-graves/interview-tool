@@ -3,7 +3,8 @@ import { Navigator } from 'react-onsenui';
 
 import { Home } from './home/Home';
 
-
+import 'onsenui/css/onsenui.css';
+import 'onsenui/css/onsen-css-components.css';
 
 export default class App extends React.Component {
 

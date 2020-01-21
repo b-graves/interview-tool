@@ -13,9 +13,6 @@ import { Provider } from 'react-redux';
 import store from '../store';
 import { loadUser } from "../actions/auth";
 
-import 'onsenui/css/onsenui.css';
-import 'onsenui/css/onsen-css-components.css';
-
 
 
 class Authentication extends Component {

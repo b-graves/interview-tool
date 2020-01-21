@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Form from "./Form";
 import Plans from "./Plans"
 import { Navigator, Page, Button, Toolbar, BackButton } from 'react-onsenui';
+import Content from '../layout/Content'
 
 export default class Dashboard extends Component {
 
@@ -26,12 +26,9 @@ export default class Dashboard extends Component {
                         Interview Tool
                     </div>
                 </Toolbar>}>
-                <p style={{ textAlign: 'center' }}>
-                    <Button onClick={this.pushPage.bind(this)}>Push page</Button>
-                    <Button onClick={this.popPage.bind(this)}>Pop page</Button>
-                </p>
-                <Form />
-                <Plans />
+                <Content>
+                    <Plans />
+                </Content>
             </Page>
         );
     }
