@@ -33,7 +33,7 @@ export class Add extends Component {
                     <Input
                         type="text"
                         name="name"
-                        placeholder="+ Add Plan"
+                        placeholder="+ Add New Plan"
                         onChange={this.onChange}
                         value={this.state.name}
                         style={{width: "80%"}}
