@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Plans from "./Plans"
 import { Navigator, Page, Button, Toolbar, BackButton } from 'react-onsenui';
-import Content from '../layout/Content'
+import Content from '../layout/Content';
 
 export default class Dashboard extends Component {
 
@@ -27,7 +27,7 @@ export default class Dashboard extends Component {
                     </div>
                 </Toolbar>}>
                 <Content>
-                    <Plans />
+                    <Plans navigator={this.props.navigator} />
                 </Content>
             </Page>
         );

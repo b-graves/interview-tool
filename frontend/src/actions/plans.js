@@ -2,7 +2,7 @@ import axios from 'axios';
 import { createMessage, returnErrors } from './messages';
 import { tokenConfig } from './auth';
 
-import { GET_PLANS, DELETE_PLAN, ADD_PLAN } from './types';
+import { GET_PLANS, GET_PLAN, DELETE_PLAN, ADD_PLAN } from './types';
 
 // GET PLANS
 export const getPlans = () => (dispatch, getState) => {
@@ -12,6 +12,19 @@ export const getPlans = () => (dispatch, getState) => {
             dispatch({
                 type: GET_PLANS,
                 payload: res.data
+            });
+        })
+        .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+}
+
+// GET PLAN
+export const getPlan = (id) => (dispatch, getState) => {
+    axios
+        .get(`/api/plans/${id}`, tokenConfig(getState))
+        .then(res => {
+            dispatch({
+                type: GET_PLAN,
+                payload: id
             });
         })
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));

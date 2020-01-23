@@ -13,3 +13,7 @@ h3 {
     font-size: 24px !important;
     font-weight: 1000 !important;
 }
+
+* {
+    font-family: Roboto, sans-serif !important;
+}
