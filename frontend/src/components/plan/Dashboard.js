@@ -36,6 +36,8 @@ export class Dashboard extends Component {
                 </Toolbar>}>
                 <Content>
                     <h1>{this.props.plan ? this.props.plan.name : <ProgressCircular indeterminate/>}</h1>
+                    <h2>Session Components</h2>
+                    {/* <Components /> */}
                 </Content>
             </Page>
         )

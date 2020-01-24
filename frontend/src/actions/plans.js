@@ -6,6 +6,8 @@ import { GET_PLANS, GET_PLAN, DELETE_PLAN, ADD_PLAN } from './types';
 
 // GET PLANS
 export const getPlans = () => (dispatch, getState) => {
+    console.log("Token Config:")
+    console.log(tokenConfig(getState));
     axios
         .get('/api/plans/', tokenConfig(getState))
         .then(res => {
@@ -19,8 +21,10 @@ export const getPlans = () => (dispatch, getState) => {
 
 // GET PLAN
 export const getPlan = (id) => (dispatch, getState) => {
+    console.log("Token Config:")
+    console.log(tokenConfig(getState));
     axios
-        .get(`/api/plans/${id}`, tokenConfig(getState))
+        .get(`/api/plans/${id}/`, tokenConfig(getState))
         .then(res => {
             dispatch({
                 type: GET_PLAN,
@@ -33,7 +37,7 @@ export const getPlan = (id) => (dispatch, getState) => {
 // DELETE PLAN
 export const deletePlan = (id) => (dispatch, getState) => {
     axios
-        .delete(`/api/plans/${id}`, tokenConfig(getState))
+        .delete(`/api/plans/${id}/`, tokenConfig(getState))
         .then(res => {
             dispatch(createMessage({ deletePlan: "Plan Deleted" }));
             dispatch({
