@@ -6,6 +6,8 @@ import { Home } from './home/Home';
 import 'onsenui/css/onsenui.css';
 import 'onsenui/css/onsen-css-components.css';
 
+import Alerts from './layout/Alerts';
+
 export default class App extends React.Component {
 
     renderPage(route, navigator) {

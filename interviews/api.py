@@ -1,7 +1,9 @@
 from interviews.models import Plan
 from interviews.models import Component
+from interviews.models import Participant
 from rest_framework import viewsets, permissions
 from .serializers import PlanSerializer
+from .serializers import ParticipantSerializer
 from .serializers import ComponentSerializer
 
 # Plan Viewset
@@ -28,6 +30,20 @@ class ComponentViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return self.request.user.components.all()
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+# Participant Viewset
+class ParticipantViewSet(viewsets.ModelViewSet):
+    queryset = Participant.objects.all()
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = ParticipantSerializer
+
+    def get_queryset(self):
+        return self.request.user.participants.all()
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

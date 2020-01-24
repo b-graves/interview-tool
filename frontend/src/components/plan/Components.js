@@ -24,9 +24,9 @@ export class Components extends Component {
     }
 
     render() {
+        console.log(this.props.planId)
         return (
             <Fragment>
-                <h2>Session Components</h2>
                 <List
                     dataSource={this.props.components}
                     renderRow={(component, idx) => (

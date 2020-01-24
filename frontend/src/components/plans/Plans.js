@@ -20,14 +20,13 @@ export class Plans extends Component {
     }
 
     openPlan(planId) {
-        console.log(planId)
         this.props.navigator.pushPage({ component: Dashboard, props: { planId } });
     }
 
     render() {
         return (
             <Fragment>
-                <h1>Session Plans</h1>
+                <h1>Your Sessions Plans</h1>
                 <List
                     dataSource={this.props.plans}
                     renderRow={(plan, idx) => (
@@ -36,7 +35,7 @@ export class Plans extends Component {
                             onClick={() => this.openPlan(plan.id)}
                         >
                             {plan.name}
-                            <Button modifier="quiet" onClick={this.props.deletePlan.bind(this, plan.id)}>Remove</Button>
+                        <Button modifier="quiet" onClick={this.props.deletePlan.bind(this, plan.id)}>Remove</Button>
                         </ListItem>
                     )}>
                         <Add />

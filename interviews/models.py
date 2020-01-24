@@ -10,23 +10,24 @@ class Component(models.Model):
     owner = models.ForeignKey(User, related_name="components", on_delete=models.CASCADE, null=True)
     plan = models.ForeignKey(Plan, related_name="components", on_delete=models.CASCADE, null=True)
 
-class Interview(models.Model):
+class Participant(models.Model):
     name = models.CharField(max_length=100)
-    plan = models.ForeignKey(Plan, related_name="interviews", on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(User, related_name="participants", on_delete=models.CASCADE, null=True)
+    plan = models.ForeignKey(Plan, related_name="participants", on_delete=models.CASCADE, null=True)
 
 class Response(models.Model):
     name = models.CharField(max_length=100)
-    interview = models.ForeignKey(Interview, related_name="responses", on_delete=models.CASCADE, null=True)
+    interview = models.ForeignKey(Participant, related_name="responses", on_delete=models.CASCADE, null=True)
     component = models.ForeignKey(Component, related_name="responses", on_delete=models.CASCADE, null=True)
 
 class BiasDeclaration(models.Model):
     name = models.CharField(max_length=100)
-    interview = models.ForeignKey(Interview, related_name="bias_declarations", on_delete=models.CASCADE, null=True)
+    interview = models.ForeignKey(Participant, related_name="bias_declarations", on_delete=models.CASCADE, null=True)
     component = models.ForeignKey(Component, related_name="bias_declarations", on_delete=models.CASCADE, null=True)
 
 class BiasReflection(models.Model):
     name = models.CharField(max_length=100)
-    interview = models.ForeignKey(Interview, related_name="bias_reflections", on_delete=models.CASCADE, null=True)
+    interview = models.ForeignKey(Participant, related_name="bias_reflections", on_delete=models.CASCADE, null=True)
     component = models.ForeignKey(Component, related_name="bias_reflections", on_delete=models.CASCADE, null=True)
 
 class InsightTagType(models.Model):

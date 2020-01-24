@@ -40,7 +40,7 @@ export const deleteComponent = (id) => (dispatch, getState) => {
     axios
         .delete(`/api/components/${id}/`, tokenConfig(getState))
         .then(res => {
-            dispatch(createMessage({ deleteComponent: "Component Deleted" }));
+            dispatch(createMessage({ genericMessage: "Component Deleted" }));
             dispatch({
                 type: DELETE_COMPONENT,
                 payload: id
@@ -53,7 +53,7 @@ export const addComponent = (component) => (dispatch, getState) => {
     axios
         .post('/api/components/', component, tokenConfig(getState))
         .then(res => {
-            dispatch(createMessage({ addComponent: "Component Added" }));
+            dispatch(createMessage({ genericMessage: "Component Added" }));
             dispatch({
                 type: ADD_COMPONENT,
                 payload: res.data

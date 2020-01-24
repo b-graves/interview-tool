@@ -16,3 +16,19 @@ h3 {
 * {
     font-family: Roboto, sans-serif !important;
 }
+
+.toast__message {
+    white-space: normal;
+}
+
+.toast {
+    padding: 16px 16px;
+    line-height: 1.5;
+}
+
+ion-icon {
+    margin-right: 4px;
+    position: relative;
+    top: 6px;
+    font-size: 140%;
+}

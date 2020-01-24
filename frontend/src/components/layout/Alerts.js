@@ -2,7 +2,15 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 
+import { Toast } from 'react-onsenui';
+
 export class Alerts extends Component {
+    state = {
+        open: false,
+        messages: [],
+        error: false,
+    }
+
     static propTypes = {
         error: PropTypes.object.isRequired,
         message: PropTypes.object.isRequired
@@ -11,32 +19,42 @@ export class Alerts extends Component {
     componentDidUpdate(prevProps) {
         const { error, message } = this.props;
         if (error !== prevProps.error) {
+            let messages = []
             if (error.msg.name) {
-                alert(`Name: ${error.msg.name.join()}`)
+                messages.push(`Name: ${error.msg.name.join()}`)
             }
             if (error.msg.username) {
-                alert(error.msg.username.join())
+                messages.push(`Userame: ${error.msg.username.join()}`)
+            }
+            if (error.msg.password) {
+                messages.push(`Password: ${error.msg.password.join()}`)
             }
             if (error.msg.non_field_errors) {
-                alert(error.msg.non_field_errors.join())
+                messages.push(error.msg.non_field_errors.join())
+            }
+
+            if (messages.length > 0) {
+                this.setState({open: true, messages : messages, error: true})
+                setTimeout(function(){this.setState({open: false, messages: []})}.bind(this), 10000);
             }
         }
         if (message !== prevProps.message) {
-            if (message.deleteInterview) {
-                alert(message.deleteInterview);
-            }
-            if (message.addInterview) {
-                alert(message.addInterview);
-            }
-            if (message.passwordsNotMatch) {
-                alert(message.passwordsNotMatch);
+            if (message.genericMessage) {
+                this.setState({open: true, messages: [message.genericMessage], error: false});
+                setTimeout(function(){this.setState({open: false, messages: []})}.bind(this), 3000);
             }
         }
     }
 
     render() {
+        console.log(this.state.messages.length > 0)
+        let messages = this.state.messages.map(message => <div style={this.state.error ? {"color": "#ff7b7b"}: null}>{message}</div>)
         return (
-            <Fragment />
+            this.state.messages.length > 0 ? 
+                <Toast isOpen={this.state.open}>
+                    {messages}
+                </Toast> 
+            : null
         )
     }
 }

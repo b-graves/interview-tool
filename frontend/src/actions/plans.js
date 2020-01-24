@@ -2,7 +2,7 @@ import axios from 'axios';
 import { createMessage, returnErrors } from './messages';
 import { tokenConfig } from './auth';
 
-import { GET_PLANS, GET_PLAN, DELETE_PLAN, ADD_PLAN } from './types';
+import { GET_PLANS, GET_PLAN, DELETE_PLAN, ADD_PLAN, CLEAR_COMPONENTS } from './types';
 
 // GET PLANS
 export const getPlans = () => (dispatch, getState) => {
@@ -39,7 +39,7 @@ export const deletePlan = (id) => (dispatch, getState) => {
     axios
         .delete(`/api/plans/${id}/`, tokenConfig(getState))
         .then(res => {
-            dispatch(createMessage({ deletePlan: "Plan Deleted" }));
+            dispatch(createMessage({ genericMessage: "Plan Deleted" }));
             dispatch({
                 type: DELETE_PLAN,
                 payload: id
@@ -52,7 +52,7 @@ export const addPlan = (plan) => (dispatch, getState) => {
     axios
         .post('/api/plans/', plan, tokenConfig(getState))
         .then(res => {
-            dispatch(createMessage({ addPlan: "Plan Added" }));
+            dispatch(createMessage({ genericMessage: "Plan Created" }));
             dispatch({
                 type: ADD_PLAN,
                 payload: res.data
