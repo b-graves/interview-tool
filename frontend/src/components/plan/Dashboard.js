@@ -6,6 +6,8 @@ import { getPlan, deletePlan } from '../../actions/plans'
 import { Navigator, Page, Button, Toolbar, BackButton, ProgressCircular } from 'react-onsenui';
 import Content from '../layout/Content';
 
+import Components from "./Components";
+
 export class Dashboard extends Component {
     static propTypes = {
         plan: PropTypes.object.isRequired,
@@ -35,8 +37,12 @@ export class Dashboard extends Component {
                     </div>
                 </Toolbar>}>
                 <Content>
-                    <h1>{this.props.plan ? this.props.plan.name : <ProgressCircular indeterminate/>}</h1>
-                    <h2>Session Components</h2>
+                    {this.props.plan ? 
+                        <div>
+                            <h1>{this.props.plan.name}</h1>
+                            <Components planId={this.props.planId} />
+                        </div>
+                    : <ProgressCircular indeterminate/>}
                     {/* <Components /> */}
                 </Content>
             </Page>

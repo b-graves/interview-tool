@@ -24,14 +24,15 @@ class Authentication extends Component {
         console.log("authenticate")
         return (
             <Provider store={store}>
+                <Alerts />
                 <Router>
-                <Fragment>
-                    <Switch>
-                        <PrivateRoute exact path="/" component={App} />
-                        <Route exact path="/login" component={Login} />
-                        <Route exact path="/register" component={Register} />
-                    </Switch>
-                </Fragment>
+                    <Fragment>
+                        <Switch>
+                            <PrivateRoute exact path="/" component={App} />
+                            <Route exact path="/login" component={Login} />
+                            <Route exact path="/register" component={Register} />
+                        </Switch>
+                    </Fragment>
                 </Router>
             </Provider>
         )

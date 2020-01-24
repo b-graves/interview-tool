@@ -5,9 +5,10 @@ class Plan(models.Model):
     name = models.CharField(max_length=100)
     owner = models.ForeignKey(User, related_name="plans", on_delete=models.CASCADE, null=True)
 
-class Question(models.Model):
+class Component(models.Model):
     name = models.CharField(max_length=100)
-    plan = models.ForeignKey(Plan, related_name="questions", on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(User, related_name="components", on_delete=models.CASCADE, null=True)
+    plan = models.ForeignKey(Plan, related_name="components", on_delete=models.CASCADE, null=True)
 
 class Interview(models.Model):
     name = models.CharField(max_length=100)
@@ -16,17 +17,17 @@ class Interview(models.Model):
 class Response(models.Model):
     name = models.CharField(max_length=100)
     interview = models.ForeignKey(Interview, related_name="responses", on_delete=models.CASCADE, null=True)
-    question = models.ForeignKey(Question, related_name="responses", on_delete=models.CASCADE, null=True)
+    component = models.ForeignKey(Component, related_name="responses", on_delete=models.CASCADE, null=True)
 
 class BiasDeclaration(models.Model):
     name = models.CharField(max_length=100)
     interview = models.ForeignKey(Interview, related_name="bias_declarations", on_delete=models.CASCADE, null=True)
-    question = models.ForeignKey(Question, related_name="bias_declarations", on_delete=models.CASCADE, null=True)
+    component = models.ForeignKey(Component, related_name="bias_declarations", on_delete=models.CASCADE, null=True)
 
 class BiasReflection(models.Model):
     name = models.CharField(max_length=100)
     interview = models.ForeignKey(Interview, related_name="bias_reflections", on_delete=models.CASCADE, null=True)
-    question = models.ForeignKey(Question, related_name="bias_reflections", on_delete=models.CASCADE, null=True)
+    component = models.ForeignKey(Component, related_name="bias_reflections", on_delete=models.CASCADE, null=True)
 
 class InsightTagType(models.Model):
     name = models.CharField(max_length=100)

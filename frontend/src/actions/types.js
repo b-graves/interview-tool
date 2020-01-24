@@ -4,6 +4,12 @@ export const GET_PLAN = "GET_PLAN";
 export const DELETE_PLAN = "DELETE_PLAN";
 export const ADD_PLAN = "ADD_PLAN";
 
+// COMPONENTS
+export const GET_COMPONENTS = "GET_COMPONENTS";
+export const GET_COMPONENT = "GET_COMPONENT";
+export const DELETE_COMPONENT = "DELETE_COMPONENT";
+export const ADD_COMPONENT = "ADD_COMPONENT";
+
 // ALERTS
 export const GET_ERRORS = "GET_ERRORS";
 export const CREATE_MESSAGE = "CREATE_MESSAGE";
