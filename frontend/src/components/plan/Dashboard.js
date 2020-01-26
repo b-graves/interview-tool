@@ -11,6 +11,9 @@ import Content from '../layout/Content';
 import Components from "./Components";
 import Participants from "./Participants";
 
+import { IoIosContacts, IoIosChatbubbles } from 'react-icons/io';
+
+
 export class Dashboard extends Component {
     static propTypes = {
         plan: PropTypes.object.isRequired,
@@ -60,7 +63,7 @@ export class Dashboard extends Component {
                                         <Components planId={this.props.planId}/>
                                     </Content>
                                 </Page>,
-                                tab: <Tab><ion-icon name="chatboxes"></ion-icon> Components</Tab>
+                                tab: <Tab><IoIosChatbubbles className="ion-icon--larger" /> Components</Tab>
                                 },
                                 {
                                 content: <Page title="Participants" active={activeIndex === 1} tabbar={tabbar}>
@@ -68,7 +71,7 @@ export class Dashboard extends Component {
                                             <Participants planId={this.props.planId}/>
                                         </Content>
                                     </Page>,
-                                tab: <Tab><ion-icon name="contacts"></ion-icon> Participants</Tab>
+                                tab: <Tab><IoIosContacts className="ion-icon--larger" /> Participants</Tab>
                                 }]
                             }
                         />

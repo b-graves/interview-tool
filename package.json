@@ -24,11 +24,15 @@
     "webpack-cli": "^3.3.9"
   },
   "dependencies": {
+    "@coreui/icons": "^1.0.0",
     "axios": "^0.19.0",
+    "babel-polyfill": "^6.26.0",
+    "eva-icons": "^1.1.2",
     "onsenui": "^2.10.10",
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "react-icons": "^3.8.0",
     "react-onsenui": "^1.11.2",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
