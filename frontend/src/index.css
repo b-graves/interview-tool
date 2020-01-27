@@ -32,3 +32,24 @@ h3 {
     top: 6px;
     font-size: 140%;
 }
+
+.list-header {
+    text-transform: none !important;
+}
+
+.header-icon--larger {
+    margin-right: 4px;
+    position: relative;
+    top: 4px;
+    font-size: 130%;
+}
+
+.hidden {
+    opacity: 0;
+
+}
+
+.icon--center {
+    display: block;
+    margin: auto;
+}

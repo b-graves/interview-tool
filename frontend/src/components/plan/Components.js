@@ -8,6 +8,8 @@ import Dashboard from "./Dashboard"
 
 import { Col, Row, List, ListItem, Button, Icon } from 'react-onsenui';
 
+import { FaChevronUp, FaChevronDown, FaTrash, FaPen } from 'react-icons/fa';
+
 export class Components extends Component {
     static propTypes = {
         components: PropTypes.array.isRequired,
@@ -27,19 +29,77 @@ export class Components extends Component {
         console.log(this.props.planId)
         return (
             <Fragment>
-                <List
-                    dataSource={this.props.components}
-                    renderRow={(component, idx) => (
-                        <ListItem 
-                            modifier='material tappable chevron'
-                            onClick={() => this.openComponent(component.id)}
-                        >
-                            {component.name}
-                            <Button modifier="quiet" onClick={this.props.deleteComponent.bind(this, component.id)}>Remove</Button>
-                        </ListItem>
-                    )}>
-                        <AddComponent planId={this.props.planId} />
-                </List>
+                <Row>
+                    <Col>
+                        <List
+                            dataSource={this.props.components}
+                            renderRow={(component, idx) => (
+                                <ListItem 
+                                    modifier='material tappable chevron'
+                                    onClick={() => this.openComponent(component.id)}
+                                >
+                                    {component.name}
+                                    {/* <Button modifier="quiet" onClick={this.props.deleteComponent.bind(this, component.id)}>Remove</Button> */}
+                                </ListItem>
+                            )}>
+                                {/* <AddComponent planId={this.props.planId} /> */}
+                        </List>
+                    </Col>
+                    {/* <Col width="48px">
+                        <List
+                            dataSource={this.props.components}
+                            renderRow={(component, idx) => (
+                                <ListItem 
+                                    modifier='material tappable'
+                                    onClick={() => this.openComponent(component.id)}
+                                >
+                                    <FaPen />
+                                </ListItem>
+                            )}>
+                        </List>
+                    </Col> */}
+                    {/* <Col width="48px">
+                        <List
+                            dataSource={this.props.components}
+                            renderRow={(component, idx) => (
+                                <ListItem 
+                                    modifier='material tappable'
+                                    onClick={() => this.openComponent(component.id)}
+                                >
+                                    <FaChevronUp />
+                                </ListItem>
+                            )}>
+                        </List>
+                    </Col>
+                    <Col width="48px">
+                        <List
+                            dataSource={this.props.components}
+                            renderRow={(component, idx) => (
+                                <ListItem 
+                                    modifier='material tappable'
+                                    onClick={() => this.openComponent(component.id)}
+                                >
+                                    <FaChevronDown />
+                                </ListItem>
+                            )}>
+                        </List>
+                    </Col> */}
+                    <Col width="48px">
+                        <List
+                            dataSource={this.props.components}
+                            renderRow={(component, idx) => (
+                                <ListItem 
+                                    modifier='material tappable'
+                                    onClick={this.props.deleteComponent.bind(this, component.id)}
+                                >
+                                    <FaTrash />
+                                    {/* <Button modifier="quiet" onClick={this.props.deleteComponent.bind(this, component.id)}>Remove</Button> */}
+                                </ListItem>
+                            )}>
+                        </List>
+                    </Col>
+                </Row>
+                <AddComponent planId={this.props.planId} />
             </Fragment>
         )
     }

@@ -11,7 +11,8 @@ import Content from '../layout/Content';
 import Components from "./Components";
 import Participants from "./Participants";
 
-import { IoIosContacts, IoIosChatbubbles } from 'react-icons/io';
+import { IoIosChatbubbles } from 'react-icons/io';
+import { MdPeople } from 'react-icons/md';
 
 
 export class Dashboard extends Component {
@@ -71,7 +72,7 @@ export class Dashboard extends Component {
                                             <Participants planId={this.props.planId}/>
                                         </Content>
                                     </Page>,
-                                tab: <Tab><IoIosContacts className="ion-icon--larger" /> Participants</Tab>
+                                tab: <Tab><MdPeople className="ion-icon--larger" /> Participants</Tab>
                                 }]
                             }
                         />
