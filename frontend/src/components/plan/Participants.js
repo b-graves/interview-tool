@@ -6,11 +6,13 @@ import { getParticipants, deleteParticipant } from '../../actions/participants'
 import AddParticipant from "./AddParticipant"
 import Dashboard from "./Dashboard"
 
-import { Col, Row, List, ListItem, Button, Icon, ListHeader } from 'react-onsenui';
+import { Col, Row, List, ListItem, Button, Icon, ListHeader, ProgressBar } from 'react-onsenui';
 
-import { FaChevronUp, FaChevronDown, FaTrash, FaPen, FaBalanceScale, FaCheck, FaEllipsisH } from 'react-icons/fa';
+import { FaChevronUp, FaChevronDown, FaTrash, FaPen, FaBalanceScale, FaCheck, FaEllipsisH, FaPlay } from 'react-icons/fa';
 import { GiDiscussion } from 'react-icons/gi';
 import { MdPerson } from 'react-icons/md';
+
+import Session from '../session/Session'
 
 export class Participants extends Component {
     static propTypes = {
@@ -27,6 +29,10 @@ export class Participants extends Component {
         console.log(participantId)
     }
 
+    startSession(participantId, planId) {
+        this.props.navigator.pushPage({ component: Session, props: { participantId, planId } });
+    }
+
     render() {
         return (
             <Fragment>
@@ -34,8 +40,8 @@ export class Participants extends Component {
                     <Row>
                         <Col>
                             <List
-                                renderHeader={() =>
-                                    <ListHeader style={{fontSize: 15}} className="testClass"><MdPerson className="header-icon--larger"/> Participant </ListHeader> }
+                                // renderHeader={() =>
+                                //     <ListHeader style={{fontSize: 15}} className="testClass"><MdPerson className="header-icon--larger"/> Participant </ListHeader> }
                                 dataSource={this.props.participants}
                                 renderRow={(participant, idx) => (
                                     <ListItem 
@@ -62,7 +68,7 @@ export class Participants extends Component {
                                 )}>
                             </List>
                         </Col> */}
-                        <Col width="156px">
+                        {/* <Col width="156px">
                             <List
                                 renderHeader={() =>
                                     <ListHeader style={{fontSize: 15, textAlign: "center"}} className="testClass"><FaBalanceScale className="header-icon--larger"/> Bias Declaration </ListHeader> }
@@ -71,59 +77,66 @@ export class Participants extends Component {
                                     <ListItem 
                                         style={{alignItems: "center"}}
                                         modifier='material tappable'
-                                        onClick={this.props.deleteParticipant.bind(this, participant.id)}
+                                        // onClick={this.props.deleteParticipant.bind(this, participant.id)}
                                     >
                                         {Math.random() > 0.5 ? <FaCheck className="icon--center" style={{color: "green"}} /> : <FaEllipsisH className="icon--center" />}
-                                        {/* <Button modifier="quiet" onClick={this.props.deleteParticipant.bind(this, participant.id)}>Remove</Button> */}
+                                        <FaEllipsisH className="icon--center" />
                                     </ListItem>
                                 )}>
                             </List>
-                        </Col>
+                        </Col> */}
                         <Col width="156px">
                             <List
-                                renderHeader={() =>
-                                    <ListHeader style={{fontSize: 15, textAlign:"center"}} className="testClass"><GiDiscussion className="header-icon--larger"/> Session</ListHeader> }
+                                // renderHeader={() =>
+                                //     <ListHeader style={{fontSize: 15, textAlign:"center"}} className="testClass"><GiDiscussion className="header-icon--larger"/> Session</ListHeader> }
                                 dataSource={this.props.participants}
                                 renderRow={(participant, idx) => (
                                     <ListItem 
-                                        style={{alignItems: "center"}}
+                                        style={{textAlign: "center", alignItems: "flex-start"}}
                                         modifier='material tappable'
-                                        onClick={this.props.deleteParticipant.bind(this, participant.id)}
+                                        className='list-item--button positive'
+                                        onClick={() => this.startSession(participant.id, this.props.planId)}
                                     >
-                                        {Math.random() > 0.5 ? <FaCheck className="icon--center" style={{color: "green"}} /> : <FaEllipsisH className="icon--center" />}
+                                        {/* {Math.random() > 0.5 ? <FaCheck className="icon--center" style={{color: "green"}} /> : <FaEllipsisH className="icon--center" />} */}
+                                        <div style={{textAlign: "center", alignItems: "flex-start", width: "100%"}}>
+                                            <FaPlay 
+                                                className="button-icon"
+                                            /> Start Session
+                                        </div>
                                         {/* <Button modifier="quiet" onClick={this.props.deleteParticipant.bind(this, participant.id)}>Remove</Button> */}
                                     </ListItem>
                                 )}>
                             </List>
                         </Col>
-                        <Col width="156px">
+                        {/* <Col width="156px">
                             <List
                                 renderHeader={() =>
                                     <ListHeader style={{fontSize: 15, textAlign:"center"}} className="testClass"><FaBalanceScale className="header-icon--larger"/> Bias Reflection</ListHeader> }
                                 dataSource={this.props.participants}
                                 renderRow={(participant, idx) => (
                                     <ListItem 
-                                        style={{textAlign: "center"}}
-                                        modifier='material tappable'
-                                        onClick={this.props.deleteParticipant.bind(this, participant.id)}
+                                        style={{textAlign: "center", "background-color": "#f0eff4"}}
+                                        modifier='material'
+                                        // onClick={this.props.deleteParticipant.bind(this, participant.id)}
                                     >
                                         {Math.random() > 0.5 ? <FaCheck className="icon--center" style={{color: "green"}} /> : <FaEllipsisH className="icon--center" />}
-                                        {/* <Button modifier="quiet" onClick={this.props.deleteParticipant.bind(this, participant.id)}>Remove</Button> */}
+                                        <FaEllipsisH style={{color: "lightgrey"}} className="icon--center" />
                                     </ListItem>
                                 )}>
                             </List>
-                        </Col>
+                        </Col> */}
                         <Col width="48px">
                             <List
-                                renderHeader={() =>
-                                    <ListHeader style={{fontSize: 15, textAlign:"center"}} className="testClass"><FaBalanceScale className="header-icon--larger hidden"/></ListHeader> }
+                                // renderHeader={() =>
+                                //     <ListHeader style={{fontSize: 15, textAlign:"center"}} className="testClass"><FaBalanceScale className="header-icon--larger hidden"/></ListHeader> }
                                 dataSource={this.props.participants}
                                 renderRow={(participant, idx) => (
                                     <ListItem 
                                         modifier='material tappable'
+                                        className='list-item--button negative'
                                         onClick={this.props.deleteParticipant.bind(this, participant.id)}
                                     >
-                                        <FaTrash />
+                                        <FaTrash className="icon--center"/>
                                         {/* <Button modifier="quiet" onClick={this.props.deleteParticipant.bind(this, participant.id)}>Remove</Button> */}
                                     </ListItem>
                                 )}>

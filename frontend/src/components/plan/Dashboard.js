@@ -61,7 +61,7 @@ export class Dashboard extends Component {
                                 {
                                 content: <Page title="Components" active={activeIndex === 0} tabbar={tabbar}>
                                     <Content>
-                                        <Components planId={this.props.planId}/>
+                                        <Components navigator={this.props.navigator} planId={this.props.planId}/>
                                     </Content>
                                 </Page>,
                                 tab: <Tab><IoIosChatbubbles className="ion-icon--larger" /> Components</Tab>
@@ -69,7 +69,7 @@ export class Dashboard extends Component {
                                 {
                                 content: <Page title="Participants" active={activeIndex === 1} tabbar={tabbar}>
                                         <Content>
-                                            <Participants planId={this.props.planId}/>
+                                            <Participants navigator={this.props.navigator} planId={this.props.planId}/>
                                         </Content>
                                     </Page>,
                                 tab: <Tab><MdPeople className="ion-icon--larger" /> Participants</Tab>

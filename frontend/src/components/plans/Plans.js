@@ -8,6 +8,8 @@ import Dashboard from "../plan/Dashboard"
 
 import { Col, Row, List, ListItem, Button, Icon } from 'react-onsenui';
 
+import { FaChevronUp, FaChevronDown, FaTrash, FaPen, FaBalanceScale, FaCheck, FaEllipsisH, FaPlay } from 'react-icons/fa';
+
 export class Plans extends Component {
     static propTypes = {
         plans: PropTypes.array.isRequired,
@@ -27,19 +29,36 @@ export class Plans extends Component {
         return (
             <Fragment>
                 <h1>Your Sessions Plans</h1>
-                <List
-                    dataSource={this.props.plans}
-                    renderRow={(plan, idx) => (
-                        <ListItem 
-                            modifier='material tappable chevron'
-                            onClick={() => this.openPlan(plan.id)}
-                        >
-                            {plan.name}
-                        <Button modifier="quiet" onClick={this.props.deletePlan.bind(this, plan.id)}>Remove</Button>
-                        </ListItem>
-                    )}>
-                        <Add />
-                </List>
+                <Row>
+                    <Col>
+                        <List
+                            dataSource={this.props.plans}
+                            renderRow={(plan, idx) => (
+                                <ListItem 
+                                    modifier='material tappable chevron'
+                                    onClick={() => this.openPlan(plan.id)}
+                                >
+                                    {plan.name}
+                                </ListItem>
+                            )}>
+                        </List>
+                    </Col>
+                    <Col width="48px">
+                            <List
+                                dataSource={this.props.plans}
+                                renderRow={(plan, idx) => (
+                                    <ListItem 
+                                        modifier='material tappable'
+                                        className='list-item--button negative'
+                                        onClick={this.props.deletePlan.bind(this, plan.id)}
+                                    >
+                                        <FaTrash className="icon--center"/>
+                                    </ListItem>
+                                )}>
+                            </List>
+                        </Col>
+                </Row>
+                <Add />
             </Fragment>
         )
     }

@@ -35,7 +35,7 @@ export class Components extends Component {
                             dataSource={this.props.components}
                             renderRow={(component, idx) => (
                                 <ListItem 
-                                    modifier='material tappable chevron'
+                                    modifier='material tappable'
                                     onClick={() => this.openComponent(component.id)}
                                 >
                                     {component.name}
@@ -91,8 +91,9 @@ export class Components extends Component {
                                 <ListItem 
                                     modifier='material tappable'
                                     onClick={this.props.deleteComponent.bind(this, component.id)}
+                                    className='list-item--button negative'
                                 >
-                                    <FaTrash />
+                                    <FaTrash className="icon--center"/>
                                     {/* <Button modifier="quiet" onClick={this.props.deleteComponent.bind(this, component.id)}>Remove</Button> */}
                                 </ListItem>
                             )}>

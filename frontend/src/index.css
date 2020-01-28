@@ -14,7 +14,9 @@ h3 {
 }
 
 * {
-    font-family: Roboto, sans-serif !important;
+    font-family: 'Roboto', sans-serif !important;
+    /* font-weight: 500; */
+    border-radius: 0px !important;
 }
 
 .toast__message {
@@ -45,11 +47,56 @@ h3 {
 }
 
 .hidden {
-    opacity: 0;
+    opacity: 0.2;
 
 }
 
 .icon--center {
     display: block;
     margin: auto;
+}
+
+.list-item {
+    border-left: 3px solid #f0eff4;
+    border-bottom: 3px solid #f0eff4;
+    /* background-color: #ffffff !important; */
+}
+
+.list-item--material__center {
+    background-image: linear-gradient(0deg, #f0eff4, #f0eff4 50%, transparent 50%) !important;
+    padding: 14px 6px 14px 6px !important;
+}
+
+.list-item--button {
+    padding: 0 0 !important;
+}
+
+.list-item__center {
+    background-image: linear-gradient(0deg, #f0eff4, #f0eff4 50%, transparent 50%) !important;
+    padding: 14px 6px 14px 6px !important;
+}
+
+.negative {
+    color: white;
+    background-color: #fe0000;
+}
+
+.positive {
+    background-color: #168e44;
+    color: white;
+}
+
+
+.button-icon {
+    margin-right: 4px;
+    position: relative;
+    top: 2px;
+}
+
+button{
+    border-radius: 0px !important;
+}
+
+.card--completed {
+    opacity: 0.2;
 }
