@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@coreui/icons": "^1.0.0",
+    "@weknow/react-bubble-chart-d3": "^1.0.12",
     "axios": "^0.19.0",
     "babel-polyfill": "^6.26.0",
     "eva-icons": "^1.1.2",

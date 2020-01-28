@@ -5,6 +5,7 @@ import { getComponents } from '../../actions/components'
 
 import TickboxesView from './TickboxesView';
 import CardsView from './CardsView';
+import BubbleView from './BubbleView';
 
 import { Tabbar, Page, ProgressCircular, Tab } from 'react-onsenui';
 
@@ -12,6 +13,7 @@ import Content from '../layout/Content';
 
 import { FaCheck } from 'react-icons/fa';
 import {IoIosApps} from 'react-icons/io';
+import {MdBubbleChart} from 'react-icons/md';
 
 export class Components extends Component {
     generateCompletionState() {
@@ -59,6 +61,14 @@ export class Components extends Component {
                                 </Page>,
                                 tab: <Tab><IoIosApps className="ion-icon--larger" /> Cards View</Tab>
                                 },
+                            {
+                                content: <Page title="BubbleView" active={activeIndex === 2} tabbar={tabbar}>
+                                    <Content>
+                                        {this.state.index === 2 ? <BubbleView components={this.props.components} componentCompletion={this.state.componentCompletion} toggleCompletion={this.toggleCompletion.bind(this)} columns={3} /> : null}
+                                    </Content>
+                                </Page>,
+                                tab: <Tab><MdBubbleChart className="ion-icon--larger" /> Bubble View</Tab>
+                                }
                         ]
                         }
                     />

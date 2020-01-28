@@ -1,0 +1,56 @@
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { getComponents, deleteComponent } from '../../actions/components'
+
+
+
+import { Col, Row, List, ListItem, Button, Icon } from 'react-onsenui';
+
+import { FaCheck } from 'react-icons/fa';
+
+import BubbleChart from '@weknow/react-bubble-chart-d3';
+
+export class BubbleView extends Component {
+    bubbleClick = (label) =>{
+        console.log(label)
+    }
+
+    render() {
+        
+        return (
+            <div id="square" style={{
+                width: this.props.width ? this.props.width : "100%",
+                "padding-bottom": this.props.width ? this.props.width : "100%",
+                "margin-top": this.props.shiftDown ? this.props.shiftDown : "0px",
+                "margin-left": this.props.shiftRight ? this.props.shiftRight : "0px",
+                }} >
+                <div id="circle" onClick={() => this.props.onClick()} className="bubble-center" style={{"background-image": 'url("http://clipart-library.com/images_k/transparent-bubble-png/transparent-bubble-png-17.png', "background-size": "cover", opacity : this.props.popped ? 0 : 1}}>
+                    <p style={{fontSize: this.props.size, textAlign: "center"}}>
+                        {this.props.component.name}
+                    </p>
+                </div>
+            </div>
+
+
+
+            // <div
+            // className="tappable bubble-center" 
+            // style={{
+            //     width: this.props.radius*2,
+            //     height: this.props.radius*2,
+            //     "border-radius": this.props.radius,
+            //     "background-color": "blue",
+            //     color: "white",
+            //     "font-size": this.props.radius/5
+            // }}>
+            //     <p>
+            //         {this.props.component.name}
+            //     </p>
+            // </div>
+        )
+    }
+}
+
+
+export default connect(null, {})(BubbleView)

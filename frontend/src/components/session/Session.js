@@ -14,6 +14,7 @@ import { IoIosChatbubbles } from 'react-icons/io';
 import { MdPeople } from 'react-icons/md';
 
 import Timer from 'react-compound-timer'
+import BubbleView from './BubbleView';
 
 
 export class Session extends Component {
@@ -52,11 +53,12 @@ export class Session extends Component {
                             direction="forward"
                             lastUnit="m"
                         >
-                            {() => (
-                                <Fragment>
-                                    <Timer.Minutes /> : <Timer.Seconds />
-                                </Fragment>
-                            )}
+                            {({getTime}) => {
+                                let milliseconds = getTime();
+                                let minutes = Math.floor(milliseconds / 60000)
+                                let seconds = Math.floor((milliseconds % 60000) / 1000)
+                                return (minutes < 10 ? '0' : '') + minutes + ':' +(seconds < 10 ? '0' : '') + seconds
+                            }}
                         </Timer>
                     </div>
                 </Toolbar>}>
