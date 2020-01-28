@@ -13,6 +13,8 @@ import Components from "./Components";
 import { IoIosChatbubbles } from 'react-icons/io';
 import { MdPeople } from 'react-icons/md';
 
+import Timer from 'react-compound-timer'
+
 
 export class Session extends Component {
     static propTypes = {
@@ -43,6 +45,19 @@ export class Session extends Component {
                     </div>
                     <div className="center">
                         {this.props.plan && this.props.participant ? "Session In Progress: " + this.props.plan.name + " with "+this.props.participant.name: ""}
+                    </div>
+                    <div className="right"> 
+                        <Timer
+                            initialTime={0}
+                            direction="forward"
+                            lastUnit="m"
+                        >
+                            {() => (
+                                <Fragment>
+                                    <Timer.Minutes /> : <Timer.Seconds />
+                                </Fragment>
+                            )}
+                        </Timer>
                     </div>
                 </Toolbar>}>
                     {this.props.components ?

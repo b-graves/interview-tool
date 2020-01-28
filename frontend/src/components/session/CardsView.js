@@ -31,7 +31,7 @@ export class TickboxesView extends Component {
                                     onClick={() => this.props.toggleCompletion(component.id)}
                                     className={this.props.componentCompletion[component.id] ? 'card--completed' : ''}
                                 >
-                                    <div class="title">
+                                    <div className="title">
                                         {component.name}
                                     </div>
                                 </Card>
