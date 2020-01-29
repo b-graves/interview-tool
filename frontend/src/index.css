@@ -123,10 +123,9 @@ button{
 
 #square {
     position: relative;
-    background-color: #f0eff4;
   }
 
-  #circle {
+#circle {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -134,4 +133,5 @@ button{
     height: 100%;
     color: #2a95a5 ;
     border-radius: 50%;
+
   }

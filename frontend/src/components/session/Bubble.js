@@ -24,9 +24,11 @@ export class BubbleView extends Component {
                 "padding-bottom": this.props.width ? this.props.width : "100%",
                 "margin-top": this.props.shiftDown ? this.props.shiftDown : "0px",
                 "margin-left": this.props.shiftRight ? this.props.shiftRight : "0px",
+                opacity : this.props.popped ? 0 : 1
                 }} >
-                <div id="circle" onClick={() => this.props.onClick()} className="bubble-center" style={{"background-image": 'url("http://clipart-library.com/images_k/transparent-bubble-png/transparent-bubble-png-17.png', "background-size": "cover", opacity : this.props.popped ? 0 : 1}}>
-                    <p style={{fontSize: this.props.size, textAlign: "center"}}>
+                <img src="/static/frontend/images/bubble.png" id="circle" />
+                <div id="circle" className="bubble-center" onClick={() => this.props.onClick()}>
+                    <p style={{fontSize: this.props.size, textAlign: "center"}} >
                         {this.props.component.name}
                     </p>
                 </div>
