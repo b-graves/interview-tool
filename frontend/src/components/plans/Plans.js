@@ -6,7 +6,7 @@ import { getPlans, deletePlan } from '../../actions/plans'
 import Add from "./Add"
 import Dashboard from "../plan/Dashboard"
 
-import { Col, Row, List, ListItem, Button, Icon } from 'react-onsenui';
+import { Col, Row, List, ListItem, Button, Icon, ProgressCircular } from 'react-onsenui';
 
 import { FaChevronUp, FaChevronDown, FaTrash, FaPen, FaBalanceScale, FaCheck, FaEllipsisH, FaPlay } from 'react-icons/fa';
 
@@ -25,10 +25,15 @@ export class Plans extends Component {
         this.props.navigator.pushPage({ component: Dashboard, props: { planId } });
     }
 
+    state = {
+        delete: false
+    }
+
     render() {
         return (
             <Fragment>
                 <h1>Your Sessions Plans</h1>
+                { !this.state.delete ?
                 <Row>
                     <Col>
                         <List
@@ -50,7 +55,11 @@ export class Plans extends Component {
                                     <ListItem 
                                         modifier='material tappable'
                                         className='list-item--button negative'
-                                        onClick={this.props.deletePlan.bind(this, plan.id)}
+                                        onClick={()=>{
+                                            this.setState({delete: true})
+                                            this.props.deletePlan(plan.id);
+                                            setTimeout(function(){this.setState({delete: false})}.bind(this), 100);
+                                        }}
                                     >
                                         <FaTrash className="icon--center"/>
                                     </ListItem>
@@ -58,6 +67,7 @@ export class Plans extends Component {
                             </List>
                         </Col>
                 </Row>
+                : <ProgressCircular indeterminate /> }
                 <Add />
             </Fragment>
         )

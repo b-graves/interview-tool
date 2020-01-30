@@ -6,7 +6,7 @@ import { getComponents, deleteComponent } from '../../actions/components'
 import AddComponent from "./AddComponent"
 import Dashboard from "./Dashboard"
 
-import { Col, Row, List, ListItem, Button, Icon } from 'react-onsenui';
+import { Col, Row, List, ListItem, Button, Icon, ProgressCircular } from 'react-onsenui';
 
 import { FaChevronUp, FaChevronDown, FaTrash, FaPen } from 'react-icons/fa';
 
@@ -25,17 +25,22 @@ export class Components extends Component {
         console.log(componentId)
     }
 
+    state = {
+        delete: false
+    }
+
     render() {
         console.log(this.props.planId)
         return (
             <Fragment>
+                { !this.state.delete ?
                 <Row>
                     <Col>
                         <List
                             dataSource={this.props.components}
                             renderRow={(component, idx) => (
                                 <ListItem 
-                                    modifier='material tappable'
+                                    modifier='material tappable chevron'
                                     onClick={() => this.openComponent(component.id)}
                                 >
                                     {component.name}
@@ -90,7 +95,13 @@ export class Components extends Component {
                             renderRow={(component, idx) => (
                                 <ListItem 
                                     modifier='material tappable'
-                                    onClick={this.props.deleteComponent.bind(this, component.id)}
+                                    onClick={()=>{
+                                        this.setState({delete: true})
+                                        console.log("true")
+                                        this.props.deleteComponent(component.id);
+                                        setTimeout(function(){this.setState({delete: false})}.bind(this), 100);
+                                        console.log("false")
+                                    }}
                                     className='list-item--button negative'
                                 >
                                     <FaTrash className="icon--center"/>
@@ -100,6 +111,7 @@ export class Components extends Component {
                         </List>
                     </Col>
                 </Row>
+                : <ProgressCircular indeterminate /> }
                 <AddComponent planId={this.props.planId} />
             </Fragment>
         )

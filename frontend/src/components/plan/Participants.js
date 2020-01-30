@@ -33,10 +33,15 @@ export class Participants extends Component {
         this.props.navigator.pushPage({ component: Session, props: { participantId, planId } });
     }
 
+    state = {
+        delete: false
+    }
+
     render() {
         return (
             <Fragment>
-                {this.props.participants.length > 0 ?
+                {this.props.participants.length > 0 && !this.state.delete ?
+                    
                     <Row>
                         <Col>
                             <List
@@ -134,7 +139,11 @@ export class Participants extends Component {
                                     <ListItem 
                                         modifier='material tappable'
                                         className='list-item--button negative'
-                                        onClick={this.props.deleteParticipant.bind(this, participant.id)}
+                                        onClick={()=>{
+                                            this.setState({delete: true})
+                                            this.props.deleteParticipant(participant.id);
+                                            setTimeout(function(){this.setState({delete: false})}.bind(this), 100);
+                                        }}
                                     >
                                         <FaTrash className="icon--center"/>
                                         {/* <Button modifier="quiet" onClick={this.props.deleteParticipant.bind(this, participant.id)}>Remove</Button> */}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigator } from 'react-onsenui';
 
-import { Home } from './home/Home';
+import Dashboard from './plans/Dashboard';
 
 import 'onsenui/css/onsenui.css';
 import 'onsenui/css/onsen-css-components.css';
@@ -20,7 +20,7 @@ export default class App extends React.Component {
     render() {
         return (
             <Navigator
-                initialRoute={{key: "Home", component: Home}}
+                initialRoute={{key: "Dashboard", component: Dashboard}}
                 renderPage={this.renderPage}
             />
         );
