@@ -28,7 +28,7 @@ export class BubbleView extends Component {
                 }} >
                 <img src="/static/frontend/images/bubble.png" id="circle" />
                 <div id="circle" className="bubble-center" onClick={() => this.props.onClick()}>
-                    <p style={{fontSize: this.props.size, textAlign: "center"}} >
+                    <p style={{fontSize: this.props.size, textAlign: "center", fontWeight: "light !important"}} >
                         {this.props.component.name}
                     </p>
                 </div>

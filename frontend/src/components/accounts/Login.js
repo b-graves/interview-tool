@@ -61,7 +61,7 @@ export class Login extends Component {
                             />
                         </p>
                         <p>
-                            <button type="submit" className="button">Submit</button>
+                            <button type="submit" className="button button-light-blue">Submit</button>
                         </p>
                         <p>
                             Don't have an account? <Link to="/register">Register</Link>

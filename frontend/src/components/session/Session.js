@@ -5,10 +5,13 @@ import { getPlan } from '../../actions/plans';
 import { getParticipant } from '../../actions/participants';
 import { getComponents } from '../../actions/components';
 
-import { Tabbar, TabPage, Tab, Page, Navigator, Button, Toolbar, BackButton, ProgressCircular } from 'react-onsenui';
+import { Tabbar, TabPage, Tab, Page, Navigator, Button, Toolbar, BackButton, ProgressCircular, ProgressBar } from 'react-onsenui';
 import Content from '../layout/Content';
 
 import Components from "./Components";
+
+
+import { FaCheck } from 'react-icons/fa';
 
 import { IoIosChatbubbles } from 'react-icons/io';
 import { MdPeople } from 'react-icons/md';
@@ -36,6 +39,10 @@ export class Session extends Component {
         seconds: 0
     }
 
+    completeSession() {
+        this.props.navigator.popPage();
+    }
+
     render() {
         console.log(this.props)
         let remainingTime = 0;
@@ -47,9 +54,9 @@ export class Session extends Component {
             <Page renderToolbar={() =>
                 <Toolbar>
                     <div className="right">
-                        <BackButton>
-                            Complete
-                        </BackButton>
+                        <Button className="positive--quiet" modifier="quiet" onClick={() => this.completeSession()}>
+                            <FaCheck className="icon-in-button"/> Complete
+                        </Button>
                     </div>
                     <div className="center">
                         {this.props.plan && this.props.participant ? "Session In Progress: " + this.props.plan.name + " with "+this.props.participant.name: ""}

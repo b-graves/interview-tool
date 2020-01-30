@@ -1,22 +1,21 @@
 h1 {
     font-size: 45px !important;
-    font-weight: 1000 !important;
 }
 
 h2 {
     font-size: 35px !important;
-    font-weight: 1000 !important;
 }
 
 h3 {
     font-size: 24px !important;
-    font-weight: 1000 !important;
 }
 
 * {
-    font-family: 'Roboto', sans-serif !important;
+    font-family: "Helvetica Neue" !important;
     /* font-weight: 500; */
-    border-radius: 0px
+    font-weight: bold !important;
+    border-radius: 0px;
+    box-shadow: none !important;
 }
 
 .toast__message {
@@ -82,7 +81,7 @@ h3 {
 }
 
 .positive {
-    background-color: #168e44;
+    background-color: #039801;
     color: white;
 }
 
@@ -116,6 +115,7 @@ button{
 .card__uniform {
     height: 120px;
     border-radius: 0px;
+    margin: 6px 3px;
 }
 
 .bubble-center {
@@ -164,4 +164,36 @@ button{
 .icon-in-button {
     position: relative;
     top: 2px;
+}
+
+.tabbar {
+    background-image: none !important;
+}
+
+.button--quiet {
+    color: #1ea2e7 !important;
+}
+
+.button--quiet.positive--quiet {
+    color: #039801 !important;
+}
+
+.button-light-blue {
+    background-color: #1ea2e7 !important;
+}
+
+.back-button {
+    color: #1ea2e7 !important;
+}
+
+.tabbar__item.active {
+    color: #1ea2e7 !important;
+}
+
+:checked + .tabbar__button {
+    color: #1ea2e7 !important;
+}
+
+.back-button__icon {
+    fill: #1ea2e7 !important;
 }
