@@ -106,7 +106,8 @@ button{
 }
 
 .card__uniform {
-    height: 150px;
+    height: 120px;
+    border-radius: 0px;
 }
 
 .bubble-center {

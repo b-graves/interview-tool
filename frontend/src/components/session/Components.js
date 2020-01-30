@@ -63,9 +63,7 @@ export class Components extends Component {
                                 },
                             {
                                 content: <Page title="BubbleView" active={activeIndex === 2} tabbar={tabbar}>
-                                    <Content>
-                                        <BubbleView components={this.props.components} componentCompletion={this.state.componentCompletion} toggleCompletion={this.toggleCompletion.bind(this)} columns={3} />
-                                    </Content>
+                                    <BubbleView components={this.props.components} componentCompletion={this.state.componentCompletion} toggleCompletion={this.toggleCompletion.bind(this)} columns={3} />
                                 </Page>,
                                 tab: <Tab><MdBubbleChart className="ion-icon--larger" /> Bubble View</Tab>
                                 }
