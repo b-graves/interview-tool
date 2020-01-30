@@ -41,8 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'frontend',
     'knox',
-    'accounts',
-    'django_extensions',
+    'accounts'
 ]
 
 REST_FRAMEWORK = {
