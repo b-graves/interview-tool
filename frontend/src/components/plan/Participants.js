@@ -30,7 +30,7 @@ export class Participants extends Component {
     }
 
     startSession(participantId, planId) {
-        this.props.navigator.pushPage({ component: Session, props: { participantId, planId } });
+        this.props.navigator.pushPage({ component: Session, props: { participantId, planId, duration: 100 } });
     }
 
     state = {

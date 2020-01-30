@@ -16,7 +16,7 @@ h3 {
 * {
     font-family: 'Roboto', sans-serif !important;
     /* font-weight: 500; */
-    /* border-radius: 0px !important; */
+    border-radius: 0px
 }
 
 .toast__message {
@@ -78,7 +78,7 @@ h3 {
 
 .negative {
     color: white;
-    background-color: #fe0000;
+    background-color: #909090;
 }
 
 .positive {
@@ -94,6 +94,14 @@ h3 {
 }
 
 button{
+    border-radius: 0px !important;
+}
+
+.button{
+    border-radius: 0px !important;
+}
+
+.card {
     border-radius: 0px !important;
 }
 
@@ -133,6 +141,27 @@ button{
     width: 100%;
     height: 100%;
     color: #2a95a5 ;
-    border-radius: 50%;
+    border-radius: 50% !important;
 
   }
+
+.timer {
+    width: 80px;
+    height: 80px;
+    position: fixed;
+    right:4 !important;
+    top:4 !important;
+    padding-top: 5px;
+    padding-left: 5px;
+}
+
+.duration {
+    display: inline;
+
+    padding: 10px 10px;
+}
+
+.icon-in-button {
+    position: relative;
+    top: 2px;
+}

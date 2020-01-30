@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 class Plan(models.Model):
     name = models.CharField(max_length=100)
     owner = models.ForeignKey(User, related_name="plans", on_delete=models.CASCADE, null=True)
+    duration = models.IntegerField(default=60)
 
 class Component(models.Model):
     name = models.CharField(max_length=100)

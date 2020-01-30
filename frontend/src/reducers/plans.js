@@ -1,4 +1,4 @@
-import { GET_PLANS, GET_PLAN, DELETE_PLAN, ADD_PLAN } from "../actions/types.js";
+import { GET_PLANS, GET_PLAN, DELETE_PLAN, ADD_PLAN, UPDATE_PLAN } from "../actions/types.js";
 
 const initialState = {
     plans: [],
@@ -29,6 +29,12 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 plans: [...state.plans, action.payload]
+            };
+        case UPDATE_PLAN:
+            return {
+                ...state,
+                plans: [...state.plans.filter(plan => plan.id !== action.payload.id), action.payload],
+                plan: action.payload
             };
         default:
             return state;

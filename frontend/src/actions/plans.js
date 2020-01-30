@@ -2,7 +2,7 @@ import axios from 'axios';
 import { createMessage, returnErrors } from './messages';
 import { tokenConfig } from './auth';
 
-import { GET_PLANS, GET_PLAN, DELETE_PLAN, ADD_PLAN, CLEAR_COMPONENTS } from './types';
+import { GET_PLANS, GET_PLAN, DELETE_PLAN, ADD_PLAN, UPDATE_PLAN } from './types';
 
 // GET PLANS
 export const getPlans = () => (dispatch, getState) => {
@@ -55,6 +55,19 @@ export const addPlan = (plan) => (dispatch, getState) => {
             dispatch(createMessage({ genericMessage: "Plan Created" }));
             dispatch({
                 type: ADD_PLAN,
+                payload: res.data
+            });
+        })
+        .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+}
+
+// UPDATE PLAN
+export const updatePlan = (plan) => (dispatch, getState) => {
+    axios
+        .put(`/api/plans/${plan.id}/`, plan, tokenConfig(getState))
+        .then(res => {
+            dispatch({
+                type: UPDATE_PLAN,
                 payload: res.data
             });
         })

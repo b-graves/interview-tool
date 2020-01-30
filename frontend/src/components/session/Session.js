@@ -16,6 +16,7 @@ import { MdPeople } from 'react-icons/md';
 import Timer from 'react-compound-timer'
 import BubbleView from './BubbleView';
 
+import ReactMinimalPieChart from 'react-minimal-pie-chart';
 
 export class Session extends Component {
     static propTypes = {
@@ -31,23 +32,29 @@ export class Session extends Component {
     }
 
     state = {
-        index: 0
+        index: 0,
+        seconds: 0
     }
 
     render() {
         console.log(this.props)
+        let remainingTime = 0;
+        if (this.props.plan.duration && this.props.plan.duration * 60 - this.state.seconds > 0){
+            remainingTime = this.props.plan.duration * 60 - this.state.seconds
+        }
+        console.log(remainingTime)
         return (
             <Page renderToolbar={() =>
                 <Toolbar>
-                    <div className="left">
+                    <div className="right">
                         <BackButton>
-                            Back
+                            Complete
                         </BackButton>
                     </div>
                     <div className="center">
                         {this.props.plan && this.props.participant ? "Session In Progress: " + this.props.plan.name + " with "+this.props.participant.name: ""}
                     </div>
-                    <div className="right"> 
+                    <div className="left"> 
                         <Timer
                             initialTime={0}
                             direction="forward"
@@ -55,11 +62,45 @@ export class Session extends Component {
                         >
                             {({getTime}) => {
                                 let milliseconds = getTime();
-                                let minutes = Math.floor(milliseconds / 60000)
-                                let seconds = Math.floor((milliseconds % 60000) / 1000)
-                                return (minutes < 10 ? '0' : '') + minutes + ':' +(seconds < 10 ? '0' : '') + seconds
+                                let seconds = Math.floor(milliseconds / 1000);
+                                if (seconds != this.state.seconds) {
+                                    
+                                    this.setState({seconds});
+                                }
+                                return null
+                                // return (minutes < 10 ? '0' : '') + minutes + ':' +(seconds < 10 ? '0' : '') + seconds
                             }}
                         </Timer>
+                        <ReactMinimalPieChart
+                        animate={true}
+                        className="timer"
+                        animationDuration={500}
+                        animationEasing="ease-out"
+                        cx={50}
+                        cy={50}
+                        data={[
+                            {
+                                color: '#fe0000',
+                                value: this.state.seconds
+                            },
+                            {
+                                color: '#ffffff',
+                                value: remainingTime
+                            }
+                        ]}
+                        label={false}
+                        onClick={undefined}
+                        onMouseOut={undefined}
+                        onMouseOver={undefined}
+                        paddingAngle={0}
+                        radius={50}
+                        rounded={false}
+                        startAngle={-90}
+                        viewBoxSize={[
+                            100,
+                            100
+                        ]}
+                    />
                     </div>
                 </Toolbar>}>
                     {this.props.components ?

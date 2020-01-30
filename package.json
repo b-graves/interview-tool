@@ -35,6 +35,7 @@
     "react-compound-timer": "^1.1.15",
     "react-dom": "^16.10.2",
     "react-icons": "^3.8.0",
+    "react-minimal-pie-chart": "^6.0.1",
     "react-onsenui": "^1.11.2",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",

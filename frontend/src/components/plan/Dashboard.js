@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getPlan, deletePlan } from '../../actions/plans';
+import { getPlan, deletePlan, updatePlan } from '../../actions/plans';
 import { getParticipants } from '../../actions/participants';
 import { getComponents } from '../../actions/components';
 
@@ -10,8 +10,9 @@ import Content from '../layout/Content';
 
 import Components from "./Components";
 import Participants from "./Participants";
+import Options from "./Options";
 
-import { IoIosChatbubbles } from 'react-icons/io';
+import { IoIosChatbubbles, IoIosOptions } from 'react-icons/io';
 import { MdPeople } from 'react-icons/md';
 
 
@@ -29,11 +30,13 @@ export class Dashboard extends Component {
         this.props.getComponents(this.props.planId);
     }
 
+    updatePlan(plan) {
+        this.props.updatePlan(plan)
+    }
+
     state = {
         index: 0
     }
-
-    
 
     render() {
         console.log(this.props)
@@ -67,7 +70,15 @@ export class Dashboard extends Component {
                                 tab: <Tab><IoIosChatbubbles className="ion-icon--larger" /> Components</Tab>
                                 },
                                 {
-                                content: <Page title="Participants" active={activeIndex === 1} tabbar={tabbar}>
+                                    content: <Page title="Options" active={activeIndex === 1} tabbar={tabbar}>
+                                        <Content>
+                                            <Options navigator={this.props.navigator} plan={this.props.plan} updatePlan={this.updatePlan.bind(this)} />
+                                        </Content>
+                                    </Page>,
+                                    tab: <Tab><IoIosOptions className="ion-icon--larger" /> Options</Tab>
+                                    }, 
+                                {
+                                content: <Page title="Participants" active={activeIndex === 2} tabbar={tabbar}>
                                         <Content>
                                             <Participants navigator={this.props.navigator} planId={this.props.planId}/>
                                         </Content>
@@ -87,4 +98,4 @@ const mapStateToProps = state => ({
     plan: state.plans.plan
 });
 
-export default connect(mapStateToProps, { getPlan, deletePlan, getParticipants, getComponents })(Dashboard)
+export default connect(mapStateToProps, { getPlan, deletePlan, getParticipants, getComponents, updatePlan })(Dashboard)

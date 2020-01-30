@@ -3,6 +3,7 @@ export const GET_PLANS = "GET_PLANS";
 export const GET_PLAN = "GET_PLAN";
 export const DELETE_PLAN = "DELETE_PLAN";
 export const ADD_PLAN = "ADD_PLAN";
+export const UPDATE_PLAN = "UPDATE_PLAN";
 
 // COMPONENTS
 export const GET_COMPONENTS = "GET_COMPONENTS";

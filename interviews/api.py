@@ -6,6 +6,8 @@ from .serializers import PlanSerializer
 from .serializers import ParticipantSerializer
 from .serializers import ComponentSerializer
 
+from rest_framework.decorators import api_view
+
 # Plan Viewset
 class PlanViewSet(viewsets.ModelViewSet):
     queryset = Plan.objects.all()
@@ -19,6 +21,9 @@ class PlanViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+    
+    # def update(self, request, pk=None):
+    #     instance = serializer.save(owner=self.request.user)
 
 # Component Viewset
 class ComponentViewSet(viewsets.ModelViewSet):

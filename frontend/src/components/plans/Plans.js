@@ -33,6 +33,7 @@ export class Plans extends Component {
         return (
             <Fragment>
                 <h1>Your Sessions Plans</h1>
+                <ProgressCircular value={70}/>
                 { !this.state.delete ?
                 <Row>
                     <Col>
