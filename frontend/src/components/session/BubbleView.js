@@ -44,10 +44,10 @@ export class BubbleView extends Component {
                     </Col>
                     <Col width={"20"}>
                         {this.props.components.length > i*10+ 8 ? <Bubble component={this.props.components[i*10 + 8]} onClick={() => this.props.toggleCompletion(this.props.components[i*10 + 8].id)} popped={this.props.componentCompletion[this.props.components[i*10 + 8].id]} size={15} width="100%"/> : null}
-                        {this.props.components.length > i*10+ 7 ? <Bubble component={this.props.components[i*10 + 7]} onClick={() => this.props.toggleCompletion(this.props.components[i*10 + 7].id)} popped={this.props.componentCompletion[this.props.components[i*10 + 7].id]} size={15} width="80%" shiftRight={"20px"} shiftDown={"15px"}/> : null}
+                        {this.props.components.length > i*10+ 9 ? <Bubble component={this.props.components[i*10 + 9]} onClick={() => this.props.toggleCompletion(this.props.components[i*10 + 7].id)} popped={this.props.componentCompletion[this.props.components[i*10 + 9].id]} size={15} width="80%" shiftRight={"20px"} shiftDown={"15px"}/> : null}
                     </Col>
                     <Col width={"15"}>
-                        {this.props.components.length > i*10+ 9 ? <Bubble component={this.props.components[i*10 + 9]} onClick={() => this.props.toggleCompletion(this.props.components[i*10 + 9].id)} popped={this.props.componentCompletion[this.props.components[i*10 + 9].id]} size={15} shiftDown={"100px"}/> : null}
+                        {this.props.components.length > i*10+ 7 ? <Bubble component={this.props.components[i*10 + 7]} onClick={() => this.props.toggleCompletion(this.props.components[i*10 + 9].id)} popped={this.props.componentCompletion[this.props.components[i*10 + 7].id]} size={15} shiftDown={"100px"}/> : null}
                     </Col>
                 </Row>
             )
