@@ -35,6 +35,25 @@ export class Components extends Component {
     }
 
     render() {
+        let filteredComponents = this.props.components;
+
+        if (this.props.orderByColor) {
+            filteredComponents.sort(function(a, b) { 
+                return a.color - b.color;
+            });
+        } else {
+            filteredComponents.sort(function(a, b) { 
+                return a.id - b.id;
+            });
+        }
+
+        if (this.props.hideCompletedComponents) {
+            filteredComponents = filteredComponents.filter(component => !this.state.componentCompletion[component.id]);
+        }
+
+        console.log(this.props.hideCompletedComponents)
+        console.l
+
         return (
             this.props.components ?
                 <div>
@@ -48,7 +67,7 @@ export class Components extends Component {
                             {
                             content: <Page title="TickboxesView" active={activeIndex === 0} tabbar={tabbar}>
                                 <Content>
-                                    <TickboxesView components={this.props.components} componentCompletion={this.state.componentCompletion} toggleCompletion={this.toggleCompletion.bind(this)} />
+                                    {this.props.hideList ? null : <TickboxesView components={filteredComponents} componentCompletion={this.state.componentCompletion} hideCompletedComponents={this.props.hideCompletedComponents} toggleCompletion={this.toggleCompletion.bind(this)} />}
                                 </Content>
                             </Page>,
                             tab: <Tab><FaCheck className="ion-icon--larger" /> Tickboxes View</Tab>
@@ -56,14 +75,14 @@ export class Components extends Component {
                             {
                                 content: <Page title="CardsView" active={activeIndex === 1} tabbar={tabbar}>
                                     <Content>
-                                        <CardsView components={this.props.components} componentCompletion={this.state.componentCompletion} toggleCompletion={this.toggleCompletion.bind(this)} columns={3} />
+                                        <CardsView components={filteredComponents} componentCompletion={this.state.componentCompletion} toggleCompletion={this.toggleCompletion.bind(this)} columns={3} />
                                     </Content>
                                 </Page>,
                                 tab: <Tab><IoIosApps className="ion-icon--larger" /> Cards View</Tab>
                                 },
                             {
                                 content: <Page title="BubbleView" active={activeIndex === 2} tabbar={tabbar}>
-                                    <BubbleView components={this.props.components} componentCompletion={this.state.componentCompletion} toggleCompletion={this.toggleCompletion.bind(this)} columns={3} />
+                                    <BubbleView components={filteredComponents} componentCompletion={this.state.componentCompletion} toggleCompletion={this.toggleCompletion.bind(this)}  columns={3} />
                                 </Page>,
                                 tab: <Tab><MdBubbleChart className="ion-icon--larger" /> Bubble View</Tab>
                                 }

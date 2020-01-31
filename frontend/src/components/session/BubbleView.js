@@ -59,7 +59,7 @@ export class BubbleView extends Component {
 
     render() {    
         return (
-            <div style={{padding: "0 11%"}}>
+            <div style={{padding: "0 2%"}}>
                 {this.makeBubbles(this.props.components)}
             </div>
 
