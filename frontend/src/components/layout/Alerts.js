@@ -47,7 +47,6 @@ export class Alerts extends Component {
     }
 
     render() {
-        console.log(this.state.messages.length > 0)
         let messages = this.state.messages.map(message => <div style={this.state.error ? {"color": "#ff7b7b"}: null}>{message}</div>)
         return (
             this.state.messages.length > 0 ? 

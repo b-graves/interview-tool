@@ -17,7 +17,6 @@ export class Options extends Component {
                     <div className="title"><FaStopwatch className="header-icon--larger"/> Duration</div>
                     <Button
                         onClick={() => {
-                            console.log("down")
                             this.props.updatePlan({...this.props.plan, duration: this.props.plan.duration > 0 ? this.props.plan.duration - 1 : 0})
                         }}
                         disabled={this.props.plan.duration < 0}
@@ -28,7 +27,6 @@ export class Options extends Component {
                     <p className="duration">{this.props.plan.duration} Minutes</p>
                     <Button
                         onClick={() => {
-                            console.log("up")
                             this.props.updatePlan({...this.props.plan, duration: this.props.plan.duration + 1})
                         }}
                         modifier="quiet"

@@ -10,6 +10,7 @@ class Component(models.Model):
     name = models.CharField(max_length=100)
     owner = models.ForeignKey(User, related_name="components", on_delete=models.CASCADE, null=True)
     plan = models.ForeignKey(Plan, related_name="components", on_delete=models.CASCADE, null=True)
+    color = models.IntegerField(default=0)
 
 class Participant(models.Model):
     name = models.CharField(max_length=100)

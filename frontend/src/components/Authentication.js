@@ -21,7 +21,6 @@ class Authentication extends Component {
     }
 
     render() {
-        console.log("authenticate")
         return (
             <Provider store={store}>
                 <Alerts />

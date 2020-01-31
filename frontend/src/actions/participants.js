@@ -6,8 +6,6 @@ import { GET_PARTICIPANTS, GET_PARTICIPANT, DELETE_PARTICIPANT, ADD_PARTICIPANT 
 
 // GET PARTICIPANTS
 export const getParticipants = (planId) => (dispatch, getState) => {
-    console.log("STATE")
-    console.log(getState);
     axios
         .get(`/api/participants/`, tokenConfig(getState))
         .then(res => {
@@ -22,8 +20,6 @@ export const getParticipants = (planId) => (dispatch, getState) => {
 
 // GET PARTICIPANT
 export const getParticipant = (id) => (dispatch, getState) => {
-    console.log("Token Config:")
-    console.log(tokenConfig(getState));
     axios
         .get(`/api/participants/${id}/`, tokenConfig(getState))
         .then(res => {

@@ -10,6 +10,9 @@ import { FaCheck } from 'react-icons/fa';
 
 export class TickboxesView extends Component {
 
+    backgroundColors = ["#fff", "#e6001f", "#f8981d", "#090", "#1ea2e7", "#0e5eaa", "#a5007d"]
+    colors = ["#000", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"]
+
     render() {
         return (
             <Fragment>
@@ -20,6 +23,8 @@ export class TickboxesView extends Component {
                             renderRow={(component, idx) => (
                                 <ListItem 
                                     modifier='material'
+                                    className={this.props.componentCompletion[component.id] ? 'card--completed ' : ''}
+                                    style={{backgroundColor: this.backgroundColors[component.color], color: this.colors[component.color]}}
                                 >
                                     {component.name}
                                     {/* <Button modifier="quiet" onClick={this.props.deleteComponent.bind(this, component.id)}>Remove</Button> */}

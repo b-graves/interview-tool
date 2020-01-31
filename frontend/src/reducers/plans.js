@@ -6,9 +6,6 @@ const initialState = {
 }
 
 export default function(state = initialState, action) {
-    console.log(action.type)
-    console.log(state.plans)
-    console.log(action.payload)
     switch(action.type) {
         case GET_PLANS:
             return {

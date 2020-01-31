@@ -16,6 +16,8 @@ export class BubbleView extends Component {
         console.log(label)
     }
 
+    colors = ["#949494", "#e6001f", "#f8981d", "#090", "#1ea2e7", "#0e5eaa", "#a5007d"]
+
     render() {
         
         return (
@@ -28,7 +30,7 @@ export class BubbleView extends Component {
                 }} >
                 <img src="/static/frontend/images/bubble.png" id="circle" />
                 <div id="circle" className="bubble-center" onClick={() => this.props.onClick()}>
-                    <p style={{fontSize: this.props.size, textAlign: "center", fontWeight: "light !important"}} >
+                    <p style={{fontSize: this.props.size, textAlign: "center", fontWeight: "light !important", color: this.colors[this.props.component.color]}} >
                         {this.props.component.name}
                     </p>
                 </div>

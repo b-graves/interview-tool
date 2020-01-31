@@ -44,12 +44,10 @@ export class Session extends Component {
     }
 
     render() {
-        console.log(this.props)
         let remainingTime = 0;
         if (this.props.plan.duration && this.props.plan.duration * 60 - this.state.seconds > 0){
             remainingTime = this.props.plan.duration * 60 - this.state.seconds
         }
-        console.log(remainingTime)
         return (
             <Page renderToolbar={() =>
                 <Toolbar>
@@ -87,7 +85,7 @@ export class Session extends Component {
                         cy={50}
                         data={[
                             {
-                                color: '#f00',
+                                color: '#1f1f21',
                                 value: this.state.seconds
                             },
                             {

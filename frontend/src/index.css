@@ -121,6 +121,8 @@ button{
     height: 120px;
     border-radius: 0px;
     margin: 6px 3px;
+    padding: 5px 10px;
+    line-height: 140%;
 }
 
 .bubble-center {
@@ -151,13 +153,13 @@ button{
   }
 
 .timer {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     position: fixed;
     right:4 !important;
     top:4 !important;
-    padding-top: 5px;
-    padding-left: 5px;
+    padding-top: 10px;
+    padding-left: 10px;
 }
 
 .duration {
@@ -192,17 +194,26 @@ button{
 }
 
 .back-button {
-    color: #1ea2e7 !important;
+    color: #1f1f21 !important;
 }
 
 .tabbar__item.active {
-    color: #1ea2e7 !important;
+    color: #1f1f21 !important;
 }
 
 :checked + .tabbar__button {
-    color: #1ea2e7 !important;
+    color: #1f1f21 !important;
 }
 
 .back-button__icon {
-    fill: #1ea2e7 !important;
+    fill: #1f1f21 !important;
+}
+
+.icon-color-marker {
+    position: absolute;
+    font-size: 170%;
+}
+
+.component-name {
+    padding-left: 45px;
 }

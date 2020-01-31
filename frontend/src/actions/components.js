@@ -2,12 +2,10 @@ import axios from 'axios';
 import { createMessage, returnErrors } from './messages';
 import { tokenConfig } from './auth';
 
-import { GET_COMPONENTS, GET_COMPONENT, DELETE_COMPONENT, ADD_COMPONENT } from './types';
+import { GET_COMPONENTS, GET_COMPONENT, DELETE_COMPONENT, ADD_COMPONENT, UPDATE_COMPONENT } from './types';
 
 // GET COMPONENTS
 export const getComponents = (planId) => (dispatch, getState) => {
-    console.log("STATE")
-    console.log(getState);
     axios
         .get(`/api/components/`, tokenConfig(getState))
         .then(res => {
@@ -22,8 +20,6 @@ export const getComponents = (planId) => (dispatch, getState) => {
 
 // GET COMPONENT
 export const getComponent = (id) => (dispatch, getState) => {
-    console.log("Token Config:")
-    console.log(tokenConfig(getState));
     axios
         .get(`/api/components/${id}/`, tokenConfig(getState))
         .then(res => {
@@ -56,6 +52,19 @@ export const addComponent = (component) => (dispatch, getState) => {
             dispatch(createMessage({ genericMessage: "Component Added" }));
             dispatch({
                 type: ADD_COMPONENT,
+                payload: res.data
+            });
+        })
+        .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+}
+
+// UPDATE COMPONENT
+export const updateComponent = (component) => (dispatch, getState) => {
+    axios
+        .put(`/api/components/${component.id}/`, component, tokenConfig(getState))
+        .then(res => {
+            dispatch({
+                type: UPDATE_COMPONENT,
                 payload: res.data
             });
         })

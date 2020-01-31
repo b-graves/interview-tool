@@ -1,4 +1,4 @@
-import { GET_COMPONENTS, GET_COMPONENT, DELETE_COMPONENT, ADD_COMPONENT } from "../actions/types.js";
+import { GET_COMPONENTS, GET_COMPONENT, DELETE_COMPONENT, ADD_COMPONENT, UPDATE_COMPONENT } from "../actions/types.js";
 
 const initialState = {
     components: [],
@@ -26,6 +26,12 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 components: [...state.components, action.payload]
+            };
+        case UPDATE_COMPONENT:
+            return {
+                ...state,
+                components: [...state.components.filter(component => component.id !== action.payload.id), action.payload],
+                component: action.payload
             };
         default:
             return state;
