@@ -87,7 +87,7 @@ export class Session extends Component {
                         cy={50}
                         data={[
                             {
-                                color: '#fe0000',
+                                color: '#f00',
                                 value: this.state.seconds
                             },
                             {
