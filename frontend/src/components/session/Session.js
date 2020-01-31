@@ -66,14 +66,13 @@ export class Session extends Component {
 
         return (
             <Page renderToolbar={() =>
-                <Toolbar>
-                    <div className="right">
-                    </div>
-                    <div className="center">
+                <Toolbar
+                    style={{ height: "24px"}}
+                    className="toolbar__narrow"
+                >
+                    <div className="center toolbar__session" >
                     {/* <Button onClick={() => this.state.isOpen ? this.hide() : this.show()}>open {this.state.isOpen}</Button> */}
                         {this.props.plan && this.props.participant ? "Session In Progress: " + this.props.plan.name + " with "+this.props.participant.name: ""}
-                    </div>
-                    <div className="left"> 
                         <Timer
                             initialTime={0}
                             direction="forward"
@@ -90,36 +89,6 @@ export class Session extends Component {
                                 // return (minutes < 10 ? '0' : '') + minutes + ':' +(seconds < 10 ? '0' : '') + seconds
                             }}
                         </Timer>
-                        <ReactMinimalPieChart
-                        animate={true}
-                        className="timer"
-                        animationDuration={500}
-                        animationEasing="ease-out"
-                        cx={50}
-                        cy={50}
-                        data={[
-                            {
-                                color: '#1f1f21',
-                                value: this.state.seconds
-                            },
-                            {
-                                color: '#ffffff',
-                                value: remainingTime
-                            }
-                        ]}
-                        label={false}
-                        onClick={undefined}
-                        onMouseOut={undefined}
-                        onMouseOver={undefined}
-                        paddingAngle={0}
-                        radius={50}
-                        rounded={false}
-                        startAngle={-90}
-                        viewBoxSize={[
-                            100,
-                            100
-                        ]}
-                    />
                     </div>
                 </Toolbar>}>
                     {this.props.components ?
@@ -137,6 +106,41 @@ export class Session extends Component {
                         swipeable={true}
                         collapse={"split"}>
                             <div>
+                            <Card
+                                style={{textAlign: "center"}}
+                            >
+                            <ReactMinimalPieChart
+                                    animate={true}
+                                    className="timer"
+                                    animationDuration={500}
+                                    animationEasing="ease-out"
+                                    cx={50}
+                                    cy={50}
+                                    data={[
+                                        {
+                                            color: '#009900',
+                                            value: this.state.seconds
+                                        },
+                                        {
+                                            color: '#f0eff4',
+                                            value: remainingTime
+                                        }
+                                    ]}
+                                    label={false}
+                                    onClick={undefined}
+                                    onMouseOut={undefined}
+                                    onMouseOver={undefined}
+                                    paddingAngle={0}
+                                    radius={50}
+                                    rounded={false}
+                                    startAngle={-90}
+                                    viewBoxSize={[
+                                        100,
+                                        100
+                                    ]}
+                                />
+                                {Math.ceil(remainingTime/60)} Minutes Left
+                                </Card>
                                 <Card
                                     className={this.state.orderByColor ? "card__checkbox card__checkbox--selected" : "card__checkbox"}
                                     onClick={() =>  {
@@ -157,8 +161,8 @@ export class Session extends Component {
                                 Filter completed <Checkbox modifier="material" checked={this.state.hideCompletedComponents} />
                                 </Card>
                             </div>
-                            <Button className="positive--quiet complete-button" modifier="quiet" onClick={() => this.completeSession()}>
-                                <FaCheck className="icon-in-button"/> Complete
+                            <Button className="positive complete-button"  onClick={() => this.completeSession()}>
+                                <FaCheck className="icon-in-button"/> Complete Session
                             </Button>
                         </SplitterSide>
                     </Splitter>

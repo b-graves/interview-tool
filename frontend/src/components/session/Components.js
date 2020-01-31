@@ -75,7 +75,7 @@ export class Components extends Component {
                             {
                                 content: <Page title="CardsView" active={activeIndex === 1} tabbar={tabbar}>
                                     <Content>
-                                        <CardsView components={filteredComponents} componentCompletion={this.state.componentCompletion} toggleCompletion={this.toggleCompletion.bind(this)} columns={3} />
+                                        <CardsView orderByColor={this.props.orderByColor} components={filteredComponents} componentCompletion={this.state.componentCompletion} toggleCompletion={this.toggleCompletion.bind(this)} columns={3} />
                                     </Content>
                                 </Page>,
                                 tab: <Tab><IoIosApps className="ion-icon--larger" /> Cards View</Tab>

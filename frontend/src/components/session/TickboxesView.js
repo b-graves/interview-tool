@@ -30,10 +30,10 @@ export class TickboxesView extends Component {
                             renderRow={(component, idx) => (
                                 <ListItem 
                                     modifier='material'
-                                    className={this.props.componentCompletion[component.id] ? 'card--completed ' : ''}
+                                    className={this.props.componentCompletion[component.id] ? 'card--completed list-item__checkboxes ' : 'list-item__checkboxes'}
                                     style={{backgroundColor: this.backgroundColors[component.color], color: this.colors[component.color]}}
                                 >
-                                    {component.name}
+                                    <div className="checkbox-text">{component.name}</div>
                                     {/* <Button modifier="quiet" onClick={this.props.deleteComponent.bind(this, component.id)}>Remove</Button> */}
                                 </ListItem>
                             )}>
@@ -44,7 +44,7 @@ export class TickboxesView extends Component {
                         <List
                             dataSource={this.props.components}
                             renderRow={(component, idx) => (
-                                <ListItem 
+                                <ListItem
                                     modifier='material tappable'
                                     onClick={() => {
                                         if (this.props.hideCompletedComponents) {
