@@ -48,104 +48,45 @@ export class Components extends Component {
         console.log(this.props.components)
         return (
             <Fragment>
-                { !this.state.delete ?
-                <Row>
-                    {/* <Col width="48px">
-                        <List
-                            dataSource={this.props.components}
-                            renderRow={(component, idx) => {
-                                console.log(component)
-                                return <ListItem 
-                                    modifier='material'
-                                    style={{"color": this.colors[component.color]}}
-                                    onClick={() => this.changeColor(component)}
-                                    className='list-item--button'
-                                >
-                                <FaSquareFull className="icon--center" />
-                                </ListItem>
-                            }
-                            }>
-                        </List>
-                    </Col> */}
-                    <Col>
+                {/* { !this.state.delete ? */}
                         <List
                             dataSource={this.props.components}
                             renderRow={(component, idx) => (
-                                <ListItem 
-                                    modifier='material'
-                                >
-                                    <FaSquareFull 
-                                        className="icon-color-marker"
-                                        style={{"color": this.colors[component.color]}}
-                                        onClick={() => this.changeColor(component)}
-                                    />
-                                    <div className="component-name">{component.name}</div>
-                                    {/* <Button modifier="quiet" onClick={this.props.deleteComponent.bind(this, component.id)}>Remove</Button> */}
-                                </ListItem>
+                                <Row>
+                                    <Col>
+                                        <ListItem 
+                                            modifier='material'
+                                        >
+                                            <FaSquareFull 
+                                                className="icon-color-marker"
+                                                style={{"color": this.colors[component.color]}}
+                                                onClick={() => this.changeColor(component)}
+                                            />
+                                            <div className="component-name">{component.name}</div>
+                                            {/* <Button modifier="quiet" onClick={this.props.deleteComponent.bind(this, component.id)}>Remove</Button> */}
+                                    
+                                        </ListItem>
+                                    </Col>
+                                    <Col width="44px">
+                                        <ListItem
+                                            style={{height: "100%"}}
+                                            modifier='material tappable'
+                                            onClick={()=>{
+                                                this.setState({delete: true})
+                                                this.props.deleteComponent(component.id);
+                                                setTimeout(function(){this.setState({delete: false})}.bind(this), 100);
+                                            }}
+                                            className='list-item--button negative'
+                                        >
+                                            <FaTrash className="icon--center"/>
+                                            {/* <Button modifier="quiet" onClick={this.props.deleteComponent.bind(this, component.id)}>Remove</Button> */}
+                                        </ListItem>
+                                    </Col>
+                                </Row>
                             )}>
                                 {/* <AddComponent planId={this.props.planId} /> */}
                         </List>
-                    </Col>
-                    {/* <Col width="48px">
-                        <List
-                            dataSource={this.props.components}
-                            renderRow={(component, idx) => (
-                                <ListItem 
-                                    modifier='material tappable'
-                                    onClick={() => this.openComponent(component.id)}
-                                >
-                                    <FaPen />
-                                </ListItem>
-                            )}>
-                        </List>
-                    </Col> */}
-                    {/* <Col width="48px">
-                        <List
-                            dataSource={this.props.components}
-                            renderRow={(component, idx) => (
-                                <ListItem 
-                                    modifier='material tappable'
-                                    onClick={() => this.openComponent(component.id)}
-                                >
-                                    <FaChevronUp />
-                                </ListItem>
-                            )}>
-                        </List>
-                    </Col>
-                    <Col width="48px">
-                        <List
-                            dataSource={this.props.components}
-                            renderRow={(component, idx) => (
-                                <ListItem 
-                                    modifier='material tappable'
-                                    onClick={() => this.openComponent(component.id)}
-                                >
-                                    <FaChevronDown />
-                                </ListItem>
-                            )}>
-                        </List>
-                    </Col> */}
-                    <Col width="48px">
-                        <List
-                            dataSource={this.props.components}
-                            renderRow={(component, idx) => (
-                                <ListItem 
-                                    modifier='material tappable'
-                                    onClick={()=>{
-                                        this.setState({delete: true})
-                                        this.props.deleteComponent(component.id);
-                                        setTimeout(function(){this.setState({delete: false})}.bind(this), 100);
-                                    }}
-                                    className='list-item--button negative'
-                                >
-                                    <FaTrash className="icon--center"/>
-                                    {/* <Button modifier="quiet" onClick={this.props.deleteComponent.bind(this, component.id)}>Remove</Button> */}
-                                </ListItem>
-                            )}>
-                        </List>
-                    </Col>
-                </Row>
-                : <ProgressCircular indeterminate /> }
+                {/* : <ProgressCircular indeterminate /> } */}
                 <AddComponent planId={this.props.planId} />
             </Fragment>
         )

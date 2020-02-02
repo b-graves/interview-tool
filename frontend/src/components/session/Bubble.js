@@ -26,7 +26,7 @@ export class BubbleView extends Component {
                 "padding-bottom": this.props.width ? this.props.width : "100%",
                 "margin-top": this.props.shiftDown ? this.props.shiftDown : "0px",
                 "margin-left": this.props.shiftRight ? this.props.shiftRight : "0px",
-                opacity : this.props.popped ? 0.1 : 1
+                opacity : this.props.popped ? 0 : 1
                 }} >
                 <img src="/static/frontend/images/bubble.png" id="circle" />
                 <div id="circle" className="bubble-center" onClick={() => this.props.onClick()}>

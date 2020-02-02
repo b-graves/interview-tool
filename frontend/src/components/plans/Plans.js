@@ -34,39 +34,34 @@ export class Plans extends Component {
             <Fragment>
                 <h1>Your Sessions Plans</h1>
                 { !this.state.delete ?
-                <Row>
-                    <Col>
                         <List
                             dataSource={this.props.plans}
                             renderRow={(plan, idx) => (
-                                <ListItem 
-                                    modifier='material tappable chevron'
-                                    onClick={() => this.openPlan(plan.id)}
-                                >
-                                    {plan.name}
-                                </ListItem>
+                                <Row>
+                                    <Col>
+                                    <ListItem 
+                                        modifier='material tappable chevron'
+                                        onClick={() => this.openPlan(plan.id)}
+                                    >
+                                        {plan.name}
+                                    </ListItem>
+                                    </Col>
+                                    <Col width="48px">
+                                        <ListItem 
+                                            modifier='material tappable'
+                                            className='list-item--button negative'
+                                            onClick={()=>{
+                                                this.setState({delete: true})
+                                                this.props.deletePlan(plan.id);
+                                                setTimeout(function(){this.setState({delete: false})}.bind(this), 100);
+                                            }}
+                                        >
+                                            <FaTrash className="icon--center"/>
+                                        </ListItem>
+                                    </Col>
+                                </Row>
                             )}>
                         </List>
-                    </Col>
-                    <Col width="48px">
-                            <List
-                                dataSource={this.props.plans}
-                                renderRow={(plan, idx) => (
-                                    <ListItem 
-                                        modifier='material tappable'
-                                        className='list-item--button negative'
-                                        onClick={()=>{
-                                            this.setState({delete: true})
-                                            this.props.deletePlan(plan.id);
-                                            setTimeout(function(){this.setState({delete: false})}.bind(this), 100);
-                                        }}
-                                    >
-                                        <FaTrash className="icon--center"/>
-                                    </ListItem>
-                                )}>
-                            </List>
-                        </Col>
-                </Row>
                 : <ProgressCircular indeterminate /> }
                 <Add />
             </Fragment>

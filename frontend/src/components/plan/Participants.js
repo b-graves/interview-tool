@@ -41,14 +41,11 @@ export class Participants extends Component {
         return (
             <Fragment>
                 {this.props.participants.length > 0 && !this.state.delete ?
-                    
-                    <Row>
-                        <Col>
-                            <List
-                                // renderHeader={() =>
-                                //     <ListHeader style={{fontSize: 15}} className="testClass"><MdPerson className="header-icon--larger"/> Participant </ListHeader> }
-                                dataSource={this.props.participants}
-                                renderRow={(participant, idx) => (
+                    <List
+                        dataSource={this.props.participants}
+                        renderRow={(participant, idx) => (
+                            <Row>
+                                <Col>
                                     <ListItem 
                                         modifier='material tappable'
                                         onClick={() => this.openParticipant(participant.id)}
@@ -56,46 +53,8 @@ export class Participants extends Component {
                                         {participant.name}
                                         {/* <Button modifier="quiet" onClick={this.props.deleteParticipant.bind(this, participant.id)}>Remove</Button> */}
                                     </ListItem>
-                                )}>
-                                    {/* <AddParticipant planId={this.props.planId} /> */}
-                            </List>
-                        </Col>
-                        {/* <Col width="48px">
-                            <List
-                                dataSource={this.props.participants}
-                                renderRow={(participant, idx) => (
-                                    <ListItem 
-                                        modifier='material tappable'
-                                        onClick={() => this.openParticipant(participant.id)}
-                                    >
-                                        <FaPen />
-                                    </ListItem>
-                                )}>
-                            </List>
-                        </Col> */}
-                        {/* <Col width="156px">
-                            <List
-                                renderHeader={() =>
-                                    <ListHeader style={{fontSize: 15, textAlign: "center"}} className="testClass"><FaBalanceScale className="header-icon--larger"/> Bias Declaration </ListHeader> }
-                                dataSource={this.props.participants}
-                                renderRow={(participant, idx) => (
-                                    <ListItem 
-                                        style={{alignItems: "center"}}
-                                        modifier='material tappable'
-                                        // onClick={this.props.deleteParticipant.bind(this, participant.id)}
-                                    >
-                                        {Math.random() > 0.5 ? <FaCheck className="icon--center" style={{color: "green"}} /> : <FaEllipsisH className="icon--center" />}
-                                        <FaEllipsisH className="icon--center" />
-                                    </ListItem>
-                                )}>
-                            </List>
-                        </Col> */}
-                        <Col width="156px">
-                            <List
-                                // renderHeader={() =>
-                                //     <ListHeader style={{fontSize: 15, textAlign:"center"}} className="testClass"><GiDiscussion className="header-icon--larger"/> Session</ListHeader> }
-                                dataSource={this.props.participants}
-                                renderRow={(participant, idx) => (
+                                </Col>
+                                <Col width="156px">
                                     <ListItem 
                                         style={{textAlign: "center", alignItems: "flex-start"}}
                                         modifier='material tappable'
@@ -110,48 +69,25 @@ export class Participants extends Component {
                                         </div>
                                         {/* <Button modifier="quiet" onClick={this.props.deleteParticipant.bind(this, participant.id)}>Remove</Button> */}
                                     </ListItem>
-                                )}>
-                            </List>
-                        </Col>
-                        {/* <Col width="156px">
-                            <List
-                                renderHeader={() =>
-                                    <ListHeader style={{fontSize: 15, textAlign:"center"}} className="testClass"><FaBalanceScale className="header-icon--larger"/> Bias Reflection</ListHeader> }
-                                dataSource={this.props.participants}
-                                renderRow={(participant, idx) => (
+                                </Col>
+                                <Col width="48px">
                                     <ListItem 
-                                        style={{textAlign: "center", "background-color": "#f0eff4"}}
-                                        modifier='material'
-                                        // onClick={this.props.deleteParticipant.bind(this, participant.id)}
-                                    >
-                                        {Math.random() > 0.5 ? <FaCheck className="icon--center" style={{color: "green"}} /> : <FaEllipsisH className="icon--center" />}
-                                        <FaEllipsisH style={{color: "lightgrey"}} className="icon--center" />
-                                    </ListItem>
-                                )}>
-                            </List>
-                        </Col> */}
-                        <Col width="48px">
-                            <List
-                                // renderHeader={() =>
-                                //     <ListHeader style={{fontSize: 15, textAlign:"center"}} className="testClass"><FaBalanceScale className="header-icon--larger hidden"/></ListHeader> }
-                                dataSource={this.props.participants}
-                                renderRow={(participant, idx) => (
-                                    <ListItem 
-                                        modifier='material tappable'
-                                        className='list-item--button negative'
-                                        onClick={()=>{
-                                            this.setState({delete: true})
-                                            this.props.deleteParticipant(participant.id);
-                                            setTimeout(function(){this.setState({delete: false})}.bind(this), 100);
-                                        }}
-                                    >
-                                        <FaTrash className="icon--center"/>
-                                        {/* <Button modifier="quiet" onClick={this.props.deleteParticipant.bind(this, participant.id)}>Remove</Button> */}
-                                    </ListItem>
-                                )}>
-                            </List>
-                        </Col>
-                    </Row>
+                                            modifier='material tappable'
+                                            className='list-item--button negative'
+                                            onClick={()=>{
+                                                this.setState({delete: true})
+                                                this.props.deleteParticipant(participant.id);
+                                                setTimeout(function(){this.setState({delete: false})}.bind(this), 100);
+                                            }}
+                                        >
+                                            <FaTrash className="icon--center"/>
+                                            {/* <Button modifier="quiet" onClick={this.props.deleteParticipant.bind(this, participant.id)}>Remove</Button> */}
+                                        </ListItem>
+                                </Col>
+                            </Row>
+                        )}>
+                            {/* <AddParticipant planId={this.props.planId} /> */}
+                    </List>
                 :
                     null
                 }

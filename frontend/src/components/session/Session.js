@@ -154,8 +154,8 @@ export class Session extends Component {
                                 <Card 
                                     className={this.state.hideCompletedComponents ? "card__checkbox card__checkbox--selected" : "card__checkbox"}
                                     onClick={() =>  {
-                                        this.setState({hideCompletedComponents : !this.state.hideCompletedComponents, hideList: true})
-                                        setTimeout(function(){this.setState({hideList: false})}.bind(this), 10);
+                                        this.setState({hideCompletedComponents : !this.state.hideCompletedComponents})
+                                        // setTimeout(function(){this.setState({hideList: false})}.bind(this), 10);
                                         }}
                                 >
                                 Filter completed <Checkbox modifier="material" checked={this.state.hideCompletedComponents} />
