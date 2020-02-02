@@ -9,6 +9,7 @@ import { Tabbar, TabPage, Tab, Page, Navigator, Button, Toolbar, BackButton, Pro
 import Content from '../layout/Content';
 
 import Components from "./Components";
+import ComponentGroups from "./ComponentGroups";
 import Participants from "./Participants";
 import Options from "./Options";
 
@@ -66,8 +67,16 @@ export class Dashboard extends Component {
                                         <Components navigator={this.props.navigator} planId={this.props.planId}/>
                                     </Content>
                                 </Page>,
-                                tab: <Tab><IoIosChatbubbles className="ion-icon--larger" /> Components</Tab>
+                                tab: <Tab><IoIosChatbubbles className="ion-icon--larger" /> Components View A</Tab>
                                 },
+                                {
+                                    content: <Page title="Groups" active={activeIndex === 0} tabbar={tabbar}>
+                                        <Content>
+                                            <ComponentGroups navigator={this.props.navigator} planId={this.props.planId}/>
+                                        </Content>
+                                    </Page>,
+                                    tab: <Tab><IoIosChatbubbles className="ion-icon--larger" /> Components View B</Tab>
+                                    },
                                 {
                                     content: <Page title="Options" active={activeIndex === 1} tabbar={tabbar}>
                                         <Content>

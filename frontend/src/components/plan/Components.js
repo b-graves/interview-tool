@@ -16,8 +16,8 @@ export class Components extends Component {
         getComponents: PropTypes.func.isRequired,
         deleteComponent: PropTypes.func.isRequired,
     }
-
-    colors = ["#f0eff4", "#e6001f", "#f8981d", "#090", "#1ea2e7", "#0e5eaa", "#a5007d"]
+    
+    colors = ["#f0eff4", "#a5007d", "#0e5eaa", "#1ea2e7", "#090", "#f8981d", "#e6001f"]
 
     componentDidMount() {
         this.props.getComponents(this.props.planId);

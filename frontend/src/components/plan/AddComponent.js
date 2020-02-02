@@ -20,7 +20,7 @@ export class AddComponent extends Component {
     onSubmit = e => {
         e.preventDefault();
         const { name } = this.state;
-        const component = { name, plan: this.props.planId };
+        const component = { name, plan: this.props.planId, color: this.props.colorIdx };
         this.props.addComponent(component);
         this.setState({
             name: ""

@@ -10,7 +10,7 @@ import { FaCheck } from 'react-icons/fa';
 
 export class TickboxesView extends Component {
 
-    backgroundColors = ["#fff", "#e6001f", "#f8981d", "#090", "#1ea2e7", "#0e5eaa", "#a5007d"]
+    backgroundColors = ["#fff", "#a5007d", "#0e5eaa", "#1ea2e7", "#090", "#f8981d", "#e6001f"]
     colors = ["#000", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"]
 
     render() {

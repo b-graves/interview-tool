@@ -17,6 +17,7 @@ export class BubbleView extends Component {
     }
 
     colors = ["#949494", "#e6001f", "#f8981d", "#090", "#1ea2e7", "#0e5eaa", "#a5007d"]
+    colors = ["#949494", "#a5007d", "#0e5eaa", "#1ea2e7", "#090", "#f8981d", "#e6001f"]
 
     render() {
         
