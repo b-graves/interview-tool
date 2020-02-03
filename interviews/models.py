@@ -17,6 +17,7 @@ class Component(models.Model):
     owner = models.ForeignKey(User, related_name="components", on_delete=models.CASCADE, null=True)
     plan = models.ForeignKey(Plan, related_name="components", on_delete=models.CASCADE, null=True)
     group = models.ForeignKey(Group, related_name="components", on_delete=models.CASCADE, null=True)
+    priority = models.IntegerField(default=0)
 
 class Participant(models.Model):
     name = models.CharField(max_length=1000)

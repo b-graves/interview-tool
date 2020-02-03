@@ -8,12 +8,22 @@ import { Col, Row, Card } from 'react-onsenui';
 
 import { FaCheck } from 'react-icons/fa';
 
+import { FiChevronUp, FiChevronDown, FiChevronsDown, FiChevronsUp, FiMinus} from 'react-icons/fi';
+
 export class TickboxesView extends Component {
 
     backgroundColors = ["#fff", "#a5007d", "#0e5eaa", "#1ea2e7", "#090", "#f8981d", "#e6001f"]
     colors = ["#000", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"]
     
     fgOnlyColors =  ["#000", "#a5007d", "#0e5eaa", "#1ea2e7", "#090", "#f8981d", "#e6001f"]
+
+    priorityIcons = {
+        "-2" : <FiChevronsDown className="card-priority-icon" />,
+        "-1" : <FiChevronDown className="card-priority-icon" />,
+        1 : <FiChevronUp className="card-priority-icon" />,
+        2 : <FiChevronsUp className="card-priority-icon" />,
+    }
+    
 
     render() {
         let columns = []
@@ -59,6 +69,7 @@ export class TickboxesView extends Component {
                                 >
                                     <div className="title">
                                         {component.name}
+                                        {component.priority !== 0 ? this.priorityIcons[component.priority] : null}
                                     </div>
                                 </Card>
                             )}
@@ -81,6 +92,7 @@ export class TickboxesView extends Component {
                                         >
                                             <div className="title">
                                                 {component.name}
+                                                {component.priority !== 0 ? this.priorityIcons[component.priority] : null}
                                             </div>
                                         </Card>
                                     )}

@@ -8,10 +8,11 @@ import AddComponent from "./AddComponent"
 import AddGroup from "./AddGroup"
 import Dashboard from "./Dashboard"
 
-import { Col, Row, List, ListItem, Button, Icon, ProgressCircular } from 'react-onsenui';
+import { Col, Row, List, ListItem, Button, Icon, ProgressCircular, Segment } from 'react-onsenui';
 
 import { FaChevronUp, FaChevronDown, FaTrash, FaPen, FaSquareFull } from 'react-icons/fa';
 import { IoIosColorFill } from 'react-icons/io';
+import { FiChevronUp, FiChevronDown, FiChevronsDown, FiChevronsUp, FiMinus} from 'react-icons/fi';
 
 export class ComponentGroups extends Component {
     static propTypes = {
@@ -65,10 +66,23 @@ export class ComponentGroups extends Component {
         this.props.updateGroup(group)
     }
 
+    changePriority(component, priority) {
+        component.priority = priority;
+        this.props.updateComponent(component)
+    }
+
+    state = {
+        value: "0"
+    }
+
 
     render() {
         this.props.components.sort(function(a, b) { 
             return a.id - b.id;
+        })
+
+        this.props.components.sort(function(a, b) { 
+            return  b.priority - a.priority;
         })
 
         this.props.groups.sort(function(a, b) { 
@@ -104,9 +118,17 @@ export class ComponentGroups extends Component {
                                         <Col>
                                             <ListItem 
                                                 modifier='material'
-                                                style={{backgroundColor: this.backgroundColors[group.color], color: this.colors[group.color]}}
+                                                style={{backgroundColor: this.backgroundColors[group.color], color: this.colors[group.color], paddingRight: "230px"}}
                                             >
                                                 {component.name}
+                                                <div 
+                                                    className="priority-segment">
+                                                    <Button onClick={() => this.changePriority(component, -2)} className="priority-button" style={{color: this.colors[group.color], opacity: component.priority == -2 ? 1 : 0.2}}><FiChevronsDown /></Button>
+                                                    <Button onClick={() => this.changePriority(component, -1)} className="priority-button" style={{color: this.colors[group.color], opacity: component.priority == -1 ? 1 : 0.2}}><FiChevronDown /></Button>
+                                                    <Button onClick={() => this.changePriority(component, 0)} className="priority-button" style={{color: this.colors[group.color], opacity: component.priority == 0 ? 1 : 0.2}}><FiMinus /></Button>
+                                                    <Button onClick={() => this.changePriority(component, 1)} className="priority-button" style={{color: this.colors[group.color], opacity: component.priority == 1 ? 1 : 0.2}}><FiChevronUp /></Button>
+                                                    <Button onClick={() => this.changePriority(component, 2)} className="priority-button" style={{color: this.colors[group.color], opacity: component.priority == 2 ? 1 : 0.2}}><FiChevronsUp /></Button>
+                                                </div>
                                             </ListItem>
                                         </Col>
                                         <Col width="44px">

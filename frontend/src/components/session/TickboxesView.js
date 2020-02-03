@@ -7,6 +7,7 @@ import { getComponents, deleteComponent } from '../../actions/components'
 import { Col, Row, List, ListItem, Button, Icon } from 'react-onsenui';
 
 import { FaCheck } from 'react-icons/fa';
+import { FiChevronUp, FiChevronDown, FiChevronsDown, FiChevronsUp, FiMinus} from 'react-icons/fi';
 
 export class TickboxesView extends Component {
 
@@ -19,6 +20,14 @@ export class TickboxesView extends Component {
         hideList: false,
         removeList: false,
     }
+
+    priorityIcons = {
+        "-2" : <FiChevronsDown className="list-priority-icon" />,
+        "-1" : <FiChevronDown className="list-priority-icon" />,
+        1 : <FiChevronUp className="list-priority-icon" />,
+        2 : <FiChevronsUp className="list-priority-icon" />,
+    }
+    
 
     render() {
         let groupColors = {}
@@ -39,7 +48,10 @@ export class TickboxesView extends Component {
                                     className={this.props.componentCompletion[component.id] ? 'card--completed list-item__checkboxes ' : 'list-item__checkboxes'}
                                     style={{ backgroundColor: this.backgroundColors[groupColors[component.group]], color: this.colors[groupColors[component.group]] }}
                                 >
-                                    <div className="checkbox-text">{component.name}</div>
+                                    <div className="checkbox-text">{
+                                        component.name}
+                                        {component.priority !== 0 ? this.priorityIcons[component.priority] : null}
+                                    </div>
                                     {/* <Button modifier="quiet" onClick={this.props.deleteComponent.bind(this, component.id)}>Remove</Button> */}
                                 </ListItem>
                             </Col>
@@ -83,7 +95,10 @@ export class TickboxesView extends Component {
                                                 className={this.props.componentCompletion[component.id] ? 'card--completed list-item__checkboxes ' : 'list-item__checkboxes'}
                                                 style={{ backgroundColor: this.backgroundColors[groupColors[component.group]], color: this.colors[groupColors[component.group]] }}
                                             >
-                                                <div className="checkbox-text">{component.name}</div>
+                                                <div className="checkbox-text">
+                                                    {component.name}
+                                                    {component.priority !== 0 ? this.priorityIcons[component.priority] : null}
+                                                </div>
                                                 {/* <Button modifier="quiet" onClick={this.props.deleteComponent.bind(this, component.id)}>Remove</Button> */}
                                             </ListItem>
                                         </Col>

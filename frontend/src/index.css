@@ -139,6 +139,7 @@ button{
     transition : all .3s;
     -wekit-transition : all .3s;
     -moz-transition : all .3s;
+    position: relative;
 }
 
 .bubble-center {
@@ -315,4 +316,30 @@ button{
   .list-heading {
     font-size: 20px;
     margin: 0.6em 0.4em 6px 3px;
+}
+
+.priority-segment {
+    position: absolute;
+    right: 0;
+    margin-right: 8px;
+}
+
+.priority-button {
+    font-size: 150%;
+    background: none;
+}
+
+.card-priority-icon {
+    
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        margin-right: 8px;
+        margin-bottom: 8px;
+}
+
+.list-priority-icon {
+    position: absolute;
+    right: 0;
+    margin-right: 8px;
 }

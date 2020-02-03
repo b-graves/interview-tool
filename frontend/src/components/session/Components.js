@@ -15,6 +15,7 @@ import { FaCheck } from 'react-icons/fa';
 import {IoIosApps} from 'react-icons/io';
 import {MdBubbleChart} from 'react-icons/md';
 
+
 export class Components extends Component {
     generateCompletionState() {
         let componentCompletion = {}
@@ -50,6 +51,10 @@ export class Components extends Component {
         if (this.props.hideCompletedComponents) {
             filteredComponents = filteredComponents.filter(component => !this.state.componentCompletion[component.id]);
         }
+
+        filteredComponents.sort(function(a, b) { 
+            return  b.priority - a.priority;
+        })
 
         return (
             this.props.components ?
