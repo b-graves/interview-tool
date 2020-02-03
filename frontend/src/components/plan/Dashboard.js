@@ -62,20 +62,12 @@ export class Dashboard extends Component {
                             index={this.state.index}
                             renderTabs={(activeIndex, tabbar) => [
                                 {
-                                content: <Page title="Components" active={activeIndex === 0} tabbar={tabbar}>
-                                    <Content>
-                                        <Components navigator={this.props.navigator} planId={this.props.planId}/>
-                                    </Content>
-                                </Page>,
-                                tab: <Tab><IoIosChatbubbles className="ion-icon--larger" /> Components View A</Tab>
-                                },
-                                {
-                                    content: <Page title="Groups" active={activeIndex === 0} tabbar={tabbar}>
+                                    content: <Page title="Components" active={activeIndex === 0} tabbar={tabbar}>
                                         <Content>
                                             <ComponentGroups navigator={this.props.navigator} planId={this.props.planId}/>
                                         </Content>
                                     </Page>,
-                                    tab: <Tab><IoIosChatbubbles className="ion-icon--larger" /> Components View B</Tab>
+                                    tab: <Tab><IoIosChatbubbles className="ion-icon--larger" /> Components</Tab>
                                     },
                                 {
                                     content: <Page title="Options" active={activeIndex === 1} tabbar={tabbar}>
@@ -86,12 +78,12 @@ export class Dashboard extends Component {
                                     tab: <Tab><IoIosOptions className="ion-icon--larger" /> Options</Tab>
                                     }, 
                                 {
-                                content: <Page title="Participants" active={activeIndex === 2} tabbar={tabbar}>
+                                content: <Page title="Sessions" active={activeIndex === 2} tabbar={tabbar}>
                                         <Content>
                                             <Participants navigator={this.props.navigator} planId={this.props.planId}/>
                                         </Content>
                                     </Page>,
-                                tab: <Tab><MdPeople className="ion-icon--larger" /> Participants</Tab>
+                                tab: <Tab><MdPeople className="ion-icon--larger" /> Sessions</Tab>
                                 }]
                             }
                         />

@@ -230,7 +230,15 @@ button{
 
 .icon-color-marker {
     position: absolute;
-    font-size: 170%;
+    font-size: 130%;
+    margin-left: 3px;
+    transition : all .3s;
+    -wekit-transition : all .3s;
+    -moz-transition : all .3s;
+}
+
+.group-name {
+    padding-left: 50px
 }
 
 .component-name {
@@ -287,7 +295,7 @@ button{
       background-color: #009900;
     }
     50% {
-      background-color:#00bf00;
+      background-color:#4cd24c;
     }
     100% {
       background-color: #009900;
@@ -298,3 +306,13 @@ button{
       top: 24px
       
   }
+
+  .cards-heading {
+      font-size: 20px;
+      margin: 0.6em 0.4em 0 4px;
+  }
+
+  .list-heading {
+    font-size: 20px;
+    margin: 0.6em 0.4em 6px 3px;
+}

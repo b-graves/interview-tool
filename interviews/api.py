@@ -1,10 +1,12 @@
 from interviews.models import Plan
 from interviews.models import Component
+from interviews.models import Group
 from interviews.models import Participant
 from rest_framework import viewsets, permissions
 from .serializers import PlanSerializer
 from .serializers import ParticipantSerializer
 from .serializers import ComponentSerializer
+from .serializers import GroupSerializer
 
 from rest_framework.decorators import api_view
 
@@ -35,6 +37,21 @@ class ComponentViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return self.request.user.components.all()
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
+# Group Viewset
+class GroupViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all()
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = GroupSerializer
+
+    def get_queryset(self):
+        return self.request.user.component_groups.all()
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

@@ -6,11 +6,17 @@ class Plan(models.Model):
     owner = models.ForeignKey(User, related_name="plans", on_delete=models.CASCADE, null=True)
     duration = models.IntegerField(default=60)
 
+class Group(models.Model):
+    name = models.CharField(max_length=100)
+    owner = models.ForeignKey(User, related_name="component_groups", on_delete=models.CASCADE, null=True)
+    plan = models.ForeignKey(Plan, related_name="component_groups", on_delete=models.CASCADE, null=True)
+    color = models.IntegerField(default=0)
+
 class Component(models.Model):
     name = models.CharField(max_length=100)
     owner = models.ForeignKey(User, related_name="components", on_delete=models.CASCADE, null=True)
     plan = models.ForeignKey(Plan, related_name="components", on_delete=models.CASCADE, null=True)
-    color = models.IntegerField(default=0)
+    group = models.ForeignKey(Group, related_name="components", on_delete=models.CASCADE, null=True)
 
 class Participant(models.Model):
     name = models.CharField(max_length=1000)

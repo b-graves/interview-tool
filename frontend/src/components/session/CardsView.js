@@ -12,40 +12,48 @@ export class TickboxesView extends Component {
 
     backgroundColors = ["#fff", "#a5007d", "#0e5eaa", "#1ea2e7", "#090", "#f8981d", "#e6001f"]
     colors = ["#000", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"]
+    
+    fgOnlyColors =  ["#000", "#a5007d", "#0e5eaa", "#1ea2e7", "#090", "#f8981d", "#e6001f"]
 
     render() {
         let columns = []
-        let colorColumns = [[], [], [], [], [], [], []]
-        let colorIndex = [0, 0, 0, 0, 0, 0, 0]
-        if (!this.props.orderByColor){
-            for (let i = 0; i<this.props.columns; i++) {
+        let groupColumns = {}
+        let groupIndex = {}
+        let groupColors = {}
+        if (!this.props.useGroups) {
+            for (let i = 0; i < this.props.columns; i++) {
                 columns.push([])
             }
 
             this.props.components.forEach((component, index) => {
-                columns[index%this.props.columns].push(component)
+                columns[index % this.props.columns].push(component)
             });
         } else {
-            for (let i = 0; i<this.colors.length; i++) {
-                for (let j = 0; j<this.props.columns; j++) {
-                    colorColumns[i].push([])
+            for (let i = 0; i < this.props.groups.length; i++) {
+                groupColumns[this.props.groups[i].id] = []
+                groupIndex[this.props.groups[i].id] = 0
+                for (let j = 0; j < this.props.columns; j++) {
+                    groupColumns[this.props.groups[i].id].push([])
                 }
             }
             this.props.components.forEach((component, index) => {
-                colorColumns[component.color][colorIndex[component.color]].push(component);
-                colorIndex[component.color] = (colorIndex[component.color] + 1) % this.props.columns;
+                groupColumns[component.group][groupIndex[component.group]].push(component);
+                groupIndex[component.group] = (groupIndex[component.group] + 1) % this.props.columns;
             });
+        }
 
+        for (let i = 0; i < this.props.groups.length; i++) {
+            groupColors[this.props.groups[i].id] = this.props.groups[i].color
         }
 
         return (
-        !this.props.orderByColor ? 
-            <Row>
-                {columns.map(column => 
-                    <Col>
-                        {column.map(component => 
+            !this.props.useGroups ?
+                <Row>
+                    {columns.map(column =>
+                        <Col>
+                            {column.map(component =>
                                 <Card
-                                    style={{backgroundColor: this.backgroundColors[component.color], color: this.colors[component.color]}}
+                                    style={{ backgroundColor: this.backgroundColors[groupColors[component.group]], color: this.colors[groupColors[component.group]] }}
                                     onClick={() => this.props.toggleCompletion(component.id)}
                                     className={this.props.componentCompletion[component.id] ? 'card--completed card__uniform' : 'card__uniform'}
                                 >
@@ -53,35 +61,38 @@ export class TickboxesView extends Component {
                                         {component.name}
                                     </div>
                                 </Card>
-                        )}
-                    </Col>
-                )}
-            </Row>
-            : 
+                            )}
+                        </Col>
+                    )}
+                </Row>
+                :
                 <div>
-                    {colorColumns.map(color =>
+                    {this.props.groups.map(group =>
+                        <div>
+                        <div className={"cards-heading"} style={{ color: this.fgOnlyColors[group.color]}}>{group.name}</div>
                         <Row>
-                            {color.map(column => 
-                    <Col>
-                        {column.map(component => 
-                                <Card
-                                    style={{backgroundColor: this.backgroundColors[component.color], color: this.colors[component.color]}}
-                                    onClick={() => this.props.toggleCompletion(component.id)}
-                                    className={this.props.componentCompletion[component.id] ? 'card--completed card__uniform' : 'card__uniform'}
-                                >
-                                    <div className="title">
-                                        {component.name}
-                                    </div>
-                                </Card>
-                        )}
-                    </Col>
-                )}
+                            {groupColumns[group.id].map(column =>
+                                <Col>
+                                    {column.map(component =>
+                                        <Card
+                                            style={{ backgroundColor: this.backgroundColors[group.color], color: this.colors[group.color] }}
+                                            onClick={() => this.props.toggleCompletion(component.id)}
+                                            className={this.props.componentCompletion[component.id] ? 'card--completed card__uniform' : 'card__uniform'}
+                                        >
+                                            <div className="title">
+                                                {component.name}
+                                            </div>
+                                        </Card>
+                                    )}
+                                </Col>
+                            )}
                         </Row>
-                        )}
+                        </div>
+                    )}
                 </div>
-            
+
         )
-        
+
     }
 }
 

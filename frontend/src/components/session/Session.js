@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { getPlan } from '../../actions/plans';
 import { getParticipant } from '../../actions/participants';
 import { getComponents } from '../../actions/components';
+import { getGroups } from '../../actions/groups';
 
 import { Tabbar, TabPage, Tab, Page, Card, Navigator, Button, Toolbar, BackButton, ProgressCircular, ProgressBar, Splitter, SplitterContent, SplitterSide, Checkbox, List, ListItem } from 'react-onsenui';
 import Content from '../layout/Content';
@@ -32,6 +33,7 @@ export class Session extends Component {
         this.props.getPlan(this.props.planId);
         this.props.getComponents(this.props.planId);
         this.props.getParticipant(this.props.participantId);
+        this.props.getGroups(this.props.planId);
     }
 
     state = {
@@ -39,7 +41,7 @@ export class Session extends Component {
         seconds: 0,
         isOpen: true,
         resize: false,
-        orderByColor: false,
+        useGroups: true,
         hideCompletedComponents: false
     }
 
@@ -72,7 +74,7 @@ export class Session extends Component {
                 >
                     <div className="center toolbar__session" >
                     {/* <Button onClick={() => this.state.isOpen ? this.hide() : this.show()}>open {this.state.isOpen}</Button> */}
-                        {this.props.plan && this.props.participant ? "Session In Progress: " + this.props.plan.name + " with "+this.props.participant.name: ""}
+                        {this.props.plan && this.props.participant ? "Session In Progress: " + this.props.plan.name + " - "+this.props.participant.name: ""}
                         <Timer
                             initialTime={0}
                             direction="forward"
@@ -94,7 +96,7 @@ export class Session extends Component {
                     {this.props.components ?
                     <Splitter>
                         <SplitterContent>
-                            {this.state.resize ? null : <Components components={this.props.components} planId={this.props.planId} hideList={this.state.hideList} orderByColor={this.state.orderByColor} hideCompletedComponents={this.state.hideCompletedComponents} />}
+                            {this.state.resize ? null : <Components components={this.props.components} groups={this.props.groups} planId={this.props.planId} hideList={this.state.hideList} useGroups={this.state.useGroups} hideCompletedComponents={this.state.hideCompletedComponents} />}
                         </SplitterContent>
                         <SplitterSide
                         side="right"
@@ -142,13 +144,13 @@ export class Session extends Component {
                                 {Math.ceil(remainingTime/60)} Minutes Left
                                 </Card>
                                 <Card
-                                    className={this.state.orderByColor ? "card__checkbox card__checkbox--selected" : "card__checkbox"}
+                                    className={this.state.useGroups ? "card__checkbox card__checkbox--selected" : "card__checkbox"}
                                     onClick={() =>  {
-                                        this.setState({orderByColor : !this.state.orderByColor, hideList: true})
+                                        this.setState({useGroups : !this.state.useGroups, hideList: true})
                                         setTimeout(function(){this.setState({hideList: false})}.bind(this), 10);
                                         }}
                                 >
-                                Order by colour <Checkbox modifier="material" checked={this.state.orderByColor} />
+                                Show Stages <Checkbox modifier="material" checked={this.state.useGroups} />
 
                                 </Card>
                                 <Card 
@@ -175,7 +177,8 @@ export class Session extends Component {
 const mapStateToProps = state => ({
     plan: state.plans.plan,
     components: state.components.components,
-    participant: state.participants.participant
+    participant: state.participants.participant,
+    groups: state.groups.groups,
 });
 
-export default connect(mapStateToProps, { getPlan, getParticipant, getComponents })(Session)
+export default connect(mapStateToProps, { getPlan, getParticipant, getComponents, getGroups })(Session)

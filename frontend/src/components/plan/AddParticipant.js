@@ -34,7 +34,7 @@ export class AddParticipant extends Component {
                     <Input
                         type="text"
                         name="name"
-                        placeholder="+ Add New Participant"
+                        placeholder="+ Add New Session"
                         onChange={this.onChange}
                         value={this.state.name}
                         style={{width: "80%"}}

@@ -1,14 +1,17 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getComponents, deleteComponent, updateComponent } from '../../actions/components'
+import { getComponents, deleteComponent, updateComponent } from '../../actions/components';
+import { getGroups, deleteGroup, updateGroup } from '../../actions/groups';
 
 import AddComponent from "./AddComponent"
+import AddGroup from "./AddGroup"
 import Dashboard from "./Dashboard"
 
 import { Col, Row, List, ListItem, Button, Icon, ProgressCircular } from 'react-onsenui';
 
 import { FaChevronUp, FaChevronDown, FaTrash, FaPen, FaSquareFull } from 'react-icons/fa';
+import { IoIosColorFill } from 'react-icons/io';
 
 export class ComponentGroups extends Component {
     static propTypes = {
@@ -19,6 +22,7 @@ export class ComponentGroups extends Component {
 
     componentDidMount() {
         this.props.getComponents(this.props.planId);
+        this.props.getGroups(this.props.planId);
     }
 
     openComponent(componentId) {
@@ -44,33 +48,65 @@ export class ComponentGroups extends Component {
     colors = ["#000", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"]
     groups = ["White", "Purple", "Dark Blue", "Light Blue", "Green", "Yellow", "Red"]
 
+    findColor() {
+        let color = 1;
+        let usedColors = this.props.groups.map(group => group.color)
+        console.log("usedColors")
+        console.log(usedColors)
+        while (usedColors.includes(color) ) {
+            color += 1
+        }
+        color = color % this.colors.length
+        return color
+    }
+
+    changeColor(group) {
+        group.color = (group.color + 1) % this.colors.length 
+        this.props.updateGroup(group)
+    }
+
 
     render() {
         this.props.components.sort(function(a, b) { 
             return a.id - b.id;
         })
+
+        this.props.groups.sort(function(a, b) { 
+            return a.id - b.id;
+        })
+        let nextColor = this.findColor();
         return (
             <Fragment>
-                { this.backgroundColors.map((color, colorIdx) =>
+                { this.props.groups.map((group, groupIdx) =>
                         <div>
-                            <h3 style={{color: colorIdx > 0 ? color : "#000" }}>{this.groups[colorIdx]} Group</h3>
+                            <Row>
+                                <Col>
+                                    <h3>
+                                        <FaSquareFull 
+                                            className="icon-color-marker"
+                                            style={{"color": this.backgroundColors[group.color]}}
+                                            onClick={() => this.changeColor(group)}
+                                        />
+                                        <div className="group-name">{group.name}</div>
+                                    </h3>
+                                </Col>
+                                <Col width="44px">
+                                    <h3 >
+                                        <FaTrash onClick={()=>{this.props.deleteGroup(group.id);}} />
+                                    </h3>
+                                </Col>
+                            </Row>
                             <List
                                 dataSource={this.props.components}
                                 renderRow={(component, idx) => (
-                                    component.color === colorIdx ?
+                                    component.group === group.id ?
                                     <Row>
                                         <Col>
                                             <ListItem 
                                                 modifier='material'
-                                                style={{backgroundColor: color, color: this.colors[colorIdx]}}
+                                                style={{backgroundColor: this.backgroundColors[group.color], color: this.colors[group.color]}}
                                             >
-                                                {/* <FaSquareFull 
-                                                    className="icon-color-marker"o
-                                                    style={{"color": this.colors[component.color]}}
-                                                    onClick={() => this.changeColor(component)}
-                                                /> */}
                                                 {component.name}
-                                        
                                             </ListItem>
                                         </Col>
                                         <Col width="44px">
@@ -91,10 +127,11 @@ export class ComponentGroups extends Component {
                                     </Row>
                                     :  null 
                                 )}>
-                                <AddComponent planId={this.props.planId} backgroundColor={color} color={this.colors[colorIdx]} colorIdx={colorIdx} />
+                                <AddComponent planId={this.props.planId} groupId={group.id} />
                             </List>
                         </div>
                     )}
+                    <AddGroup planId={this.props.planId} color={nextColor} first={this.props.groups.length == 0} />
                 {/* : <ProgressCircular indeterminate /> } */}
             </Fragment>
         )
@@ -103,6 +140,7 @@ export class ComponentGroups extends Component {
 
 const mapStateToProps = state => ({
     components: state.components.components,
+    groups: state.groups.groups,
 });
 
-export default connect(mapStateToProps, { getComponents, deleteComponent, updateComponent })(ComponentGroups)
+export default connect(mapStateToProps, { getComponents, deleteComponent, updateComponent, getGroups, deleteGroup, updateGroup })(ComponentGroups)
