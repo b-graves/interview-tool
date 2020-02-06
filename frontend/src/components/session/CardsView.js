@@ -4,11 +4,17 @@ import PropTypes from 'prop-types';
 import { getComponents, deleteComponent } from '../../actions/components'
 
 
-import { Col, Row, Card } from 'react-onsenui';
+import { Col, Row, Card, Tabbar, Tab, Page } from 'react-onsenui';
 
-import { FaCheck } from 'react-icons/fa';
+import { FaRegClipboard } from 'react-icons/fa';
 
 import { FiChevronUp, FiChevronDown, FiChevronsDown, FiChevronsUp, FiMinus} from 'react-icons/fi';
+
+import {IoIosApps} from 'react-icons/io';
+
+import Content from '../layout/Content';
+
+import Documentation from './Documentation'
 
 export class TickboxesView extends Component {
 
@@ -22,6 +28,10 @@ export class TickboxesView extends Component {
         "-1" : <FiChevronDown className="card-priority-icon" />,
         1 : <FiChevronUp className="card-priority-icon" />,
         2 : <FiChevronsUp className="card-priority-icon" />,
+    }
+
+    state = {
+        index: 0
     }
     
 
@@ -57,51 +67,79 @@ export class TickboxesView extends Component {
         }
 
         return (
-            !this.props.useGroups ?
-                <Row>
-                    {columns.map(column =>
-                        <Col>
-                            {column.map(component =>
-                                <Card
-                                    style={{ backgroundColor: this.backgroundColors[groupColors[component.group]], color: this.colors[groupColors[component.group]] }}
-                                    onClick={() => this.props.toggleCompletion(component.id)}
-                                    className={this.props.componentCompletion[component.id] ? 'card--completed card__uniform' : 'card__uniform'}
-                                >
-                                    <div className="title">
-                                        {component.name}
-                                        {component.priority !== 0 ? this.priorityIcons[component.priority] : null}
-                                    </div>
-                                </Card>
-                            )}
-                        </Col>
-                    )}
-                </Row>
-                :
-                <div>
-                    {this.props.groups.map(group =>
-                        <div>
-                        <div className={"cards-heading"} style={{ color: this.fgOnlyColors[group.color]}}>{group.name}</div>
-                        <Row>
-                            {groupColumns[group.id].map(column =>
-                                <Col>
-                                    {column.map(component =>
-                                        <Card
-                                            style={{ backgroundColor: this.backgroundColors[group.color], color: this.colors[group.color] }}
-                                            onClick={() => this.props.toggleCompletion(component.id)}
-                                            className={this.props.componentCompletion[component.id] ? 'card--completed card__uniform' : 'card__uniform'}
-                                        >
-                                            <div className="title">
-                                                {component.name}
-                                                {component.priority !== 0 ? this.priorityIcons[component.priority] : null}
-                                            </div>
-                                        </Card>
-                                    )}
-                                </Col>
-                            )}
-                        </Row>
-                        </div>
-                    )}
-                </div>
+            <Tabbar
+                        onPreChange={({index}) => this.setState({index})}
+                        onPostChange={() => console.log('postChange')}
+                        onReactive={() => console.log('postChange')}
+                        position='top'
+                        index={this.state.index}
+                        renderTabs={(activeIndex, tabbar) => [
+                            {
+                            content: <Page title="Cards" active={activeIndex === 0} tabbar={tabbar}>
+                                <Content>
+                                    {
+                                        !this.props.useGroups ?
+                                        <Row>
+                                            {columns.map(column =>
+                                                <Col>
+                                                    {column.map(component =>
+                                                        <Card
+                                                            style={{ backgroundColor: this.backgroundColors[groupColors[component.group]], color: this.colors[groupColors[component.group]] }}
+                                                            onClick={() => this.props.toggleCompletion(component.id)}
+                                                            className={this.props.componentCompletion[component.id] ? 'card--completed card__uniform' : 'card__uniform'}
+                                                        >
+                                                            <div className="title">
+                                                                {component.name}
+                                                                {component.priority !== 0 ? this.priorityIcons[component.priority] : null}
+                                                            </div>
+                                                        </Card>
+                                                    )}
+                                                </Col>
+                                            )}
+                                        </Row>
+                                        :
+                                        <div>
+                                            {this.props.groups.map(group =>
+                                                <div>
+                                                <div className={"cards-heading"} style={{ color: this.fgOnlyColors[group.color]}}>{group.name}</div>
+                                                <Row>
+                                                    {groupColumns[group.id].map(column =>
+                                                        <Col>
+                                                            {column.map(component =>
+                                                                <Card
+                                                                    style={{ backgroundColor: this.backgroundColors[group.color], color: this.colors[group.color] }}
+                                                                    onClick={() => this.props.toggleCompletion(component.id)}
+                                                                    className={this.props.componentCompletion[component.id] ? 'card--completed card__uniform' : 'card__uniform'}
+                                                                >
+                                                                    <div className="title">
+                                                                        {component.name}
+                                                                        {component.priority !== 0 ? this.priorityIcons[component.priority] : null}
+                                                                    </div>
+                                                                </Card>
+                                                            )}
+                                                        </Col>
+                                                    )}
+                                                </Row>
+                                                </div>
+                                            )}
+                                        </div>
+                                    }
+                                </Content>
+                            </Page>,
+                            tab: <Tab><IoIosApps className="ion-icon--larger" /> Cards </Tab>
+                            },
+                            {
+                                content: <Page title="Documentation" active={activeIndex === 1} tabbar={tabbar}>
+                                    <Content>
+                                        <Documentation />
+                                    </Content>
+                                </Page>,
+                                tab: <Tab><FaRegClipboard className="ion-icon--larger" /> Documentation</Tab>
+                                }
+                            ]
+                        }
+                    />
+            
 
         )
 

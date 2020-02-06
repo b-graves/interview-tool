@@ -269,6 +269,11 @@ button{
     color: white
 }
 
+.card__checkbox--unselected {
+    color: #36474f;
+    background-color: white
+}
+
 .list-item__checkboxes{
     padding-left: 0px;
 }
@@ -345,4 +350,33 @@ margin-right: 8px;
     position: absolute;
     right: 0;
     margin-right: 8px;
+}
+
+.radio-card {
+    padding: 8px;
+}
+
+.ql-snow {
+    border: none !important;
+    font-family: 'EB Garamond', serif !important;
+    font-weight: regular;
+}
+
+.ql-editor > p, li {
+    font-family: 'EB Garamond', serif !important;
+    font-weight: normal !important;
+    font-size: 18px !important;
+}
+
+.ql-toolbar {
+    opacity: 1
+}
+
+.div[class^='ql-editor']:focus ~ .ql-toolbar {
+    opacity: 1
+}
+
+
+li:before {
+    content: "\2022\2\2\2\2" !important;
 }

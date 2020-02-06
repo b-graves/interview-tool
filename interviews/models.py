@@ -5,6 +5,9 @@ class Plan(models.Model):
     name = models.CharField(max_length=100)
     owner = models.ForeignKey(User, related_name="plans", on_delete=models.CASCADE, null=True)
     duration = models.IntegerField(default=60)
+    view = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class Group(models.Model):
     name = models.CharField(max_length=100)
@@ -25,19 +28,25 @@ class Participant(models.Model):
     plan = models.ForeignKey(Plan, related_name="participants", on_delete=models.CASCADE, null=True)
 
 class Response(models.Model):
-    name = models.CharField(max_length=10000)
+    name = models.TextField()
     interview = models.ForeignKey(Participant, related_name="responses", on_delete=models.CASCADE, null=True)
     component = models.ForeignKey(Component, related_name="responses", on_delete=models.CASCADE, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class BiasDeclaration(models.Model):
-    name = models.CharField(max_length=10000)
+    name = models.TextField()
     interview = models.ForeignKey(Participant, related_name="bias_declarations", on_delete=models.CASCADE, null=True)
     component = models.ForeignKey(Component, related_name="bias_declarations", on_delete=models.CASCADE, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class BiasReflection(models.Model):
-    name = models.CharField(max_length=10000)
+    name = models.TextField()
     interview = models.ForeignKey(Participant, related_name="bias_reflections", on_delete=models.CASCADE, null=True)
     component = models.ForeignKey(Component, related_name="bias_reflections", on_delete=models.CASCADE, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class InsightTagType(models.Model):
     name = models.CharField(max_length=1000)
