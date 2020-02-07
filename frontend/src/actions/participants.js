@@ -36,7 +36,7 @@ export const deleteParticipant = (id) => (dispatch, getState) => {
     axios
         .delete(`/api/participants/${id}/`, tokenConfig(getState))
         .then(res => {
-            dispatch(createMessage({ genericMessage: "Participant Deleted" }));
+            dispatch(createMessage({ genericMessage: "Session Deleted" }));
             dispatch({
                 type: DELETE_PARTICIPANT,
                 payload: id
@@ -49,7 +49,7 @@ export const addParticipant = (participant) => (dispatch, getState) => {
     axios
         .post('/api/participants/', participant, tokenConfig(getState))
         .then(res => {
-            dispatch(createMessage({ genericMessage: "Participant Added" }));
+            dispatch(createMessage({ genericMessage: "Session Added" }));
             dispatch({
                 type: ADD_PARTICIPANT,
                 payload: res.data

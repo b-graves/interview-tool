@@ -22,8 +22,8 @@ import BubbleView from './BubbleView';
 
 import ReactMinimalPieChart from 'react-minimal-pie-chart';
 
-import {IoIosApps} from 'react-icons/io';
-import {MdBubbleChart} from 'react-icons/md';
+import { IoIosApps } from 'react-icons/io';
+import { MdBubbleChart } from 'react-icons/md';
 
 export class Session extends Component {
     static propTypes = {
@@ -73,7 +73,6 @@ export class Session extends Component {
         if (this.props.plan.duration && this.props.plan.duration * 60 - this.state.seconds > 0) {
             remainingTime = this.props.plan.duration * 60 - this.state.seconds
         }
-        console.log(this.state.isOpen)
 
         return (
             <Page renderToolbar={() =>
@@ -102,10 +101,10 @@ export class Session extends Component {
                         </Timer>
                     </div>
                 </Toolbar>}>
-                {this.props.components ?
+                {this.props.components && this.props.participant?
                     <Splitter>
                         <SplitterContent>
-                            {this.state.resize ? null : <Components view={this.props.plan.view} components={this.props.components} groups={this.props.groups} planId={this.props.planId} hideList={this.state.hideList} useGroups={this.state.useGroups} hideCompletedComponents={this.state.hideCompletedComponents} />}
+                            {this.state.resize ? null : <Components participant={this.props.participant} view={this.props.plan.view} components={this.props.components} groups={this.props.groups} planId={this.props.planId} hideList={this.state.hideList} useGroups={this.state.useGroups} hideCompletedComponents={this.state.hideCompletedComponents} />}
                         </SplitterContent>
                         <SplitterSide
                             side="right"
@@ -171,11 +170,11 @@ export class Session extends Component {
                                 >
                                     Filter completed <Checkbox modifier="material" checked={this.state.hideCompletedComponents} />
                                 </Card>
-                                <Card style={{padding: 0}}>
-                                    <div style={{padding: "8px"}}>
+                                <Card style={{ padding: 0 }}>
+                                    <div style={{ padding: "8px" }}>
                                         Component View
                                         <div
-                                            style={{marginTop: "8px"}}
+                                            style={{ marginTop: "8px" }}
                                             className={this.props.plan.view == 0 ? "card__checkbox--selected radio-card" : " card__checkbox--unselected radio-card"}
                                             modifier="tappable"
                                             onClick={() => this.changeView(0)}

@@ -380,3 +380,12 @@ margin-right: 8px;
 li:before {
     content: "\2022\2\2\2\2" !important;
 }
+
+.suggestion-card {
+    position: absolute;
+    width: 29% ;
+    left: 0;
+    margin: 0;
+    padding-left: 8px;
+    opacity: 0.7;
+}

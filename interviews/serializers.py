@@ -2,6 +2,7 @@ from rest_framework import serializers
 from interviews.models import Plan
 from interviews.models import Component
 from interviews.models import Group
+from interviews.models import Response
 from interviews.models import Participant
 
 # Plan Serializer
@@ -20,6 +21,12 @@ class ComponentSerializer(serializers.ModelSerializer):
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
+        fields = '__all__'
+
+# Response Serializer
+class ResponseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Response
         fields = '__all__'
 
 # Participant Serializer

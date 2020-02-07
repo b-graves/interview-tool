@@ -31,8 +31,13 @@ export class Components extends Component {
         this.setState({ componentCompletion })
     }
 
+    dismissSuggestion(id) {
+        this.setState({dismissedSuggestions :[...this.state.dismissedSuggestions, id]})
+    }
+
     state = {
-        componentCompletion: this.generateCompletionState()
+        componentCompletion: this.generateCompletionState(),
+        dismissedSuggestions: []
     }
 
     render() {
@@ -56,6 +61,14 @@ export class Components extends Component {
             return b.priority - a.priority;
         })
 
+        let suggestions = []
+        suggestions = filteredComponents.filter(component => !this.state.dismissedSuggestions.includes(component.id))
+        suggestions = suggestions.filter(component => !this.state.componentCompletion[component.id])
+
+        suggestions.sort(function (a, b) {
+            return a.group - b.group;
+        })
+        
         return (
             this.props.components ?
                 this.props.view === 0 ?
@@ -64,7 +77,7 @@ export class Components extends Component {
                     </Content>
                     : this.props.view === 1 ?
                         <Content>
-                            <CardsView useGroups={this.props.useGroups} components={filteredComponents} groups={this.props.groups} componentCompletion={this.state.componentCompletion} toggleCompletion={this.toggleCompletion.bind(this)} columns={3} />
+                            <CardsView suggestions={suggestions} participant={this.props.participant} useGroups={this.props.useGroups} components={filteredComponents} groups={this.props.groups} componentCompletion={this.state.componentCompletion} toggleCompletion={this.toggleCompletion.bind(this)} dismissSuggestion={this.dismissSuggestion.bind(this)} columns={3} />
                         </Content>
                         :
                         <BubbleView useGroups={this.props.useGroups} components={filteredComponents} groups={this.props.groups} componentCompletion={this.state.componentCompletion} toggleCompletion={this.toggleCompletion.bind(this)} columns={3} />
