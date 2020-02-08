@@ -26,9 +26,26 @@ export class Responses extends Component {
         return (
             <div>
                 {this.props.responses.map(response =>
-                    this.props.view === 0 ? null :
+                    this.props.view === 0 ?
+                        <div>
+                            <Row>
+                                {this.props.completedComponents[response.component]}
+                            </Row>
+                            <Row style={{ marginBottom: "20px" }}>
+                                <Col>
+                                    <Editor updateResponse={this.props.updateResponse} response={response} />
+                                </Col>
+                                <FaTrash
+                                    className="icon--center"
+                                    onClick={() => {
+                                        this.props.deleteResponse(response.id);
+                                    }}
+                                />
+                            </Row>
+                        </div>
+                        :
                         this.props.view === 1 ?
-                            <Row style={{marginBottom: "20px"}}>
+                            <Row style={{ marginBottom: "20px" }}>
                                 <Col width={"33%"}>
                                     {this.props.completedComponents[response.component]}
                                 </Col>

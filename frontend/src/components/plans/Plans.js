@@ -30,9 +30,14 @@ export class Plans extends Component {
     }
 
     render() {
+        this.props.plans.sort(function(a, b) { 
+            return b.id - a.id;
+        })
+
         return (
             <Fragment>
                 <h1>Your Sessions Plans</h1>
+                <Add />
                 { !this.state.delete ?
                         <List
                             dataSource={this.props.plans}
@@ -63,7 +68,6 @@ export class Plans extends Component {
                             )}>
                         </List>
                 : <ProgressCircular indeterminate /> }
-                <Add />
             </Fragment>
         )
     }

@@ -26,6 +26,7 @@ class Participant(models.Model):
     name = models.CharField(max_length=1000)
     owner = models.ForeignKey(User, related_name="participants", on_delete=models.CASCADE, null=True)
     plan = models.ForeignKey(Plan, related_name="participants", on_delete=models.CASCADE, null=True)
+    complete = models.BooleanField(default=False)
 
 class Response(models.Model):
     text = models.TextField(default="")

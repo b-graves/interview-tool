@@ -2,11 +2,11 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getPlan, updatePlan } from '../../actions/plans';
-import { getParticipant } from '../../actions/participants';
+import { getParticipant, updateParticipant } from '../../actions/participants';
 import { getComponents } from '../../actions/components';
 import { getGroups } from '../../actions/groups';
 
-import { Tabbar, TabPage, Tab, Page, Card, Navigator, Button, Toolbar, BackButton, ProgressCircular, Radio, ProgressBar, Splitter, SplitterContent, SplitterSide, Checkbox, List, ListItem } from 'react-onsenui';
+import { Tabbar, TabPage, Tab, Page, Card, Navigator, Button, Toolbar, Dialog, BackButton, ProgressCircular, Radio, ProgressBar, Splitter, SplitterContent, SplitterSide, Checkbox, List, ListItem } from 'react-onsenui';
 import Content from '../layout/Content';
 
 import Components from "./Components";
@@ -45,11 +45,13 @@ export class Session extends Component {
         isOpen: true,
         resize: false,
         useGroups: true,
-        hideCompletedComponents: false
+        hideCompletedComponents: false,
+        completeDialogOpen: false
     }
 
     completeSession() {
-        this.props.navigator.popPage();
+        this.setState({ completeDialogOpen: true })
+        this.props.updateParticipant({ ...this.props.participant, complete: true });
     }
 
     hide() {
@@ -101,7 +103,7 @@ export class Session extends Component {
                         </Timer>
                     </div>
                 </Toolbar>}>
-                {this.props.components && this.props.participant?
+                {this.props.components && this.props.participant ?
                     <Splitter>
                         <SplitterContent>
                             {this.state.resize ? null : <Components participant={this.props.participant} view={this.props.plan.view} components={this.props.components} groups={this.props.groups} planId={this.props.planId} hideList={this.state.hideList} useGroups={this.state.useGroups} hideCompletedComponents={this.state.hideCompletedComponents} />}
@@ -151,7 +153,7 @@ export class Session extends Component {
                                     />
                                     {Math.ceil(remainingTime / 60)} Minutes Left
                                 </Card>
-                                <Card
+                                {/* <Card
                                     className={this.state.useGroups ? "card__checkbox card__checkbox--selected" : "card__checkbox"}
                                     onClick={() => {
                                         this.setState({ useGroups: !this.state.useGroups, hideList: true })
@@ -160,7 +162,7 @@ export class Session extends Component {
                                 >
                                     Show Stages <Checkbox modifier="material" checked={this.state.useGroups} />
 
-                                </Card>
+                                </Card> */}
                                 <Card
                                     className={this.state.hideCompletedComponents ? "card__checkbox card__checkbox--selected" : "card__checkbox"}
                                     onClick={() => {
@@ -204,6 +206,27 @@ export class Session extends Component {
                         </SplitterSide>
                     </Splitter>
                     : <ProgressCircular indeterminate />}
+                <Dialog isOpen={this.state.completeDialogOpen} onCancel={() => {
+                    this.setState({ completeDialogOpen: false })
+                    this.props.updateParticipant({ ...this.props.participant, complete: false });
+                }} cancelable>
+                    <div style={{ textAlign: "center", padding: "10px 30px" }}>
+                        <p>
+                            Are you sure you want to end the session?
+                        </p>
+                        <p>
+                            <Button onClick={() => {
+                                this.setState({ completeDialogOpen: false })
+                                this.props.updateParticipant({ ...this.props.participant, complete: false });
+                            }} className="dialog-button">
+                                Cancel
+                            </Button>
+                            <Button onClick={() => { this.props.navigator.popPage(); setTimeout(function () { this.props.navigator.popPage() }.bind(this), 1000); }} className="-dialog-button">
+                                Yes
+                            </Button>
+                        </p>
+                    </div>
+                </Dialog>
             </Page>
         )
     }
@@ -216,4 +239,4 @@ const mapStateToProps = state => ({
     groups: state.groups.groups,
 });
 
-export default connect(mapStateToProps, { getPlan, getParticipant, getComponents, getGroups, updatePlan })(Session)
+export default connect(mapStateToProps, { getPlan, getParticipant, getComponents, getGroups, updatePlan, updateParticipant })(Session)

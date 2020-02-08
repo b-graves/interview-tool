@@ -22,6 +22,8 @@ export class ComponentGroups extends Component {
     }
 
     componentDidMount() {
+        console.log("PROPS")
+        console.log(this.props)
         this.props.getComponents(this.props.planId);
         this.props.getGroups(this.props.planId);
     }

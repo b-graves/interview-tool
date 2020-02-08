@@ -2,7 +2,7 @@ import axios from 'axios';
 import { createMessage, returnErrors } from './messages';
 import { tokenConfig } from './auth';
 
-import { GET_PARTICIPANTS, GET_PARTICIPANT, DELETE_PARTICIPANT, ADD_PARTICIPANT } from './types';
+import { GET_PARTICIPANTS, GET_PARTICIPANT, DELETE_PARTICIPANT, ADD_PARTICIPANT, UPDATE_PARTICIPANT } from './types';
 
 // GET PARTICIPANTS
 export const getParticipants = (planId) => (dispatch, getState) => {
@@ -52,6 +52,19 @@ export const addParticipant = (participant) => (dispatch, getState) => {
             dispatch(createMessage({ genericMessage: "Session Added" }));
             dispatch({
                 type: ADD_PARTICIPANT,
+                payload: res.data
+            });
+        })
+        .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+}
+
+// UPDATE PARTICIPANT
+export const updateParticipant = (participant) => (dispatch, getState) => {
+    axios
+        .put(`/api/participants/${participant.id}/`, participant, tokenConfig(getState))
+        .then(res => {
+            dispatch({
+                type: UPDATE_PARTICIPANT,
                 payload: res.data
             });
         })

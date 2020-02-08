@@ -41,6 +41,11 @@ export class TickboxesView extends Component {
         let groupColumns = {}
         let groupIndex = {}
         let groupColors = {}
+
+        for (let i = 0; i < this.props.groups.length; i++) {
+            groupColors[this.props.groups[i].id] = this.props.groups[i].color
+        }
+
         if (!this.props.useGroups) {
             for (let i = 0; i < this.props.columns; i++) {
                 columns.push([])
@@ -73,10 +78,6 @@ export class TickboxesView extends Component {
             });
         }
 
-        for (let i = 0; i < this.props.groups.length; i++) {
-            groupColors[this.props.groups[i].id] = this.props.groups[i].color
-        }
-
         let completedComponentCards = {}
 
         this.props.components.forEach((component, index) => {
@@ -94,10 +95,11 @@ export class TickboxesView extends Component {
         let suggestionCards = []
         let opacities = [0.9, 0.7, 0.5]
         let widths = ["29%", "28%", "27%"]
+        let columnWidths = ["27%", "26%", "25%"]
         this.props.suggestions.slice(0, 3).forEach((component, index) => {
             suggestionCards.push(
                 <Row style={{ height: "143px", margin: "15px" }}>
-                    <Col width="27%">
+                    <Col width={columnWidths[index]}>
                         <Card
                             style={{ backgroundColor: this.backgroundColors[groupColors[component.group]], color: this.colors[groupColors[component.group]], opacity: opacities[index], width: widths[index] }}
                             onClick={() => {
@@ -125,8 +127,6 @@ export class TickboxesView extends Component {
                 </Row>
             )
         })
-
-        console.log(suggestionCards)
 
         return (
             <Tabbar
@@ -206,7 +206,7 @@ export class TickboxesView extends Component {
                                 }
                             </Content>
                         </Page>,
-                        tab: <Tab><IoIosApps className="ion-icon--larger" /> Cards </Tab>
+                        tab: <Tab><IoIosApps className="ion-icon--larger" /> Components</Tab>
                     },
                     {
                         content: <Page title="Documentation" active={activeIndex === 1} tabbar={tabbar}>
@@ -214,7 +214,7 @@ export class TickboxesView extends Component {
                                 <Documentation view={1} suggestions={suggestionCards} completedComponents={completedComponentCards} participant={this.props.participant} />
                             </Content>
                         </Page>,
-                        tab: <Tab><FaRegClipboard className="ion-icon--larger" /> Documentation</Tab>
+                        tab: <Tab><FaRegClipboard className="ion-icon--larger" /> Notes</Tab>
                     }
                 ]
                 }
