@@ -12,7 +12,7 @@ import { Col, Row, List, ListItem, Button, Icon, ProgressCircular, Segment } fro
 
 import { FaChevronUp, FaChevronDown, FaTrash, FaPen, FaSquareFull } from 'react-icons/fa';
 import { IoIosColorFill } from 'react-icons/io';
-import { FiChevronUp, FiChevronDown, FiChevronsDown, FiChevronsUp, FiMinus} from 'react-icons/fi';
+import { FiChevronUp, FiChevronDown, FiChevronsDown, FiChevronsUp, FiMinus } from 'react-icons/fi';
 
 export class ComponentGroups extends Component {
     static propTypes = {
@@ -36,7 +36,7 @@ export class ComponentGroups extends Component {
         console.log(component.id)
         console.log(component.color)
         console.log(this.colors[component.color])
-        component.color = (component.color + 1) % this.colors.length 
+        component.color = (component.color + 1) % this.colors.length
         console.log(component.color)
         console.log(this.colors[component.color])
         this.props.updateComponent(component)
@@ -56,7 +56,7 @@ export class ComponentGroups extends Component {
         let usedColors = this.props.groups.map(group => group.color)
         console.log("usedColors")
         console.log(usedColors)
-        while (usedColors.includes(color) ) {
+        while (usedColors.includes(color)) {
             color += 1
         }
         color = color % this.colors.length
@@ -64,7 +64,7 @@ export class ComponentGroups extends Component {
     }
 
     changeColor(group) {
-        group.color = (group.color + 1) % this.colors.length 
+        group.color = (group.color + 1) % this.colors.length
         this.props.updateGroup(group)
     }
 
@@ -79,83 +79,101 @@ export class ComponentGroups extends Component {
 
 
     render() {
-        this.props.components.sort(function(a, b) { 
+        this.props.components.sort(function (a, b) {
             return a.id - b.id;
         })
 
-        this.props.components.sort(function(a, b) { 
-            return  b.priority - a.priority;
+        this.props.components.sort(function (a, b) {
+            return b.priority - a.priority;
         })
 
-        this.props.groups.sort(function(a, b) { 
+        this.props.groups.sort(function (a, b) {
             return a.id - b.id;
         })
         let nextColor = this.findColor();
         return (
             <Fragment>
-                { this.props.groups.map((group, groupIdx) =>
-                        <div>
-                            <Row>
-                                <Col>
-                                    <h3>
-                                        <FaSquareFull 
-                                            className="icon-color-marker"
-                                            style={{"color": this.backgroundColors[group.color]}}
-                                            onClick={() => this.changeColor(group)}
-                                        />
-                                        <div className="group-name">{group.name}</div>
-                                    </h3>
-                                </Col>
-                                <Col width="44px">
-                                    <h3 >
-                                        <FaTrash onClick={()=>{this.props.deleteGroup(group.id);}} />
-                                    </h3>
-                                </Col>
-                            </Row>
-                            <List
-                                dataSource={this.props.components}
-                                renderRow={(component, idx) => (
-                                    component.group === group.id ?
+                {this.props.groups.map((group, groupIdx) => {
+                    let first = true;
+                    return <div>
+                        <Row>
+                            <Col>
+                                <h3>
+                                    <FaSquareFull
+                                        className="icon-color-marker"
+                                        style={{ "color": this.backgroundColors[group.color] }}
+                                        onClick={() => this.changeColor(group)}
+                                    />
+                                    <div className="group-name">{group.name}</div>
+                                </h3>
+                            </Col>
+                            <Col width="44px">
+                                <h3 >
+                                    <FaTrash onClick={() => { this.props.deleteGroup(group.id); }} />
+                                </h3>
+                            </Col>
+                        </Row>
+                        <List
+                            dataSource={this.props.components}
+                            renderRow={(component, idx) => (
+                                component.group === group.id ?
                                     <Row>
                                         <Col>
-                                            <ListItem 
+                                            <ListItem
                                                 modifier='material'
-                                                style={{backgroundColor: this.backgroundColors[group.color], color: this.colors[group.color], paddingRight: "230px"}}
+                                                style={{ backgroundColor: this.backgroundColors[group.color], color: this.colors[group.color], paddingRight: "230px" }}
                                             >
                                                 {component.name}
-                                                <div 
+                                                <div
                                                     className="priority-segment">
-                                                    <Button onClick={() => this.changePriority(component, -2)} className="priority-button" style={{color: this.colors[group.color], opacity: component.priority == -2 ? 1 : 0.2}}><FiChevronsDown /></Button>
-                                                    <Button onClick={() => this.changePriority(component, -1)} className="priority-button" style={{color: this.colors[group.color], opacity: component.priority == -1 ? 1 : 0.2}}><FiChevronDown /></Button>
-                                                    <Button onClick={() => this.changePriority(component, 0)} className="priority-button" style={{color: this.colors[group.color], opacity: component.priority == 0 ? 1 : 0.2}}><FiMinus /></Button>
-                                                    <Button onClick={() => this.changePriority(component, 1)} className="priority-button" style={{color: this.colors[group.color], opacity: component.priority == 1 ? 1 : 0.2}}><FiChevronUp /></Button>
-                                                    <Button onClick={() => this.changePriority(component, 2)} className="priority-button" style={{color: this.colors[group.color], opacity: component.priority == 2 ? 1 : 0.2}}><FiChevronsUp /></Button>
+                                                    {first ? <p className="priority-title">Importance</p> : null}
+                                                    <div className="priority-section" onClick={() => this.changePriority(component, -2)}>
+                                                        <Button className="priority-button" style={{ color: this.colors[group.color], opacity: component.priority == -2 ? 1 : 0.2 }}><FiChevronsDown /></Button>
+                                                         {first ? <p className="priority-tag" style={{ color: this.colors[group.color], opacity: component.priority == -2 ? 1 : 0.5 }}>Lowest</p> : null}
+                                                    </div>
+                                                    <div className="priority-section" onClick={() => this.changePriority(component, -1)}>
+                                                        <Button className="priority-button" style={{ color: this.colors[group.color], opacity: component.priority == -1 ? 1 : 0.2 }}><FiChevronDown /></Button>
+                                                         {first ? <p className="priority-tag" style={{ color: this.colors[group.color], opacity: component.priority == -1 ? 1 : 0.5 }}>Low</p> : null}
+                                                    </div>
+                                                    <div className="priority-section" onClick={() => this.changePriority(component, 0)} >
+                                                        <Button className="priority-button" style={{ color: this.colors[group.color], opacity: component.priority == 0 ? 1 : 0.2 }} ><FiMinus /></Button>
+                                                    </div>
+                                                    <div className="priority-section" onClick={() => this.changePriority(component, 1)} >
+                                                        <Button className="priority-button" style={{ color: this.colors[group.color], opacity: component.priority == 1 ? 1 : 0.2 }} ><FiChevronUp /></Button>
+                                                         {first ? <p className="priority-tag" style={{ color: this.colors[group.color], opacity: component.priority == 1 ? 1 : 0.5 }}>High</p> : null}
+                                                    </div>
+                                                    <div className="priority-section" onClick={() => this.changePriority(component, 2)} >
+                                                        <Button className="priority-button" style={{ color: this.colors[group.color], opacity: component.priority == 2 ? 1 : 0.2 }}><FiChevronsUp /></Button>
+                                                         {first ? <p className="priority-tag" style={{ color: this.colors[group.color], opacity: component.priority == 2 ? 1 : 0.5 }}>Highest</p> : null}
+                                                    </div>
                                                 </div>
+                                                {first = false}
                                             </ListItem>
                                         </Col>
                                         <Col width="44px">
                                             <ListItem
-                                                style={{height: "100%"}}
+                                                style={{ height: "100%" }}
                                                 modifier='material tappable'
-                                                onClick={()=>{
-                                                    this.setState({delete: true})
+                                                onClick={() => {
+                                                    this.setState({ delete: true })
                                                     this.props.deleteComponent(component.id);
-                                                    setTimeout(function(){this.setState({delete: false})}.bind(this), 100);
+                                                    setTimeout(function () { this.setState({ delete: false }) }.bind(this), 100);
                                                 }}
                                                 className='list-item--button negative'
                                             >
-                                                <FaTrash className="icon--center"/>
+                                                <FaTrash className="icon--center" />
                                                 {/* <Button modifier="quiet" onClick={this.props.deleteComponent.bind(this, component.id)}>Remove</Button> */}
                                             </ListItem>
                                         </Col>
                                     </Row>
-                                    :  null 
-                                )}>
-                                <AddComponent planId={this.props.planId} groupId={group.id} />
-                            </List>
-                        </div>
-                    )}
-                    <AddGroup planId={this.props.planId} color={nextColor} first={this.props.groups.length == 0} />
+                                    : null
+                            )}>
+                            <AddComponent planId={this.props.planId} groupId={group.id} />
+                        </List>
+                    </div>
+                }
+                )}
+                <AddGroup planId={this.props.planId} color={nextColor} first={this.props.groups.length == 0} />
                 {/* : <ProgressCircular indeterminate /> } */}
             </Fragment>
         )

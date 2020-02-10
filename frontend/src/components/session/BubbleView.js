@@ -29,7 +29,7 @@ export class BubbleView extends Component {
     pop = (component, pos) => {
         if (!this.props.componentCompletion[component.id]) {
             this.props.toggleCompletion(component.id);
-            this.setState({highestGroup: component.group, lastPopped: component, lastPos: pos})
+            this.setState({highestGroup: component.group > this.state.highestGroup ? component.group : this.state.highestGroup, lastPopped: component, lastPos: pos})
             this.props.addResponse({
                 participant: this.props.participant.id,
                 component: component.id,
@@ -51,16 +51,10 @@ export class BubbleView extends Component {
 
 
         components = components.filter(component => !this.props.componentCompletion[component.id]);
-        
-        // filter low priority past groups
-        if (components.length > 5) {
-            components = components.filter(component => component.priority >= 0 || component.group >= this.state.highestGroup);
-        }
 
-        // filter medium priority past groups
-        if (components.length > 10) {
-            components = components.filter(component => component.priority > 0 || component.group >= this.state.highestGroup);
-        }
+        // filter medium and low priority items from past groups
+        let extras = components.filter(component => component.priority <= 0 && component.group < this.state.highestGroup);
+        components = components.filter(component => component.priority > 0 || component.group >= this.state.highestGroup);
 
         components.sort(function (a, b) {
             return b.priority - a.priority;
@@ -69,6 +63,8 @@ export class BubbleView extends Component {
         components.sort(function (a, b) {
             return a.group - b.group;
         });
+
+        components = components.concat(extras)
 
         if (this.state.lastPopped) {
             components = components.slice(0, this.state.lastPos).concat([this.state.lastPopped], components.slice(this.state.lastPos, 9))
