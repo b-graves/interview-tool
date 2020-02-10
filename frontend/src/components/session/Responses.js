@@ -44,7 +44,6 @@ export class Responses extends Component {
                             </Row>
                         </div>
                         :
-                        this.props.view === 1 ?
                             <Row style={{ marginBottom: "20px" }}>
                                 <Col width={"33%"}>
                                     {this.props.completedComponents[response.component]}
@@ -60,7 +59,7 @@ export class Responses extends Component {
                                     }}
                                 />
                             </Row>
-                            : null
+                            
                 )}
             </div>
         )

@@ -163,15 +163,6 @@ export class Session extends Component {
                                     Show Stages <Checkbox modifier="material" checked={this.state.useGroups} />
 
                                 </Card> */}
-                                <Card
-                                    className={this.state.hideCompletedComponents ? "card__checkbox card__checkbox--selected" : "card__checkbox"}
-                                    onClick={() => {
-                                        this.setState({ hideCompletedComponents: !this.state.hideCompletedComponents })
-                                        // setTimeout(function(){this.setState({hideList: false})}.bind(this), 10);
-                                    }}
-                                >
-                                    Filter completed <Checkbox modifier="material" checked={this.state.hideCompletedComponents} />
-                                </Card>
                                 <Card style={{ padding: 0 }}>
                                     <div style={{ padding: "8px" }}>
                                         Component View
@@ -199,6 +190,16 @@ export class Session extends Component {
                                         </div>
                                     </div>
                                 </Card>
+                                {this.props.plan.view !== 2 ? <Card
+                                    className={this.state.hideCompletedComponents ? "card__checkbox card__checkbox--selected" : "card__checkbox"}
+                                    onClick={() => {
+                                        this.setState({ hideCompletedComponents: !this.state.hideCompletedComponents })
+                                        // setTimeout(function(){this.setState({hideList: false})}.bind(this), 10);
+                                    }}
+                                >
+                                    Filter completed <Checkbox modifier="material" checked={this.state.hideCompletedComponents} />
+                                </Card>
+                                : null}
                             </div>
                             <Button className="positive complete-button" onClick={() => this.completeSession()}>
                                 <FaCheck className="icon-in-button" /> Complete Session

@@ -14,7 +14,7 @@ export class Documentation extends Component {
                         this.props.view === 0 ? suggestion :
                             this.props.view === 1 ?
                                 suggestion
-                                : null
+                                : suggestion
                     )}
                 </div>
             </div>

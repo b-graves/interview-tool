@@ -59,6 +59,7 @@ export class TickboxesView extends Component {
         let opacities = [0.9, 0.7, 0.5]
         let widths = ["86%", "83%", "80%"]
         let columnWidths = ["88%", "85%", "82%"]
+        
         this.props.suggestions.slice(0, 3).forEach((component, index) => {
             suggestionItems.push(
                 <Row style={{ height: "48px", margin: "4px" }}>
