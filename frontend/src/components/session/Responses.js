@@ -51,13 +51,6 @@ export class Responses extends Component {
                                 <Col>
                                     <Editor updateResponse={this.props.updateResponse} response={response} />
                                 </Col>
-
-                                <FaTrash
-                                    className="icon--center"
-                                    onClick={() => {
-                                        this.props.deleteResponse(response.id);
-                                    }}
-                                />
                             </Row>
                             
                 )}
