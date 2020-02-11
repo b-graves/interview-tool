@@ -23,9 +23,11 @@ export class Responses extends Component {
         })
         console.log(this.props.suggestions)
 
+        let responses = this.props.responses.filter(response => response.participant === this.props.participant.id)
+
         return (
             <div>
-                {this.props.responses.map(response =>
+                {responses.map(response =>
                     this.props.view === 0 ?
                         <div>
                             <Row>
@@ -51,6 +53,13 @@ export class Responses extends Component {
                                 <Col>
                                     <Editor updateResponse={this.props.updateResponse} response={response} />
                                 </Col>
+
+                                <FaTrash
+                                    className="icon--center"
+                                    onClick={() => {
+                                        this.props.deleteResponse(response.id);
+                                    }}
+                                />
                             </Row>
                             
                 )}

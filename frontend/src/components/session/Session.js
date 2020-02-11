@@ -51,7 +51,6 @@ export class Session extends Component {
 
     completeSession() {
         this.setState({ completeDialogOpen: true })
-        this.props.updateParticipant({ ...this.props.participant, complete: true });
     }
 
     hide() {
@@ -222,7 +221,7 @@ export class Session extends Component {
                             }} className="dialog-button">
                                 Cancel
                             </Button>
-                            <Button onClick={() => { this.props.navigator.popPage(); setTimeout(function () { this.props.navigator.popPage() }.bind(this), 1000); }} className="-dialog-button">
+                            <Button onClick={() => { this.props.navigator.popPage(); this.props.updateParticipant({ ...this.props.participant, complete: true }); setTimeout(function () { this.props.navigator.popPage() }.bind(this), 1000); }} className="-dialog-button">
                                 Yes
                             </Button>
                         </p>

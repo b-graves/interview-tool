@@ -9,9 +9,9 @@ export class Documentation extends Component {
         return (
             <div>
                 <Responses view={this.props.view} completedComponents={this.props.completedComponents} participant={this.props.participant} />
-                <div style={{marginTop: "80px"}}>
+                <div style={{marginTop: "80px", minHeight: "150px"}}>
                     {this.props.suggestions.map(suggestion =>
-                        this.props.view === 0 ? suggestion :
+                        this.props.view === 0 && !this.props.hideSuggestions ? suggestion :
                             this.props.view === 1 ?
                                 suggestion
                                 : suggestion

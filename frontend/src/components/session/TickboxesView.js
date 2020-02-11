@@ -22,6 +22,7 @@ export class TickboxesView extends Component {
     state = {
         hideList: false,
         removeList: false,
+        hideSuggestions: false
     }
 
     priorityIcons = {
@@ -69,6 +70,8 @@ export class TickboxesView extends Component {
                             className={'list-item__checkboxes suggestion-item'}
                             onClick={() => {
                                 if (!this.props.componentCompletion[component.id]) {
+                                    this.setState({ hideSuggestions: true })
+                                    setTimeout(function(){this.setState({hideSuggestions: false})}.bind(this), 500);
                                     this.props.toggleCompletion(component.id);
                                     this.props.addResponse({
                                         participant: this.props.participant.id,
@@ -220,7 +223,7 @@ export class TickboxesView extends Component {
                     {
                         content: <Page title="Documentation" active={activeIndex === 1} tabbar={tabbar}>
                             <Content>
-                                <Documentation view={0} suggestions={suggestionItems} completedComponents={completedComponentItems} participant={this.props.participant} />
+                                <Documentation view={0} suggestions={suggestionItems} completedComponents={completedComponentItems} participant={this.props.participant} hideSuggestions={this.state.hideSuggestions} />
                             </Content>
                         </Page>,
                         tab: <Tab><FaRegClipboard className="ion-icon--larger" /> Notes</Tab>

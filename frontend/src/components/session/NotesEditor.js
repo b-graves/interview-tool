@@ -5,7 +5,7 @@ import ReactQuill from 'react-quill';
 export class Editor extends Component {
     constructor(props) {
         super(props)
-        this.state = { editorHtml: props.response.text === '' ? '<p style="font-family: serif;"><ul><li><br></li></ul></p>' : props.response.text }
+        this.state = { editorHtml: props.response.text === '' ? '<p style="font-family: serif;"><ul><li><br></li></ul></p>' : props.response.text, showToolbar: true }
         this.handleChange = this.handleChange.bind(this)
     }
 
@@ -33,16 +33,12 @@ export class Editor extends Component {
         'link', 'image', 'video'
     ]
 
-    state = {
-        showToolbar: true
-    }
-
 
     render() {
         return (
             <div>
                 <div style={{
-                    opacity: this.state.showToolbar ?  1 : 0,
+                    opacity: this.state.showToolbar ? 1 : 0,
                     position: "absolute",
                     right: 0,
                     zIndex: 999999999

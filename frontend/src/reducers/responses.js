@@ -1,4 +1,4 @@
-import { GET_RESPONSES, GET_RESPONSE, DELETE_RESPONSE, ADD_RESPONSE, UPDATE_RESPONSE } from "../actions/types.js";
+import { GET_RESPONSES, GET_RESPONSE, DELETE_RESPONSE, ADD_RESPONSE, UPDATE_RESPONSE, CLEAR_RESPONSES } from "../actions/types.js";
 
 const initialState = {
     responses: [],
@@ -33,6 +33,11 @@ export default function(state = initialState, action) {
                 responses: [...state.responses.filter(response => response.id !== action.payload.id), action.payload],
                 response: action.payload
             };
+        case CLEAR_RESPONSES:
+                return {
+                    ...state,
+                    responses: [],
+                };
         default:
             return state;
     }
