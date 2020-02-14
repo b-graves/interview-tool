@@ -19,13 +19,13 @@ export class Editor extends Component {
 
     handleEditorChange = (e) => {
         console.log(
-          'Content was updated:',
-          e.target.getContent()
+            'Content was updated:',
+            e.target.getContent()
         );
         let response = this.props.response;
         response.text = e.target.getContent();
         this.props.updateResponse(response);
-      }
+    }
 
     handleChange(html) {
         this.setState({ editorHtml: html });
@@ -35,22 +35,41 @@ export class Editor extends Component {
         this.props.updateResponse(response)
     }
 
+    state = {
+        showToolbar: true
+    }
+
     render() {
         return (
-                <DraftEditor
-                    initialValue={this.props.response.text === '' ? '<ul><li><br></li></ul>' : this.props.response.text}
-                    apiKey="5plt0g5t2jeyrtizd1c038vxe5ypdmrvrps2zqr6bwodcm23"
-                    init={{
-                        menubar: false,
-                        toolbar: false,
-                        plugins: [
-                            'advlist lists visualblocks paste'
-                        ],
-                        toolbar:
-                            'bullist outdent indent '
-                    }}
-                    onChange={this.handleEditorChange}
-                />
+            <div style={{ position: "relative"}}>
+            <div className={"toolbar-container"} id={"toolbar-" + this.props.response.id} style={{opacity: this.state.showToolbar ? 1 : 0.5}}>
+            </div>
+            <DraftEditor
+                initialValue={this.props.response.text === '' ? '<ul><li></li></ul>' : this.props.response.text}
+                apiKey="5plt0g5t2jeyrtizd1c038vxe5ypdmrvrps2zqr6bwodcm23"
+                init={{
+                    menubar: false,
+                    plugins: [
+                        'advlist lists visualblocks paste'
+                    ],
+                    toolbar:
+                        'bullist outdent indent ',
+                    inline: true,
+                    fixed_toolbar_container: "#toolbar-" + this.props.response.id
+                }}
+                onChange={this.handleEditorChange}
+                onFocus={() => {
+                    console.log("FOCUS")
+
+                    this.setState({ showToolbar: true })
+                }}
+                onBlur={() => {
+                    console.log("BLUR")
+
+                    this.setState({ showToolbar: false })
+                }}
+            />
+            </div>
         )
     }
 }
