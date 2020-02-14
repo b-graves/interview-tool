@@ -381,10 +381,41 @@ margin-right: 8px;
     opacity: 1
 }
 
-
-li:before {
-    content: "\2022\2\2\2\2" !important;
+.tox-edit-area__iframe {
+    background-color: transparent !important;
 }
+
+.mce-content-body{
+    font-family: 'EB Garamond', serif !important;
+    font-weight: normal !important;
+    font-size: 18px !important;
+}
+
+.tox-tinymce {
+    border: none !important;
+}
+
+.tox-statusbar {
+    visibility: hidden !important;
+}
+
+.tox-editor-header {
+    position: absolute !important;
+    right: 0 !important;
+    top: 0 !important;
+}
+
+.tox-toolbar {
+    background-color: transparent !important;
+}
+
+.tox-toolbar__group {
+    border-right: none !important;
+}
+
+/* li:before {
+    content: "\2022\2\2\2\2" !important;
+} */
 
 .suggestion-card {
     position: absolute;

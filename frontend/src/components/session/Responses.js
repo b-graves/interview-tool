@@ -50,7 +50,7 @@ export class Responses extends Component {
                                 <Col width={"33%"}>
                                     {this.props.completedComponents[response.component]}
                                 </Col>
-                                <Col>
+                                <Col width={"67%"}>
                                     <Editor updateResponse={this.props.updateResponse} response={response} />
                                 </Col>
 
