@@ -108,12 +108,21 @@ h3 {
     top: 2px;
 }
 
-button {
+.button {
     border-radius: 0px !important;
 }
 
-.button {
-    border-radius: 0px !important;
+.record-button-icon {
+    background-color: #e6061e;
+    border-radius: 50% !important;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    margin-right: 8px;
+    padding-top: 1px;
+    padding-left: 1px;
 }
 
 .card {
@@ -288,7 +297,7 @@ button {
 }
 
 .toolbar__session {
-    background-color: #e6061e;
+    background-color: #4cd24c;
     animation-name: color;
     animation-duration: 8s;
     animation-iteration-count: infinite;
@@ -306,6 +315,28 @@ button {
     }
     100% {
         background-color: #009900;
+    }
+}
+
+.toolbar__recording {
+    background-color: red;
+    animation-name: recording-color;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+    color: white;
+    line-height: 24px;
+    font-size: 80%;
+}
+
+@keyframes recording-color {
+    0% {
+        background-color: #e6061e;
+    }
+    50% {
+        background-color: red;
+    }
+    100% {
+        background-color: #e6061e;
     }
 }
 

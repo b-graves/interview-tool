@@ -5,6 +5,7 @@ class Plan(models.Model):
     name = models.CharField(max_length=100)
     owner = models.ForeignKey(User, related_name="plans", on_delete=models.CASCADE, null=True)
     duration = models.IntegerField(default=60)
+    permitRecording = models.BooleanField(default=True) 
     view = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

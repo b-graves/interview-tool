@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getPlan, updatePlan } from '../../actions/plans';
 import { getParticipant, updateParticipant } from '../../actions/participants';
+
 import { getComponents } from '../../actions/components';
 import { getGroups } from '../../actions/groups';
 
@@ -12,10 +13,10 @@ import Content from '../layout/Content';
 import Components from "./Components";
 
 
-import { FaCheck, FaList } from 'react-icons/fa';
+import { FaCheck, FaList, FaMicrophone } from 'react-icons/fa';
 
 import { IoIosChatbubbles } from 'react-icons/io';
-import { MdPeople } from 'react-icons/md';
+import { MdPeople, MdStop } from 'react-icons/md';
 
 import Timer from 'react-compound-timer'
 import BubbleView from './BubbleView';
@@ -24,6 +25,8 @@ import ReactMinimalPieChart from 'react-minimal-pie-chart';
 
 import { IoIosApps } from 'react-icons/io';
 import { MdBubbleChart } from 'react-icons/md';
+
+import Recorder from './Recorder';
 
 export class Session extends Component {
     static propTypes = {
@@ -46,7 +49,22 @@ export class Session extends Component {
         resize: false,
         useGroups: true,
         hideCompletedComponents: false,
-        completeDialogOpen: false
+        completeDialogOpen: false,
+        recording: false,
+        recordingStartTime: null
+    }
+
+    startRecording = () => {
+        this.setState({
+            recording: true,
+            recordingStartTime: this.state.seconds
+        });
+    }
+
+    stopRecording = () => {
+        this.setState({
+            recording: false,
+        });
     }
 
     completeSession() {
@@ -69,6 +87,8 @@ export class Session extends Component {
         this.props.updatePlan(plan);
     }
 
+    // recorder = new Recorder();
+
     render() {
         let remainingTime = 0;
         if (this.props.plan.duration && this.props.plan.duration * 60 - this.state.seconds > 0) {
@@ -79,9 +99,9 @@ export class Session extends Component {
             <Page renderToolbar={() =>
                 <Toolbar
                     style={{ height: "24px" }}
-                    className="toolbar__narrow"
+                    className={"toolbar__narrow"}
                 >
-                    <div className="center toolbar__session" >
+                    <div className={this.state.recording ? "center toolbar__recording toolbar__center toolbar__title toolbar--noshadow__center" : "center toolbar__session toolbar__center toolbar__title toolbar--noshadow__center"} >
                         {/* <Button onClick={() => this.state.isOpen ? this.hide() : this.show()}>open {this.state.isOpen}</Button> */}
                         {this.props.plan && this.props.participant ? "Session In Progress: " + this.props.plan.name + " - " + this.props.participant.name : ""}
                         <Timer
@@ -152,6 +172,23 @@ export class Session extends Component {
                                     />
                                     {Math.ceil(remainingTime / 60)} Minutes Left
                                 </Card>
+                                {this.props.plan.permitRecording ? <Card>
+                                    <div style={{ display: this.state.recording ? "block" : "none" }}>
+                                        <Recorder recording={this.state.recording} time={this.state.seconds} startTime={this.state.recordingStartTime} />
+                                    </div>
+                                    {this.state.recording ?
+                                        <div>
+                                            <div onClick={() => this.stopRecording()}>
+                                                <Button modifier={"quiet"} className={"stop-button-icon"}><MdStop /></Button> Stop Recording
+                                        </div>
+                                        </div>
+                                        :
+                                        <div onClick={() => this.startRecording()}>
+                                            <Button onClick={() => this.startRecording()} className={"record-button-icon"}><FaMicrophone /></Button> Start Recording
+                                    </div>
+                                    }
+
+                                </Card> : null}
                                 {/* <Card
                                     className={this.state.useGroups ? "card__checkbox card__checkbox--selected" : "card__checkbox"}
                                     onClick={() => {
@@ -198,7 +235,7 @@ export class Session extends Component {
                                 >
                                     Filter completed <Checkbox modifier="material" checked={this.state.hideCompletedComponents} />
                                 </Card>
-                                : null}
+                                    : null}
                             </div>
                             <Button className="positive complete-button" onClick={() => this.completeSession()}>
                                 <FaCheck className="icon-in-button" /> Complete Session

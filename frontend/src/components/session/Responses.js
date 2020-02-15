@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getResponses, updateResponse, deleteResponse } from '../../actions/responses';
+import { getPlan } from '../../actions/plans';
 
 import { Col, Row } from 'react-onsenui';
 
@@ -12,9 +13,8 @@ import { FaTrash } from 'react-icons/fa'
 
 export class Responses extends Component {
     componentDidMount() {
-        console.log(this.props.participant)
         this.props.getResponses(this.props.participant.id);
-
+        this.props.getPlan(this.props.participant.plan);
     }
 
     render() {
@@ -50,7 +50,7 @@ export class Responses extends Component {
                                 <Col width={"33%"}>
                                     {this.props.completedComponents[response.component]}
                                 </Col>
-                                <Col width={"67%"}>
+                                <Col width={"62%"}>
                                     <Editor updateResponse={this.props.updateResponse} response={response} />
                                 </Col>
 
@@ -70,7 +70,8 @@ export class Responses extends Component {
 
 const mapStateToProps = state => ({
     responses: state.responses.responses,
-    components: state.components.components
+    components: state.components.components,
+    plan: state.plans.plan
 });
 
-export default connect(mapStateToProps, { getResponses, updateResponse, deleteResponse })(Responses)
+export default connect(mapStateToProps, { getResponses, updateResponse, deleteResponse, getPlan })(Responses)
