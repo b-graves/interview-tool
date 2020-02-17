@@ -73,14 +73,14 @@ export class Components extends Component {
             this.props.components ?
                 this.props.view === 0 ?
                     <Content>
-                        {this.props.hideList ? null : <TickboxesView suggestions={suggestions} participant={this.props.participant} useGroups={this.props.useGroups} components={filteredComponents} groups={this.props.groups} componentCompletion={this.state.componentCompletion}  hideCompletedComponents={this.props.hideCompletedComponents} dismissSuggestion={this.dismissSuggestion.bind(this)} toggleCompletion={this.toggleCompletion.bind(this)} />}
+                        {this.props.hideList ? null : <TickboxesView getTime={this.props.getTime} suggestions={suggestions} participant={this.props.participant} useGroups={this.props.useGroups} components={filteredComponents} groups={this.props.groups} componentCompletion={this.state.componentCompletion}  hideCompletedComponents={this.props.hideCompletedComponents} dismissSuggestion={this.dismissSuggestion.bind(this)} toggleCompletion={this.toggleCompletion.bind(this)} />}
                     </Content>
                     : this.props.view === 1 ?
                         <Content>
-                            <CardsView suggestions={suggestions} participant={this.props.participant} useGroups={this.props.useGroups} components={filteredComponents} groups={this.props.groups} componentCompletion={this.state.componentCompletion} toggleCompletion={this.toggleCompletion.bind(this)} dismissSuggestion={this.dismissSuggestion.bind(this)} columns={3} />
+                            <CardsView getTime={this.props.getTime} suggestions={suggestions} participant={this.props.participant} useGroups={this.props.useGroups} components={filteredComponents} groups={this.props.groups} componentCompletion={this.state.componentCompletion} toggleCompletion={this.toggleCompletion.bind(this)} dismissSuggestion={this.dismissSuggestion.bind(this)} columns={3} />
                         </Content>
                         :
-                        <BubbleView suggestions={suggestions} participant={this.props.participant}  useGroups={this.props.useGroups} components={filteredComponents} groups={this.props.groups} componentCompletion={this.state.componentCompletion} toggleCompletion={this.toggleCompletion.bind(this)} dismissSuggestion={this.dismissSuggestion.bind(this)} columns={3} />
+                        <BubbleView getTime={this.props.getTime} suggestions={suggestions} participant={this.props.participant}  useGroups={this.props.useGroups} components={filteredComponents} groups={this.props.groups} componentCompletion={this.state.componentCompletion} toggleCompletion={this.toggleCompletion.bind(this)} dismissSuggestion={this.dismissSuggestion.bind(this)} columns={3} />
 
 
                 : <ProgressCircular indeterminate />

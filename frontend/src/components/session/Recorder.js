@@ -17,9 +17,10 @@ export class Recorder extends Component {
 
     onStop(recordedBlob) {
         this.props.addRecording({
+            participant: this.props.participant,
             start: this.props.startTime,
             stop: this.props.time,
-            recordedBlob
+            blobURL: recordedBlob.blobURL
         })
     }
 
@@ -36,7 +37,6 @@ export class Recorder extends Component {
                     backgroundColor="white"
                     mimeType="audio/mp3"
                 />
-                
             </div>
         )
     }

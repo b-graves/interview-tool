@@ -3,6 +3,7 @@ from interviews.models import Plan
 from interviews.models import Component
 from interviews.models import Group
 from interviews.models import Response
+from interviews.models import Recording
 from interviews.models import Participant
 
 # Plan Serializer
@@ -27,6 +28,12 @@ class GroupSerializer(serializers.ModelSerializer):
 class ResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Response
+        fields = '__all__'
+
+# Recording Serializer
+class RecordingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Recording
         fields = '__all__'
 
 # Participant Serializer

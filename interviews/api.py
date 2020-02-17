@@ -3,10 +3,12 @@ from interviews.models import Component
 from interviews.models import Group
 from interviews.models import Participant
 from interviews.models import Response
+from interviews.models import Recording
 from rest_framework import viewsets, permissions
 from .serializers import PlanSerializer
 from .serializers import ParticipantSerializer
 from .serializers import ResponseSerializer
+from .serializers import RecordingSerializer
 from .serializers import ComponentSerializer
 from .serializers import GroupSerializer
 
@@ -57,6 +59,20 @@ class ResponseViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
+
+# Recording Viewset
+class RecordingViewSet(viewsets.ModelViewSet):
+    queryset = Recording.objects.all()
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = RecordingSerializer
+
+    def get_queryset(self):
+        return self.request.user.recordings.all()
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 # Group Viewset
 class GroupViewSet(viewsets.ModelViewSet):

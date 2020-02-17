@@ -76,6 +76,7 @@ export class TickboxesView extends Component {
                                     this.props.addResponse({
                                         participant: this.props.participant.id,
                                         component: component.id,
+                                        moment: this.props.getTime()
                                     });
                                 }
                                 this.setState({ index: 1 })
@@ -125,6 +126,7 @@ export class TickboxesView extends Component {
                                                                     this.props.addResponse({
                                                                         participant: this.props.participant.id,
                                                                         component: component.id,
+                                                                        moment: this.props.getTime()
                                                                     });
                                                                 }
                                                                 this.setState({ index: 1 })
@@ -148,6 +150,7 @@ export class TickboxesView extends Component {
                                                                         this.props.addResponse({
                                                                             participant: this.props.participant.id,
                                                                             component: component.id,
+                                                                            moment: this.props.getTime()
                                                                         });
                                                                     }
                                                                     this.setState({ index: 1 })
@@ -182,6 +185,7 @@ export class TickboxesView extends Component {
                                                                                 this.props.addResponse({
                                                                                     participant: this.props.participant.id,
                                                                                     component: component.id,
+                                                                                    moment: this.props.getTime()
                                                                                 });
                                                                             }
                                                                             this.setState({ index: 1 })

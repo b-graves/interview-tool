@@ -28,12 +28,23 @@ class Participant(models.Model):
     owner = models.ForeignKey(User, related_name="participants", on_delete=models.CASCADE, null=True)
     plan = models.ForeignKey(Plan, related_name="participants", on_delete=models.CASCADE, null=True)
     complete = models.BooleanField(default=False)
+    duration = models.IntegerField(default=-1)
 
 class Response(models.Model):
     text = models.TextField(default="")
     owner = models.ForeignKey(User, related_name="responses", on_delete=models.CASCADE, null=True)
     participant = models.ForeignKey(Participant, related_name="responses", on_delete=models.CASCADE, null=True)
     component = models.ForeignKey(Component, related_name="responses", on_delete=models.CASCADE, null=True)
+    moment = models.IntegerField(default=-1)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Recording(models.Model):
+    blobURL = models.TextField()
+    owner = models.ForeignKey(User, related_name="recordings", on_delete=models.CASCADE, null=True)
+    participant = models.ForeignKey(Participant, related_name="recordings", on_delete=models.CASCADE, null=True)
+    start = models.IntegerField()
+    stop = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

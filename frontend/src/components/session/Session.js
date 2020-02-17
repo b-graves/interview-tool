@@ -87,6 +87,10 @@ export class Session extends Component {
         this.props.updatePlan(plan);
     }
 
+    getTime() {
+        return this.state.seconds
+    }
+
     // recorder = new Recorder();
 
     render() {
@@ -125,7 +129,7 @@ export class Session extends Component {
                 {this.props.components && this.props.participant ?
                     <Splitter>
                         <SplitterContent>
-                            {this.state.resize ? null : <Components participant={this.props.participant} view={this.props.plan.view} components={this.props.components} groups={this.props.groups} planId={this.props.planId} hideList={this.state.hideList} useGroups={this.state.useGroups} hideCompletedComponents={this.state.hideCompletedComponents} />}
+                            {this.state.resize ? null : <Components getTime={() => this.getTime()} participant={this.props.participant} view={this.props.plan.view} components={this.props.components} groups={this.props.groups} planId={this.props.planId} hideList={this.state.hideList} useGroups={this.state.useGroups} hideCompletedComponents={this.state.hideCompletedComponents} />}
                         </SplitterContent>
                         <SplitterSide
                             side="right"
@@ -174,7 +178,7 @@ export class Session extends Component {
                                 </Card>
                                 {this.props.plan.permitRecording ? <Card>
                                     <div style={{ display: this.state.recording ? "block" : "none" }}>
-                                        <Recorder recording={this.state.recording} time={this.state.seconds} startTime={this.state.recordingStartTime} />
+                                        <Recorder recording={this.state.recording} time={this.state.seconds} startTime={this.state.recordingStartTime} participant={this.props.participant.id} />
                                     </div>
                                     {this.state.recording ?
                                         <div>
@@ -253,12 +257,13 @@ export class Session extends Component {
                         </p>
                         <p>
                             <Button onClick={() => {
-                                this.setState({ completeDialogOpen: false })
+                                this.setState({ completeDialogOpen: false });
+                                this.stopRecording();
                                 this.props.updateParticipant({ ...this.props.participant, complete: false });
                             }} className="dialog-button">
                                 Cancel
                             </Button>
-                            <Button onClick={() => { this.props.navigator.popPage(); this.props.updateParticipant({ ...this.props.participant, complete: true }); setTimeout(function () { this.props.navigator.popPage() }.bind(this), 1000); }} className="-dialog-button">
+                            <Button onClick={() => { this.props.navigator.popPage(); this.props.updateParticipant({ ...this.props.participant, complete: true, duration: this.getTime() }); setTimeout(function () { this.props.navigator.popPage() }.bind(this), 1000); }} className="-dialog-button">
                                 Yes
                             </Button>
                         </p>

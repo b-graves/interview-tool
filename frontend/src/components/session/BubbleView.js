@@ -33,6 +33,7 @@ export class BubbleView extends Component {
             this.props.addResponse({
                 participant: this.props.participant.id,
                 component: component.id,
+                moment: this.props.getTime()
             });
             setTimeout(function () { this.setState({ index: 1 }) }.bind(this), 500);
         } else {
@@ -168,6 +169,7 @@ export class BubbleView extends Component {
                                         this.props.addResponse({
                                             participant: this.props.participant.id,
                                             component: component.id,
+                                            moment: this.props.getTime()
                                         });
                                     }
                                     this.setState({ index: 1 })

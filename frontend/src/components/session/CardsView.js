@@ -36,7 +36,7 @@ export class TickboxesView extends Component {
 
 
     render() {
-        console.log(this.props.participant)
+        console.log(this.props.getTime())
         let columns = []
         let groupColumns = {}
         let groupIndex = {}
@@ -108,6 +108,7 @@ export class TickboxesView extends Component {
                                     this.props.addResponse({
                                         participant: this.props.participant.id,
                                         component: component.id,
+                                        moment: this.props.getTime()
                                     });
                                 }
                                 this.setState({ index: 1 })
@@ -153,6 +154,7 @@ export class TickboxesView extends Component {
                                                                     this.props.addResponse({
                                                                         participant: this.props.participant.id,
                                                                         component: component.id,
+                                                                        moment: this.props.getTime()
                                                                     });
                                                                 }
                                                                 this.setState({ index: 1 })
@@ -185,6 +187,7 @@ export class TickboxesView extends Component {
                                                                                 this.props.addResponse({
                                                                                     participant: this.props.participant.id,
                                                                                     component: component.id,
+                                                                                    moment: this.props.getTime()
                                                                                 });
                                                                             }
                                                                             this.setState({ index: 1 })
