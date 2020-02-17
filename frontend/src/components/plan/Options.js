@@ -36,9 +36,19 @@ export class Options extends Component {
                         <div className="title"><FaMicrophone className="header-icon--larger" /> Audio Recording</div>
                         Permit Audio Recording <Checkbox
                             modifier="material"
-                            checked={this.props.plan.permitRecording} 
-                            onChange={event => { this.props.updatePlan({ ...this.props.plan, permitRecording: event.target.checked })}}
+                            checked={this.props.plan.permitRecording}
+                            onChange={event => { this.props.updatePlan({ ...this.props.plan, permitRecording: event.target.checked }) }}
                         />
+                        <div className="explanation">When enabled, the interviewer will be able to audio record part or all of the session and review the recording afterwards</div>
+                        <div style={{opacity: this.props.plan.permitRecording ? 1 : 0.3}}>
+                            Start Recording Automatically  <Checkbox
+                                modifier="material"
+                                disabled={!this.props.plan.permitRecording}
+                                checked={this.props.plan.permitRecording && this.props.plan.automaticRecording}
+                                onChange={event => { this.props.updatePlan({ ...this.props.plan, automaticRecording: event.target.checked }) }}
+                            />
+                            <div className="explanation">When enabled, audio recording will begin automatically when the session starts and stop the session ends</div>
+                        </div>
                     </Card>
                 </form>
             </Fragment>

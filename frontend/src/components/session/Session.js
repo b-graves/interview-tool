@@ -50,8 +50,8 @@ export class Session extends Component {
         useGroups: true,
         hideCompletedComponents: false,
         completeDialogOpen: false,
-        recording: false,
-        recordingStartTime: null
+        recording: this.props.plan.automaticRecording,
+        recordingStartTime: this.props.plan.automaticRecording ? 0 : null
     }
 
     startRecording = () => {
@@ -258,12 +258,11 @@ export class Session extends Component {
                         <p>
                             <Button onClick={() => {
                                 this.setState({ completeDialogOpen: false });
-                                this.stopRecording();
                                 this.props.updateParticipant({ ...this.props.participant, complete: false });
                             }} className="dialog-button">
                                 Cancel
                             </Button>
-                            <Button onClick={() => { this.props.navigator.popPage(); this.props.updateParticipant({ ...this.props.participant, complete: true, duration: this.getTime() }); setTimeout(function () { this.props.navigator.popPage() }.bind(this), 1000); }} className="-dialog-button">
+                            <Button onClick={() => { this.props.navigator.popPage(); this.stopRecording(); this.props.updateParticipant({ ...this.props.participant, complete: true, duration: this.getTime() }); setTimeout(function () { this.props.navigator.popPage() }.bind(this), 1000); }} className="-dialog-button">
                                 Yes
                             </Button>
                         </p>

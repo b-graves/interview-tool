@@ -12,6 +12,8 @@ import Content from '../layout/Content'
 import { FiChevronUp, FiChevronDown, FiChevronsDown, FiChevronsUp, FiMinus } from 'react-icons/fi';
 
 import { getResponses } from '../../actions/responses';
+import { getRecordings } from '../../actions/recordings';
+
 
 import Player from "./Player"
 
@@ -23,7 +25,7 @@ class SessionResults extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            progress: 50
+            progress: 0
         };
 
         this.increment = this.increment.bind(this);
@@ -34,6 +36,7 @@ class SessionResults extends Component {
         this.props.getComponents(this.props.planId);
         this.props.getGroups(this.props.planId);
         this.props.getResponses(this.props.participant.id);
+        this.props.getRecordings(this.props.participant.id);
     }
 
     componentWillUnmount() {
@@ -56,6 +59,8 @@ class SessionResults extends Component {
     backgroundColors = ["#fff", "#a5007d", "#0e5eaa", "#1ea2e7", "#090", "#f8981d", "#e6001f"]
     colors = ["#000", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff"]
 
+    colorNames = ["white", "purple", "dark-blue", "light-blue", "green", "yellow", "red"]
+
     priorityIcons = {
         "-2": <FiChevronsDown className="card-priority-icon" />,
         "-1": <FiChevronDown className="card-priority-icon" />,
@@ -70,7 +75,7 @@ class SessionResults extends Component {
 
     render() {
         let completedComponentCards = {}
-        let completedComponentNames = {}
+        let completedComponents = {}
         let groupColors = {}
 
         for (let i = 0; i < this.props.groups.length; i++) {
@@ -88,11 +93,11 @@ class SessionResults extends Component {
                         {component.priority !== 0 ? this.priorityIcons[component.priority] : null}
                     </div>
                 </Card>
-                completedComponentNames[component.id] = component.name;
+                completedComponents[component.id] = component;
             })
         }
 
-        console.log(this.props.responses)
+        console.log(this.props.recordings)
 
         return (
             <Page renderToolbar={() =>
@@ -117,26 +122,30 @@ class SessionResults extends Component {
                     </SplitterContent>
                     <SplitterSide
                         side="left"
-                        width="20%"
+                        width="15%"
                         isOpen={true}
                         style={{ backgroundColor: "#fafafa" }}
                         collapse={"split"}
                     >
-                        <div>
+                        <div style={{paddingRight: "6px"}}>
                             <Timeline
                                 height={700}
                                 onSelect={this.progressClick}
                                 progress={this.state.progress}
                             >
                                 {this.props.responses.map(response =>
+                                    <div className={this.colorNames[groupColors[completedComponents[response.component].group]]+"-marker"}>
                                     <Moment onSelect={this.progressClick} progress={this.calculatePercentage(response.moment)}>
-                                        {completedComponentNames[response.component]}
+                                        {completedComponents[response.component].name}
                                     </Moment>
+                                    </div>
                                 )}
+                                {this.props.recordings.map(recording => {
+                                    let start = this.calculatePercentage(recording.start);
+                                    let stop = this.calculatePercentage(recording.stop);
+                                    return <div class="timeline-progress timeline-recording" style={{height: (stop-start)+"%", top: start+"%"}}></div>
+                                })}
                             </Timeline>
-                            <Moment onSelect={this.progressClick} progress={this.calculatePercentage(response.moment)}>
-                                {completedComponentNames[response.component]}
-                            </Moment>
                         </div>
                     </SplitterSide>
                 </Splitter>
@@ -148,8 +157,9 @@ class SessionResults extends Component {
 const mapStateToProps = state => ({
     components: state.components.components,
     groups: state.groups.groups,
-    responses: state.responses.responses
+    responses: state.responses.responses,
+    recordings: state.recordings.recordings
 });
 
 
-export default connect(mapStateToProps, { getComponents, deleteComponent, updateComponent, getGroups, getResponses })(SessionResults)
+export default connect(mapStateToProps, { getComponents, deleteComponent, updateComponent, getGroups, getResponses, getRecordings })(SessionResults)

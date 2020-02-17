@@ -52,7 +52,8 @@ export const addRecording = (recording) => (dispatch, getState) => {
                 type: ADD_RECORDING,
                 payload: res.data
             });
-        })
+            dispatch(createMessage({ genericMessage: "Recording Saved" }));
+        }) 
         .catch(err => dispatch(returnErrors(err.recording.data, err.recording.status)));
 }
 
