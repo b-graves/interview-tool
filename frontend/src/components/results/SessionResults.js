@@ -17,6 +17,8 @@ import { getRecordings } from '../../actions/recordings';
 import ReactPlayer from 'react-player'
 import { IoMdPlay, IoMdPause } from "react-icons/io";
 
+import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+
 
 import Players from "./Players"
 
@@ -35,6 +37,7 @@ class SessionResults extends Component {
             recording: this.getRecording(0)
         }
         this.progressClick = this.progressClick.bind(this);
+        this.progressClickAndScroll = this.progressClickAndScroll.bind(this);
     }
 
 
@@ -85,16 +88,41 @@ class SessionResults extends Component {
         this.player = player
     }
 
+    getReponse(moment) {
+        console.log(moment)
+        console.log(this.props.responses)
+        return this.props.responses.find((response, index) => response.moment <= moment && (index === this.props.responses.length+1 || this.props.responses[index+1].moment > moment))
+    }
+
+    scrollTo(response) {
+        console.log("scrolling to "+response.id)
+        scroller.scrollTo(response.id, {
+            duration: 1000,
+            smooth: true,
+            containerId: "responsesContainer"
+          })
+    }
+
     progressClick(progress) {
         let moment = (progress / 100) * this.props.participant.duration;
         let recording = this.getRecording(moment)
-        console.log("CLUCk")
         this.setState({
             progress,
             moment,
             recording
         }, () => this.handleSeek(moment));
+    }
 
+    progressClickAndScroll(progress) {
+        let moment = (progress / 100) * this.props.participant.duration;
+        let recording = this.getRecording(moment)
+        let response = this.getReponse(moment)
+        this.scrollTo(response)
+        this.setState({
+            progress,
+            moment,
+            recording
+        }, () => this.handleSeek(moment));
     }
 
     setProgress(moment) {
@@ -102,6 +130,10 @@ class SessionResults extends Component {
             progress: this.calculatePercentage(moment),
             moment: moment
         });
+    }
+
+    handleSetActive = to => {
+        console.log(to);
     }
 
     backgroundColors = ["#fff", "#a5007d", "#0e5eaa", "#1ea2e7", "#090", "#f8981d", "#e6001f"]
@@ -158,7 +190,7 @@ class SessionResults extends Component {
                 </Toolbar>}>
                 <Splitter>
                     <SplitterContent>
-                        <Page>
+                        <Page className="element" id="responsesContainer">
                             <Content>
                                 <div style={{ display: "none" }}>
                                     {this.state.recording ?
@@ -195,19 +227,19 @@ class SessionResults extends Component {
                         <div style={{ paddingRight: "6px" }}>
                             <Timeline
                                 height={650}
-                                onSelect={this.progressClick}
+                                onSelect={this.progressClickAndScroll}
                                 progress={this.state.progress}
                             >
                                 {this.props.responses.map(response =>
                                     <div className={this.colorNames[groupColors[completedComponents[response.component].group]] + "-marker"}>
-                                        <Moment onSelect={this.progressClick} progress={this.calculatePercentage(response.moment)}>
+                                        <Moment onSelect={(progress) => {this.progressClick(progress); this.scrollTo(response)}} progress={this.calculatePercentage(response.moment)}>
                                         </Moment>
                                     </div>
                                 )}
                                 {this.props.recordings.map(recording => {
                                     let start = this.calculatePercentage(recording.start);
                                     let stop = this.calculatePercentage(recording.stop);
-                                    return <div class="timeline-progress timeline-recording" style={{ height: (stop - start) + "%", top: start + "%" }}></div>
+                                    return <div className="timeline-progress timeline-recording" style={{ height: (stop - start) + "%", top: start + "%" }}></div>
                                 })}
                             </Timeline>
                             <div style={{ opacity: this.state.recording ? 1 : 0.4, padding: "10px 20px", fontSize: "40px" }}>

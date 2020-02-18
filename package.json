@@ -49,7 +49,7 @@
     "react-quill": "^1.3.3",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
-    "react-scroll-to": "^3.0.0-beta.4",
+    "react-scroll": "^1.7.16",
     "react-vertical-timeline": "^0.2.0",
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
