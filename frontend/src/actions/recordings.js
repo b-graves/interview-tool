@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { createMessage, returnErrors } from './messages';
-import { tokenConfig } from './auth';
+import { tokenConfig, tokenConfigFile } from './auth';
 
 import { GET_RECORDINGS, GET_RECORDING, DELETE_RECORDING, ADD_RECORDING, UPDATE_RECORDING } from './types';
 
@@ -45,8 +45,14 @@ export const deleteRecording = (id) => (dispatch, getState) => {
 
 // ADD RECORDING
 export const addRecording = (recording) => (dispatch, getState) => {
+    var fd = new FormData();
+    fd.append('audio', recording.audio);
+    fd.append('blobURL', recording.blobURL);
+    fd.append('participant', recording.participant);
+    fd.append('start', recording.start);
+    fd.append('stop', recording.stop);
     axios
-        .post('/api/recordings/', recording, tokenConfig(getState))
+        .post('/api/recordings/', fd, tokenConfigFile(getState))
         .then(res => {
             dispatch({
                 type: ADD_RECORDING,

@@ -42,6 +42,7 @@ class Response(models.Model):
 
 class Recording(models.Model):
     blobURL = models.TextField()
+    audio =  models.FileField(upload_to="audio", blank=True)
     owner = models.ForeignKey(User, related_name="recordings", on_delete=models.CASCADE, null=True)
     participant = models.ForeignKey(Participant, related_name="recordings", on_delete=models.CASCADE, null=True)
     start = models.IntegerField()

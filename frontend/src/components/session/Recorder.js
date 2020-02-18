@@ -20,7 +20,8 @@ export class Recorder extends Component {
             participant: this.props.participant,
             start: this.props.startTime,
             stop: this.props.time,
-            blobURL: recordedBlob.blobURL
+            blobURL: recordedBlob.blobURL,
+            audio: recordedBlob.blob
         })
     }
 

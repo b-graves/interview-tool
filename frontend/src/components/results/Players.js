@@ -56,7 +56,7 @@ export class Players extends Component {
                 {recording ?
                     <ReactPlayer
                         ref={this.ref}
-                        url={recording.blobURL}
+                        url={recording.audio}
                         playing={playing}
                         controls={false}
                         light={false}

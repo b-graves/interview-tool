@@ -118,7 +118,9 @@ class SessionResults extends Component {
         let moment = (progress / 100) * this.props.participant.duration;
         let recording = this.getRecording(moment)
         let response = this.getReponse(moment)
-        this.scrollTo(response)
+        if (response !== undefined) {
+            this.scrollTo(response)
+        }
         this.setState({
             progress,
             moment,
@@ -197,7 +199,7 @@ class SessionResults extends Component {
                                     {this.state.recording ?
                                         <ReactPlayer
                                             ref={this.ref}
-                                            url={this.state.recording.blobURL}
+                                            url={this.state.recording.audio}
                                             playing={this.state.playing}
                                             controls={false}
                                             light={false}
