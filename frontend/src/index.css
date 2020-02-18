@@ -522,3 +522,80 @@ li {
     margin: 0;
     line-height: 50%;
 }
+
+.timeline-progress.timeline-recording {
+    z-index: -100000;
+    opacity: 1;
+    width: 40px !important;
+    background-image: url("/static/frontend/images/soundwave.png") !important;
+    background-size: contain !important;
+  }
+  
+  .timeline-progress {
+    opacity: 0.5;
+    background: #fafafa  !important;
+    border-radius: 0px !important;
+    width: 40px !important;
+  }
+  
+  .timeline-line {
+    opacity: 0;
+    z-index: 0;
+    width: 40px !important;
+  }
+  
+  div.timeline-bookmark::before {
+    border-radius: 0% !important;
+    background-color: #0f5eaa !important;
+    box-shadow: none !important;
+    width: 24px !important;
+    left: 30px !important;
+    height: 18px !important;
+    border: 2px solid white !important;
+  }
+  
+  .timeline-bookmark>div {
+    margin-top: -5px;
+    margin-left: 5px;
+    font-size: 10px;
+  }
+  
+  div.timeline-bookmark:hover::before {
+    transform: scale(1.0);
+    opacity: 1;
+  }
+  
+  .purple-marker > div.timeline-bookmark::before {
+    background-color: #a5007d !important;
+  }
+  
+  .dark-blue-marker > div.timeline-bookmark::before {
+    background-color: #0e5eaa !important;
+  }
+  
+  .light-blue-marker > div.timeline-bookmark::before {
+    background-color: #1ea2e7 !important;
+  }
+  
+  .green-marker > div.timeline-bookmark::before {
+    background-color: #090 !important;
+  }
+  
+  .yellow-marker > div.timeline-bookmark::before {
+    background-color: #f8981d !important;
+  }
+  
+  .red-marker > div.timeline-bookmark::before {
+    background-color: #e6001f !important;
+  }
+  
+  .white-marker > div.timeline-bookmark::before {
+    background-color: #000 !important;
+  }
+  
+  .explanation { 
+    font-size: 70%;
+    color: grey;
+    padding-bottom: 10px;
+    padding-top: 5px;
+  }

@@ -14,8 +14,11 @@ import { FiChevronUp, FiChevronDown, FiChevronsDown, FiChevronsUp, FiMinus } fro
 import { getResponses } from '../../actions/responses';
 import { getRecordings } from '../../actions/recordings';
 
+import ReactPlayer from 'react-player'
+import { IoMdPlay, IoMdPause } from "react-icons/io";
 
-import Player from "./Player"
+
+import Players from "./Players"
 
 import { Timeline, Bookmark as Moment, Marker } from 'react-vertical-timeline';
 import "react-vertical-timeline/style.css"
@@ -25,12 +28,15 @@ class SessionResults extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            progress: 0
-        };
-
-        this.increment = this.increment.bind(this);
+            progress: 0,
+            moment: 0,
+            ready: false,
+            playing: false,
+            recording: this.getRecording(0)
+        }
         this.progressClick = this.progressClick.bind(this);
     }
+
 
     componentDidMount() {
         this.props.getComponents(this.props.planId);
@@ -39,20 +45,62 @@ class SessionResults extends Component {
         this.props.getRecordings(this.props.participant.id);
     }
 
-    componentWillUnmount() {
-        clearInterval(this.interval);
+
+    handlePlayPause = () => {
+        this.setState({ playing: !this.state.playing })
     }
 
-    increment() {
-        const progress = this.state.progress > 100 ? 0 : (this.state.progress + 1);
-        this.setState({
-            progress
-        });
+    handleProgress = state => {
+        this.setProgress(this.state.recording.start + state.playedSeconds)
+    }
+
+    getRecording(moment) {
+        return this.props.recordings.find(recording => recording.start <= moment && recording.stop >= moment)
+    }
+
+    handleSeek = moment => {
+        console.log("SEEK")
+        console.log(this.state.recording)
+        console.log(this.state.ready)
+        console.log(this.state.recording && this.state.ready)
+        if (this.state.recording && this.state.ready) {
+            let seconds = moment - this.state.recording.start;
+            console.log(seconds)
+            if (seconds < 1) {
+                seconds = 0;
+            }
+            this.player.seekTo(parseFloat(seconds));
+        }
+
+    }
+
+    handleOnReady = () => {
+        console.log("READY")
+        this.setState({ ready: true });
+        // let seconds = this.state.moment - this.state.recording.start;
+        // this.player.seekTo(parseFloat(seconds));
+    }
+
+    ref = player => {
+        this.player = player
     }
 
     progressClick(progress) {
+        let moment = (progress / 100) * this.props.participant.duration;
+        let recording = this.getRecording(moment)
+        console.log("CLUCk")
         this.setState({
-            progress
+            progress,
+            moment,
+            recording
+        }, () => this.handleSeek(moment));
+
+    }
+
+    setProgress(moment) {
+        this.setState({
+            progress: this.calculatePercentage(moment),
+            moment: moment
         });
     }
 
@@ -69,7 +117,6 @@ class SessionResults extends Component {
     }
 
     calculatePercentage(moment) {
-        console.log(Math.round((moment / this.props.participant.duration) * 100))
         return Math.round((moment / this.props.participant.duration) * 100)
     }
 
@@ -97,8 +144,6 @@ class SessionResults extends Component {
             })
         }
 
-        console.log(this.props.recordings)
-
         return (
             <Page renderToolbar={() =>
                 <Toolbar>
@@ -115,37 +160,63 @@ class SessionResults extends Component {
                     <SplitterContent>
                         <Page>
                             <Content>
-
+                                <div style={{ display: "none" }}>
+                                    {this.state.recording ?
+                                        <ReactPlayer
+                                            ref={this.ref}
+                                            url={this.state.recording.blobURL}
+                                            playing={this.state.playing}
+                                            controls={false}
+                                            light={false}
+                                            loop={false}
+                                            onReady={() => this.handleOnReady()}
+                                            onStart={() => console.log('onStart')}
+                                            onEnded={() => this.setState({ playing: false })}
+                                            onBuffer={() => console.log('onBuffer')}
+                                            onSeek={e => console.log('onSeek', e)}
+                                            onError={e => console.log('onError', e)}
+                                            onProgress={this.handleProgress}
+                                        />
+                                        :
+                                        null
+                                    }
+                                </div>
                                 <Responses view={1} completedComponents={completedComponentCards} participant={this.props.participant} />
                             </Content>
                         </Page>
                     </SplitterContent>
                     <SplitterSide
                         side="left"
-                        width="15%"
+                        width="10%"
                         isOpen={true}
                         style={{ backgroundColor: "#fafafa" }}
                         collapse={"split"}
                     >
-                        <div style={{paddingRight: "6px"}}>
+                        <div style={{ paddingRight: "6px" }}>
                             <Timeline
-                                height={700}
+                                height={650}
                                 onSelect={this.progressClick}
                                 progress={this.state.progress}
                             >
                                 {this.props.responses.map(response =>
-                                    <div className={this.colorNames[groupColors[completedComponents[response.component].group]]+"-marker"}>
-                                    <Moment onSelect={this.progressClick} progress={this.calculatePercentage(response.moment)}>
-                                        {completedComponents[response.component].name}
-                                    </Moment>
+                                    <div className={this.colorNames[groupColors[completedComponents[response.component].group]] + "-marker"}>
+                                        <Moment onSelect={this.progressClick} progress={this.calculatePercentage(response.moment)}>
+                                        </Moment>
                                     </div>
                                 )}
                                 {this.props.recordings.map(recording => {
                                     let start = this.calculatePercentage(recording.start);
                                     let stop = this.calculatePercentage(recording.stop);
-                                    return <div class="timeline-progress timeline-recording" style={{height: (stop-start)+"%", top: start+"%"}}></div>
+                                    return <div class="timeline-progress timeline-recording" style={{ height: (stop - start) + "%", top: start + "%" }}></div>
                                 })}
                             </Timeline>
+                            <div style={{ opacity: this.state.recording ? 1 : 0.4, padding: "10px 20px", fontSize: "40px" }}>
+                                {this.state.playing ?
+                                    <IoMdPause onClick={this.handlePlayPause} />
+                                    :
+                                    <IoMdPlay onClick={this.handlePlayPause} />
+                                }
+                            </div>
                         </div>
                     </SplitterSide>
                 </Splitter>

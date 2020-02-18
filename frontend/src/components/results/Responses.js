@@ -21,7 +21,6 @@ export class Responses extends Component {
         this.props.responses.sort(function (a, b) {
             return a.id - b.id;
         })
-        console.log(this.props.suggestions)
 
         let responses = this.props.responses.filter(response => response.participant === this.props.participant.id)
 
