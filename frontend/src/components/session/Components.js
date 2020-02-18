@@ -29,8 +29,8 @@ export class Components extends Component {
     toggleCompletion(componentId) {
         let componentCompletion = this.state.componentCompletion;
         componentCompletion[componentId] = !componentCompletion[componentId]
-        this.scrollTo(componentId)
-        this.setState({ componentCompletion })
+       
+        this.setState({ componentCompletion }, () =>  this.scrollTo(componentId))
     }
 
     dismissSuggestion(id) {
@@ -43,12 +43,13 @@ export class Components extends Component {
     }
 
     scrollTo(componentId) {
-        console.log("scrolling to "+componentId)
-        scroller.scrollTo(componentId, {
+        console.log("in 2 seconds scrolling to "+componentId)
+        setTimeout(function () { scroller.scrollTo(componentId, {
             duration: 750,
             smooth: true,
-            containerId: "documentationContainer"
-          })
+            containerId: "documentationContainer",
+            offset: -20
+          }) }.bind(this), 500);
     }
 
     render() {

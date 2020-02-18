@@ -73,8 +73,6 @@ export class BubbleView extends Component {
             components = components.slice(0, 10)
         }
 
-        components.map((c) => {console.log(c)})
-
         for (let i = 0; i < (Math.floor(components.length / 10) + 1); i++) {
             rows.push(
                 <Row>
@@ -203,7 +201,7 @@ export class BubbleView extends Component {
                         tab: <Tab><MdBubbleChart className="ion-icon--larger" /> Components</Tab>
                     },
                     {
-                        content: <Page title="Documentation" active={activeIndex === 1} tabbar={tabbar}>
+                        content: <Page title="Documentation" active={activeIndex === 1} tabbar={tabbar} id="documentationContainer">
                             <Content>
                                 <Documentation view={2} suggestions={suggestionBubbles} completedComponents={completedComponentBubbles} participant={this.props.participant} />
                             </Content>

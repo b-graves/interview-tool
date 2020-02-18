@@ -99,7 +99,8 @@ class SessionResults extends Component {
         scroller.scrollTo(response.id, {
             duration: 750,
             smooth: true,
-            containerId: "responsesContainer"
+            containerId: "responsesContainer",
+            offset: -20
           })
     }
 
