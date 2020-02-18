@@ -15,6 +15,7 @@ import { FaCheck } from 'react-icons/fa';
 import { IoIosApps } from 'react-icons/io';
 import { MdBubbleChart } from 'react-icons/md';
 
+import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
 export class Components extends Component {
     generateCompletionState() {
@@ -28,6 +29,7 @@ export class Components extends Component {
     toggleCompletion(componentId) {
         let componentCompletion = this.state.componentCompletion;
         componentCompletion[componentId] = !componentCompletion[componentId]
+        this.scrollTo(componentId)
         this.setState({ componentCompletion })
     }
 
@@ -38,6 +40,15 @@ export class Components extends Component {
     state = {
         componentCompletion: this.generateCompletionState(),
         dismissedSuggestions: []
+    }
+
+    scrollTo(componentId) {
+        console.log("scrolling to "+componentId)
+        scroller.scrollTo(componentId, {
+            duration: 750,
+            smooth: true,
+            containerId: "documentationContainer"
+          })
     }
 
     render() {
@@ -73,11 +84,11 @@ export class Components extends Component {
             this.props.components ?
                 this.props.view === 0 ?
                     <Content>
-                        {this.props.hideList ? null : <TickboxesView getTime={this.props.getTime} suggestions={suggestions} participant={this.props.participant} useGroups={this.props.useGroups} components={filteredComponents} groups={this.props.groups} componentCompletion={this.state.componentCompletion}  hideCompletedComponents={this.props.hideCompletedComponents} dismissSuggestion={this.dismissSuggestion.bind(this)} toggleCompletion={this.toggleCompletion.bind(this)} />}
+                        {this.props.hideList ? null : <TickboxesView scrollTo={this.scrollTo} getTime={this.props.getTime} suggestions={suggestions} participant={this.props.participant} useGroups={this.props.useGroups} components={filteredComponents} groups={this.props.groups} componentCompletion={this.state.componentCompletion}  hideCompletedComponents={this.props.hideCompletedComponents} dismissSuggestion={this.dismissSuggestion.bind(this)} toggleCompletion={this.toggleCompletion.bind(this)} />}
                     </Content>
                     : this.props.view === 1 ?
                         <Content>
-                            <CardsView getTime={this.props.getTime} suggestions={suggestions} participant={this.props.participant} useGroups={this.props.useGroups} components={filteredComponents} groups={this.props.groups} componentCompletion={this.state.componentCompletion} toggleCompletion={this.toggleCompletion.bind(this)} dismissSuggestion={this.dismissSuggestion.bind(this)} columns={3} />
+                            <CardsView scrollTo={this.scrollTo} getTime={this.props.getTime} suggestions={suggestions} participant={this.props.participant} useGroups={this.props.useGroups} components={filteredComponents} groups={this.props.groups} componentCompletion={this.state.componentCompletion} toggleCompletion={this.toggleCompletion.bind(this)} dismissSuggestion={this.dismissSuggestion.bind(this)} columns={3} />
                         </Content>
                         :
                         <BubbleView getTime={this.props.getTime} suggestions={suggestions} participant={this.props.participant}  useGroups={this.props.useGroups} components={filteredComponents} groups={this.props.groups} componentCompletion={this.state.componentCompletion} toggleCompletion={this.toggleCompletion.bind(this)} dismissSuggestion={this.dismissSuggestion.bind(this)} columns={3} />

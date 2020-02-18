@@ -10,6 +10,8 @@ import Editor from './NotesEditor'
 
 import { FaTrash } from 'react-icons/fa'
 
+import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+
 
 export class Responses extends Component {
     componentDidMount() {
@@ -28,24 +30,25 @@ export class Responses extends Component {
         return (
             <div>
                 {responses.map(response =>
-                    this.props.view === 0 ?
-                        <div>
-                            <Row>
-                                {this.props.completedComponents[response.component]}
-                            </Row>
-                            <Row style={{ marginBottom: "20px" }}>
-                                <Col>
-                                    <Editor updateResponse={this.props.updateResponse} response={response} />
-                                </Col>
-                                <FaTrash
-                                    className="icon--center"
-                                    onClick={() => {
-                                        this.props.deleteResponse(response.id);
-                                    }}
-                                />
-                            </Row>
-                        </div>
-                        :
+                    <Element name={response.component}>
+                        {this.props.view === 0 ?
+                            <div>
+                                <Row>
+                                    {this.props.completedComponents[response.component]}
+                                </Row>
+                                <Row style={{ marginBottom: "20px" }}>
+                                    <Col>
+                                        <Editor updateResponse={this.props.updateResponse} response={response} />
+                                    </Col>
+                                    <FaTrash
+                                        className="icon--center"
+                                        onClick={() => {
+                                            this.props.deleteResponse(response.id);
+                                        }}
+                                    />
+                                </Row>
+                            </div>
+                            :
                             <Row style={{ marginBottom: "20px" }}>
                                 <Col width={"33%"}>
                                     {this.props.completedComponents[response.component]}
@@ -60,8 +63,8 @@ export class Responses extends Component {
                                         this.props.deleteResponse(response.id);
                                     }}
                                 />
-                            </Row>
-                            
+                            </Row>}
+                    </Element>
                 )}
             </div>
         )

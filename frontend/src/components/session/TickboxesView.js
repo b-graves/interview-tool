@@ -152,6 +152,8 @@ export class TickboxesView extends Component {
                                                                             component: component.id,
                                                                             moment: this.props.getTime()
                                                                         });
+                                                                    } else {
+                                                                        this.props.scrollTo(component.id)
                                                                     }
                                                                     this.setState({ index: 1 })
                                                                 }}
@@ -187,6 +189,8 @@ export class TickboxesView extends Component {
                                                                                     component: component.id,
                                                                                     moment: this.props.getTime()
                                                                                 });
+                                                                            } else {
+                                                                                this.props.scrollTo(component.id)
                                                                             }
                                                                             this.setState({ index: 1 })
                                                                         }}
@@ -225,7 +229,7 @@ export class TickboxesView extends Component {
                         tab: <Tab><FaList className="ion-icon--larger" /> Components</Tab>
                     },
                     {
-                        content: <Page title="Documentation" active={activeIndex === 1} tabbar={tabbar}>
+                        content: <Page title="Documentation" active={activeIndex === 1} tabbar={tabbar} id="documentationContainer">
                             <Content>
                                 <Documentation view={0} suggestions={suggestionItems} completedComponents={completedComponentItems} participant={this.props.participant} hideSuggestions={this.state.hideSuggestions} />
                             </Content>

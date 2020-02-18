@@ -97,7 +97,7 @@ class SessionResults extends Component {
     scrollTo(response) {
         console.log("scrolling to "+response.id)
         scroller.scrollTo(response.id, {
-            duration: 1000,
+            duration: 750,
             smooth: true,
             containerId: "responsesContainer"
           })

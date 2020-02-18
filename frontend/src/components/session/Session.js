@@ -12,6 +12,7 @@ import Content from '../layout/Content';
 
 import Components from "./Components";
 
+import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
 import { FaCheck, FaList, FaMicrophone } from 'react-icons/fa';
 
