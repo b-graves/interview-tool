@@ -91,7 +91,7 @@ class SessionResults extends Component {
     getReponse(moment) {
         console.log(moment)
         console.log(this.props.responses)
-        return this.props.responses.find((response, index) => response.moment <= moment && (index === this.props.responses.length+1 || this.props.responses[index+1].moment > moment))
+        return this.props.responses.find((response, index) => response.moment <= moment && (index === this.props.responses.length-1 || this.props.responses[index+1].moment > moment))
     }
 
     scrollTo(response) {
@@ -129,10 +129,15 @@ class SessionResults extends Component {
     }
 
     setProgress(moment) {
+        let response = this.getReponse(moment)
+        if (response !== undefined) {
+            this.scrollTo(response)
+        }
         this.setState({
             progress: this.calculatePercentage(moment),
             moment: moment
         });
+        
     }
 
     handleSetActive = to => {
@@ -153,6 +158,10 @@ class SessionResults extends Component {
 
     calculatePercentage(moment) {
         return Math.round((moment / this.props.participant.duration) * 100)
+    }
+
+    str_pad_left(string, pad, length) {
+        return (new Array(length+1).join(pad)+string).slice(-length);
     }
 
     render() {
@@ -222,7 +231,7 @@ class SessionResults extends Component {
                     </SplitterContent>
                     <SplitterSide
                         side="left"
-                        width="10%"
+                        width="13%"
                         isOpen={true}
                         style={{ backgroundColor: "#fafafa" }}
                         collapse={"split"}
@@ -244,6 +253,14 @@ class SessionResults extends Component {
                                     let stop = this.calculatePercentage(recording.stop);
                                     return <div className="timeline-progress timeline-recording" style={{ height: (stop - start) + "%", top: start + "%" }}></div>
                                 })}
+                                {this.state.progress < 100 ? 
+                                <div className="timeline-timer" style={{height: this.state.progress+"%"}}>
+                                    <span>{this.str_pad_left(Math.floor(this.state.moment / 60), '0', 2)}:{this.str_pad_left(Math.floor(this.state.moment % 60), '0', 2)}</span>
+                                </div>
+                                : null }
+                                <div className="timeline-timer" style={{height: "100%"}}>
+                                    <span>{this.str_pad_left(Math.floor(this.props.participant.duration / 60), '0', 2)}:{this.str_pad_left(Math.floor(this.props.participant.duration % 60), '0', 2)}</span>
+                                </div>
                             </Timeline>
                             <div style={{ opacity: this.state.recording ? 1 : 0.4, padding: "10px 20px", fontSize: "40px" }}>
                                 {this.state.playing ?
