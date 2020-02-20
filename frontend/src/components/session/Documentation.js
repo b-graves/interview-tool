@@ -8,7 +8,7 @@ export class Documentation extends Component {
     render() {
         return (
             <div>
-                <Responses view={this.props.view} completedComponents={this.props.completedComponents} participant={this.props.participant} inSession={true} />
+                <Responses view={this.props.view} getTime={this.props.getTime} completedComponents={this.props.completedComponents} participant={this.props.participant} inSession={true} />
                 <div style={{marginTop: "80px", minHeight: "150px"}}>
                     {this.props.suggestions.map(suggestion =>
                         this.props.view === 0 && !this.props.hideSuggestions ? suggestion :

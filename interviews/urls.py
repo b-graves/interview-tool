@@ -5,6 +5,7 @@ from .api import GroupViewSet
 from .api import ParticipantViewSet
 from .api import ResponseViewSet
 from .api import RecordingViewSet
+from .api import NoteViewSet
 
 from django.contrib import admin
 from django.urls import path
@@ -19,5 +20,6 @@ router.register('api/groups', GroupViewSet, 'groups')
 router.register('api/participants', ParticipantViewSet, 'participants')
 router.register('api/responses', ResponseViewSet, 'responses')
 router.register('api/recordings', RecordingViewSet, 'recordings')
+router.register('api/notes', NoteViewSet, 'notes')
 
 urlpatterns = router.urls + [path('admin/', admin.site.urls)] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

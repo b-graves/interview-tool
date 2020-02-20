@@ -4,12 +4,14 @@ from interviews.models import Group
 from interviews.models import Participant
 from interviews.models import Response
 from interviews.models import Recording
+from interviews.models import Note
 from rest_framework import viewsets, permissions
 from .serializers import PlanSerializer
 from .serializers import ParticipantSerializer
 from .serializers import ResponseSerializer
 from .serializers import RecordingSerializer
 from .serializers import ComponentSerializer
+from .serializers import NoteSerializer
 from .serializers import GroupSerializer
 
 from rest_framework.decorators import api_view
@@ -102,3 +104,16 @@ class ParticipantViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
+# Note Viewset
+class NoteViewSet(viewsets.ModelViewSet):
+    queryset = Note.objects.all()
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = NoteSerializer
+
+    def get_queryset(self):
+        return self.request.user.notes.all()
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)

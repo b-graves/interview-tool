@@ -28,12 +28,7 @@ export class Components extends Component {
     }
 
     changeColor(component) {
-        console.log(component.id)
-        console.log(component.color)
-        console.log(this.colors[component.color])
         component.color = (component.color + 1) % this.colors.length 
-        console.log(component.color)
-        console.log(this.colors[component.color])
         this.props.updateComponent(component)
     }
 
@@ -45,7 +40,6 @@ export class Components extends Component {
         this.props.components.sort(function(a, b) { 
             return a.id - b.id;
         })
-        console.log(this.props.components)
         return (
             <Fragment>
                 {/* { !this.state.delete ? */}

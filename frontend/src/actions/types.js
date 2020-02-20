@@ -34,6 +34,13 @@ export const ADD_RESPONSE = "ADD_RESPONSE";
 export const UPDATE_RESPONSE = "UPDATE_RESPONSE";
 export const CLEAR_RESPONSES = "CLEAR_RESPONSES";
 
+// NOTES
+export const GET_NOTES = "GET_NOTES";
+export const GET_NOTE = "GET_NOTE";
+export const DELETE_NOTE = "DELETE_NOTE";
+export const ADD_NOTE = "ADD_NOTE";
+export const UPDATE_NOTE = "UPDATE_NOTE";
+
 // RECORDINGS
 export const GET_RECORDINGS = "GET_RECORDINGS";
 export const GET_RECORDING = "GET_RECORDING";

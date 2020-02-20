@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from interviews.models import Plan
 from interviews.models import Component
+from interviews.models import Note
 from interviews.models import Group
 from interviews.models import Response
 from interviews.models import Recording
@@ -41,4 +42,9 @@ class ParticipantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Participant
         fields = '__all__'
-        
+
+# Note Serializer
+class NoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Note
+        fields = '__all__'

@@ -40,6 +40,15 @@ class Response(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+class Note(models.Model):
+    text = models.TextField(default="")
+    owner = models.ForeignKey(User, related_name="notes", on_delete=models.CASCADE, null=True)
+    response = models.ForeignKey(Response, related_name="notes", on_delete=models.CASCADE, null=True)
+    moment = models.IntegerField(default=-1)
+    level = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
 class Recording(models.Model):
     blobURL = models.TextField()
     audio =  models.FileField(upload_to="audio", blank=True)

@@ -4,6 +4,8 @@ import { tokenConfig } from './auth';
 
 import { GET_RESPONSES, GET_RESPONSE, DELETE_RESPONSE, ADD_RESPONSE, UPDATE_RESPONSE } from './types';
 
+import { addNote } from './notes'
+
 // GET RESPONSES
 export const getResponses = (participantId) => (dispatch, getState) => {
     axios
@@ -52,6 +54,7 @@ export const addResponse = (response) => (dispatch, getState) => {
                 type: ADD_RESPONSE,
                 payload: res.data
             });
+            
         })
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 }

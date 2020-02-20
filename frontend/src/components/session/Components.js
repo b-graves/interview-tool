@@ -43,7 +43,6 @@ export class Components extends Component {
     }
 
     scrollTo(componentId) {
-        console.log("in 2 seconds scrolling to "+componentId)
         setTimeout(function () { scroller.scrollTo(componentId, {
             duration: 750,
             smooth: true,

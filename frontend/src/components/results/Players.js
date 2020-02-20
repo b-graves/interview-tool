@@ -18,7 +18,6 @@ export class Players extends Component {
     }
 
     handleProgress = state => {
-        console.log('onProgress', state)
         this.props.setProgress(this.state.recordingStart + state.playedSeconds)
     }
 
@@ -27,8 +26,6 @@ export class Players extends Component {
     }
 
     handleSeek = moment => {
-        console.log("seek")
-        console.log(moment)
         let recording = this.getRecording()
         this.setState(recording)
         if (recording) {

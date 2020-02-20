@@ -25,7 +25,8 @@ export default function(state = initialState, action) {
         case ADD_RESPONSE:
             return {
                 ...state,
-                responses: [...state.responses, action.payload]
+                responses: [...state.responses, action.payload],
+                notes: {...state.notes, [action.payload.id]: []}
             };
         case UPDATE_RESPONSE:
             return {

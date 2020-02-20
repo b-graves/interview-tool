@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import plans from "./plans";
 import components from "./components";
+import notes from "./notes";
 import responses from "./responses";
 import recordings from "./recordings";
 import groups from "./groups";
@@ -18,6 +19,7 @@ export default combineReducers({
     participants,
     errors,
     messages,
-    auth
+    auth,
+    notes
 });
 

@@ -22,8 +22,6 @@ export class ComponentGroups extends Component {
     }
 
     componentDidMount() {
-        console.log("PROPS")
-        console.log(this.props)
         this.props.getComponents(this.props.planId);
         this.props.getGroups(this.props.planId);
     }
@@ -33,12 +31,7 @@ export class ComponentGroups extends Component {
     }
 
     changeColor(component) {
-        console.log(component.id)
-        console.log(component.color)
-        console.log(this.colors[component.color])
         component.color = (component.color + 1) % this.colors.length
-        console.log(component.color)
-        console.log(this.colors[component.color])
         this.props.updateComponent(component)
     }
 
@@ -54,8 +47,6 @@ export class ComponentGroups extends Component {
     findColor() {
         let color = 1;
         let usedColors = this.props.groups.map(group => group.color)
-        console.log("usedColors")
-        console.log(usedColors)
         while (usedColors.includes(color)) {
             color += 1
         }

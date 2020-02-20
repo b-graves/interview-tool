@@ -13,7 +13,6 @@ import { getRecordings } from '../../actions/recordings';
 export class Player extends Component {
 
     render() {
-        console.log(this.props.recordings)
         return (
             <div>
                 Player: {this.props.recording.blobURL}

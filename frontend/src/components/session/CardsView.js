@@ -36,7 +36,6 @@ export class TickboxesView extends Component {
 
 
     render() {
-        console.log(this.props.getTime())
         let columns = []
         let groupColumns = {}
         let groupIndex = {}
@@ -219,7 +218,7 @@ export class TickboxesView extends Component {
                     {
                         content: <Page title="Documentation" active={activeIndex === 1} tabbar={tabbar} id="documentationContainer">
                             <Content>
-                                <Documentation view={1} suggestions={suggestionCards} completedComponents={completedComponentCards} participant={this.props.participant} />
+                                <Documentation view={1} getTime={this.props.getTime} suggestions={suggestionCards} completedComponents={completedComponentCards} participant={this.props.participant} />
                             </Content>
                         </Page>,
                         tab: <Tab><FaRegClipboard className="ion-icon--larger" /> Notes</Tab>

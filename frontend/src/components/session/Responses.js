@@ -6,7 +6,7 @@ import { getPlan } from '../../actions/plans';
 
 import { Col, Row } from 'react-onsenui';
 
-import Editor from './NotesEditor'
+import BulletEditor from './BulletEditor'
 
 import { FaTrash } from 'react-icons/fa'
 
@@ -38,7 +38,7 @@ export class Responses extends Component {
                                 </Row>
                                 <Row style={{ marginBottom: "20px" }}>
                                     <Col>
-                                        <Editor updateResponse={this.props.updateResponse} response={response} />
+                                        <BulletEditor updateResponse={this.props.updateResponse} getTime={this.props.getTime} response={response} />
                                     </Col>
                                     <FaTrash
                                         className="icon--center"
@@ -54,7 +54,7 @@ export class Responses extends Component {
                                     {this.props.completedComponents[response.component]}
                                 </Col>
                                 <Col width={"62%"}>
-                                    <Editor updateResponse={this.props.updateResponse} response={response} />
+                                    <BulletEditor updateResponse={this.props.updateResponse} getTime={this.props.getTime} response={response} />
                                 </Col>
 
                                 <FaTrash
