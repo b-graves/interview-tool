@@ -616,3 +616,17 @@ li {
     font-weight: 500 !important;
     margin-left: 60px
 }
+
+.note-input > input {
+    font-family: 'EB Garamond', serif !important;
+    font-weight: 500 !important;
+    width: 100%
+}
+
+.bullet-point {
+    font-size: 30%;
+    margin-right: 10px;
+    position: relative;
+    top: 2px;
+    margin-left: 10px;
+}

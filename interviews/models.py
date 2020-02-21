@@ -41,11 +41,13 @@ class Response(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 class Note(models.Model):
-    text = models.TextField(default="")
+    text = models.TextField(default="", blank=True)
     owner = models.ForeignKey(User, related_name="notes", on_delete=models.CASCADE, null=True)
+    participant = models.ForeignKey(Participant, related_name="notes", on_delete=models.CASCADE, null=True)
     response = models.ForeignKey(Response, related_name="notes", on_delete=models.CASCADE, null=True)
     moment = models.IntegerField(default=-1)
     level = models.IntegerField(default=0)
+    order = models.FloatField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

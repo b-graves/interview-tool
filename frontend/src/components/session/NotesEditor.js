@@ -59,12 +59,10 @@ export class Editor extends Component {
                 }}
                 onChange={this.handleEditorChange}
                 onFocus={() => {
-                    console.log("FOCUS")
 
                     this.setState({ showToolbar: true })
                 }}
                 onBlur={() => {
-                    console.log("BLUR")
 
                     this.setState({ showToolbar: false })
                 }}
