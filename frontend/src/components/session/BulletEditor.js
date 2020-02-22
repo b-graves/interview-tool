@@ -24,6 +24,7 @@ export class BulletEditor extends Component {
     state = {
         level: 0,
         currentNote: null,
+        noteValue: null,
         focus: null
     }
 
@@ -65,14 +66,21 @@ export class BulletEditor extends Component {
                                     type="text"
                                     name="note"
                                     placeholder="Start Typing here..."
-                                    onChange={e => { this.props.updateNote({ ...note, text: e.target.value }) }}
-                                    value={note.text}
                                     className="note-input"
+                                    onChange={e => {
+                                        this.setState({ noteValue: e.target.value });
+                                    }}
                                     onFocus={() => {
                                         this.setState({ currentNote: note.id, focus: null })
                                     }}
                                     onBlur={() => {
-                                        this.setState({ currentNote: null })
+                                        let noteValue = this.state.noteValue
+                                        this.setState({ currentNote: null, noteValue: null });
+                                        if (noteValue !== null) {
+                                            console.log("Update")
+                                            console.log(noteValue)
+                                            this.props.updateNote({ ...note, text: noteValue });
+                                        }
                                     }}
                                     inputId={this.props.response.id.toString() + "-" + index}
                                 />
