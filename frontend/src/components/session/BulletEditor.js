@@ -53,7 +53,6 @@ export class BulletEditor extends Component {
         this.props.notes.sort(function (a, b) {
             return a.order - b.order;
         })
-        console.log(this.props.notes)
 
         return (
             <div style={{ padding: "10px" }}>
@@ -77,8 +76,6 @@ export class BulletEditor extends Component {
                                         let noteValue = this.state.noteValue
                                         this.setState({ currentNote: null, noteValue: null });
                                         if (noteValue !== null) {
-                                            console.log("Update")
-                                            console.log(noteValue)
                                             this.props.updateNote({ ...note, text: noteValue });
                                         }
                                     }}
