@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { getNotes, addNote, updateNote, deleteNote } from '../../actions/notes';
 
-import { Col, Row, List, ListItem, Button, Input, Icon } from 'react-onsenui';
+import { Col, Row, List, ListItem, Button, Input } from 'react-onsenui';
 
 import { FaCircle } from 'react-icons/fa';
 
@@ -40,10 +40,22 @@ export class BulletEditor extends Component {
         this.setState({ focus: this.props.response.id.toString() + "-" + (index + 1) })
     }
 
+    onEnter = (note, index) => {
+        let order = note.order;
+        if (index === this.props.notes.length - 1) {
+            order += 100
+        } else {
+            order = (order + this.props.notes[index + 1].order) / 2
+        }
+        this.props.addNote({ response: this.props.response.id, moment: this.props.getTime(), level: note.level, order, participant: this.props.response.participant  });
+        this.setState({ focus: this.props.response.id.toString() + "-" + (index + 1) })
+    }
+
     componentDidUpdate() {
         if (this.state.focus !== null) {
             let inputElement = document.getElementById(this.state.focus)
             if (inputElement !== null) {
+                document.activeElement.blur();
                 inputElement.focus();
             }
         }
@@ -59,27 +71,36 @@ export class BulletEditor extends Component {
                 {this.props.notes.map((note, index) =>
                     <form onSubmit={e => this.onSubmit(e, note, index)}>
                         <Row>
-                            <Col style={{ paddingLeft: 20 * note.level }}>
+                            <Col width={20 * note.level + 30} style={{paddingLeft: 20 * note.level}}>
                                 <FaCircle className="bullet-point" />
-                                <Input
-                                    type="text"
+                            </Col>
+                            <Col>
+                                <div 
+                                    contentEditable="true"
+                                    class="textarea textarea--transparent note-input"
                                     name="note"
                                     placeholder="Start Typing here..."
-                                    className="note-input"
-                                    onChange={e => {
-                                        this.setState({ noteValue: e.target.value });
+                                    onKeyDown={ event => {
+                                        if (event.keyCode == 13) {
+                                            event.preventDefault();
+                                            this.onEnter(note, index);
+                                        }
                                     }}
                                     onFocus={() => {
                                         this.setState({ currentNote: note.id, focus: null })
                                     }}
                                     onBlur={() => {
-                                        let noteValue = this.state.noteValue
-                                        this.setState({ currentNote: null, noteValue: null });
+                                        let noteValue = event.target.textContent
+                                        this.setState({ currentNote: null, noteValue: "" });
                                         if (noteValue !== null) {
-                                            this.props.updateNote({ ...note, text: noteValue });
+                                            if (noteValue === "" && index > 0) {
+                                                this.props.deleteNote(note.id);
+                                            } else {
+                                                this.props.updateNote({ ...note, text: noteValue });
+                                            }
                                         }
                                     }}
-                                    inputId={this.props.response.id.toString() + "-" + index}
+                                    id={this.props.response.id.toString() + "-" + index}
                                 />
                             </Col>
                             <Col width={"30px"}>
