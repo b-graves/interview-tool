@@ -40,7 +40,7 @@ export class Responses extends Component {
                                 </Row>
                                 <Row style={{ marginBottom: "20px" }}>
                                     <Col>
-                                        <BulletEditor notes={notes.filter(note => note.response === response.id)} updateResponse={this.props.updateResponse} getTime={this.props.getTime} response={response} />
+                                        <BulletEditor inSession={true} notes={notes.filter(note => note.response === response.id)} updateResponse={this.props.updateResponse} getTime={this.props.getTime} response={response} />
                                     </Col>
                                     <FaTrash
                                         className="icon--center"
@@ -56,7 +56,7 @@ export class Responses extends Component {
                                     {this.props.completedComponents[response.component]}
                                 </Col>
                                 <Col width={"62%"}>
-                                    <BulletEditor notes={notes.filter(note => note.response === response.id)} updateResponse={this.props.updateResponse} getTime={this.props.getTime} response={response} />   
+                                    <BulletEditor inSession={true} notes={notes.filter(note => note.response === response.id)} updateResponse={this.props.updateResponse} getTime={this.props.getTime} response={response} />   
                                 </Col>
 
                                 <FaTrash

@@ -8,17 +8,15 @@ import { Col, Row, List, ListItem, Button, Input } from 'react-onsenui';
 import { FaCircle } from 'react-icons/fa';
 
 import { MdFormatIndentIncrease, MdFormatIndentDecrease } from 'react-icons/md';
+import Bullet from './Bullet';
 
 export class BulletEditor extends Component {
 
     componentDidMount() {
-        this.props.addNote({ response: this.props.response.id, moment: this.props.getTime(), level: 0, order: 0, participant: this.props.response.participant });
-        // this.props.getNotes(this.props.response.id);
-        this.setState({ focus: this.props.response.id.toString() + "-0" })
-    }
-
-    focusDiv() {
-        ReactDOM.findDOMNode(this.refs.theDiv).focus();
+        if (this.props.inSession){
+            this.props.addNote({ response: this.props.response.id, moment: this.props.getTime(), level: 0, order: 0, participant: this.props.response.participant });
+            this.setState({ focus: this.props.response.id.toString() + "-0" })
+        }
     }
 
     state = {
@@ -75,33 +73,7 @@ export class BulletEditor extends Component {
                                 <FaCircle className="bullet-point" />
                             </Col>
                             <Col>
-                                <div 
-                                    contentEditable="true"
-                                    class="textarea textarea--transparent note-input"
-                                    name="note"
-                                    placeholder="Start Typing here..."
-                                    onKeyDown={ event => {
-                                        if (event.keyCode == 13) {
-                                            event.preventDefault();
-                                            this.onEnter(note, index);
-                                        }
-                                    }}
-                                    onFocus={() => {
-                                        this.setState({ currentNote: note.id, focus: null })
-                                    }}
-                                    onBlur={() => {
-                                        let noteValue = event.target.textContent
-                                        this.setState({ currentNote: null, noteValue: "" });
-                                        if (noteValue !== null) {
-                                            if (noteValue === "" && index > 0) {
-                                                this.props.deleteNote(note.id);
-                                            } else {
-                                                this.props.updateNote({ ...note, text: noteValue });
-                                            }
-                                        }
-                                    }}
-                                    id={this.props.response.id.toString() + "-" + index}
-                                />
+                                <Bullet note={note} onEnter={(note, index) => this.onEnter(note, index)} setListState={(state) => this.setState(state)} response={this.props.response} index={index}/>
                             </Col>
                             <Col width={"30px"}>
                                 {this.state.currentNote === note.id && note.level > 0 ? <MdFormatIndentDecrease style={{ fontSize: "120%" }} tabIndex={"-1"} onMouseDown={e => e.preventDefault()} onClick={() => this.props.updateNote({ ...note, level: note.level - 1 })} /> : null}
