@@ -4,8 +4,11 @@ import { connect } from 'react-redux';
 import { getNotes, addNote, updateNote, deleteNote } from '../../actions/notes';
 
 import { Col, Row, List, ListItem, Button, Input, Popover } from 'react-onsenui';
+import { addResponse } from '../../actions/responses';
 
 import { FaCircle, FaLink } from 'react-icons/fa';
+
+import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
 import { MdFormatIndentIncrease, MdFormatIndentDecrease } from 'react-icons/md';
 import Bullet from './Bullet';
@@ -14,9 +17,22 @@ export class BulletEditor extends Component {
 
     componentDidMount() {
         if (this.props.inSession) {
-            this.props.addNote({ response: this.props.response.id, moment: this.props.getTime(), level: 0, order: 0, participant: this.props.response.participant });
+            if (this.props.response.linked) {
+                this.props.addNote({ response: this.props.response.id, moment: this.props.getTime(), level: 0, order: 0, participant: this.props.response.participant, text: this.props.linkNote.text });
+            } else {
+                this.props.addNote({ response: this.props.response.id, moment: this.props.getTime(), level: 0, order: 0, participant: this.props.response.participant });
+            }
             this.setState({ focus: this.props.response.id.toString() + "-0" })
         }
+    }
+
+    scrollTo(componentId) {
+        scroller.scrollTo(componentId, {
+            duration: 300,
+            smooth: true,
+            containerId: "documentationContainer",
+            offset: -20
+          })
     }
 
     state = {
@@ -57,9 +73,40 @@ export class BulletEditor extends Component {
             let inputElement = document.getElementById(this.state.focus)
             if (inputElement !== null) {
                 document.activeElement.blur();
-                inputElement.focus();
+                if (!this.props.linked) {
+                    inputElement.focus();
+                }
             }
         }
+    }
+
+    getResponseByComponent(componentId) {
+        return this.props.responses.find(response => response.component === componentId);
+    }
+
+    createLink(component) {
+        let noteText = this.props.notes.find(note => note.id === this.state.linkNote);
+        if (noteText) {
+            let response = this.getResponseByComponent(component.id)
+            if (response) {
+                this.props.addNote({text: noteText.text, response: response.id, moment: this.props.getTime(), level: 0, order: 100000000, participant: this.props.response.participant});
+            } else {
+                this.props.addResponse({
+                    participant: this.props.participant.id,
+                    component: component.id,
+                    moment: this.props.getTime(),
+                    link_note: this.state.linkNote,
+                    linked: true
+                });
+            }
+        }
+        this.setState({isLinking: false, linkNote: null})
+    }
+
+    openPopOver(note) {
+        this.setState({ target: this.btn, linkFromComponent: this.props.response.component, linkNote: note.id })
+        this.scrollTo(this.props.response.component); 
+        setTimeout(function(){this.setState({ isLinking: true })}.bind(this), 300);
     }
 
     btn = null;
@@ -109,7 +156,7 @@ export class BulletEditor extends Component {
                                 {this.state.currentNote === note.id ? <MdFormatIndentIncrease tabIndex={"-1"} style={{ fontSize: "120%" }} onMouseDown={e => e.preventDefault()} onClick={() => this.props.updateNote({ ...note, level: note.level + 1 })} /> : null}
                             </Col>
                             <Col width={"30px"}>
-                                {this.state.currentNote === note.id || this.state.linkNote === note.id ? <Button modifier={"quiet"} ref={(btn) => { this.btn = btn; }} tabIndex={"-1"} className="link-button" onMouseDown={e => e.preventDefault()} onClick={() => this.setState({ target: this.btn, isLinking: true, linkFromComponent: this.props.response.component, linkNote: note.id })}><FaLink /></Button> : null}
+                                {this.state.currentNote === note.id || this.state.linkNote === note.id ? <Button modifier={"quiet"} ref={(btn) => { this.btn = btn; }} tabIndex={"-1"} className="link-button" onMouseDown={e => this.openPopOver(note)} onClick={e => this.openPopOver(note)}><FaLink /></Button> : null}
                             </Col>
                         </Row>
                     </form>
@@ -126,13 +173,13 @@ export class BulletEditor extends Component {
                         return groups[groupIndex].map((component, index) => 
                             index % 3 === 0 ?
                                 <Row>
-                                    <Col>
+                                    <Col onClick={() => this.createLink(component)}>
                                         {this.props.componentItems[component.id]}
                                     </Col>
-                                    <Col>
+                                    <Col onClick={() => this.createLink(groups[groupIndex][index + 1 ])}>
                                         {index+1 < groups[groupIndex].length ? this.props.componentItems[groups[groupIndex][index + 1 ].id] : null}
                                     </Col>
-                                    <Col>
+                                    <Col onClick={() => this.createLink(groups[groupIndex][index + 2 ])}>
                                         {index+2 < groups[groupIndex].length ? this.props.componentItems[groups[groupIndex][index + 2 ].id] : null}
                                     </Col>
                                 </Row>
@@ -144,9 +191,7 @@ export class BulletEditor extends Component {
     }
 }
 
-// const mapStateToProps = (state, ownProps) => ({
-//     notes: state.notes.notes[ownProps.response.id] == undefined ? [] : state.notes.notes[ownProps.response.id],
-// });
 
 
-export default connect(null, { getNotes, addNote, updateNote, deleteNote })(BulletEditor)
+
+export default connect(null, { getNotes, addNote, updateNote, deleteNote, addResponse })(BulletEditor)

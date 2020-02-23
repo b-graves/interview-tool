@@ -231,7 +231,7 @@ export class TickboxesView extends Component {
                     {
                         content: <Page title="Documentation" active={activeIndex === 1} tabbar={tabbar} id="documentationContainer">
                             <Content>
-                                <Documentation view={0} suggestions={suggestionItems} completedComponents={completedComponentItems} participant={this.props.participant} hideSuggestions={this.state.hideSuggestions} />
+                                <Documentation view={0} toggleCompletion={this.props.toggleCompletion} suggestions={suggestionItems} completedComponents={completedComponentItems} participant={this.props.participant} hideSuggestions={this.state.hideSuggestions} />
                             </Content>
                         </Page>,
                         tab: <Tab><FaRegClipboard className="ion-icon--larger" /> Notes</Tab>

@@ -32,11 +32,12 @@ class Participant(models.Model):
     duration = models.IntegerField(default=-1)
 
 class Response(models.Model):
-    text = models.TextField(default="")
     owner = models.ForeignKey(User, related_name="responses", on_delete=models.CASCADE, null=True)
     participant = models.ForeignKey(Participant, related_name="responses", on_delete=models.CASCADE, null=True)
     component = models.ForeignKey(Component, related_name="responses", on_delete=models.CASCADE, null=True)
+    link_note = models.IntegerField(default=None, null=True)
     moment = models.IntegerField(default=-1)
+    linked = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
