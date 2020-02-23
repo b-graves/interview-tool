@@ -29,6 +29,8 @@ export class Responses extends Component {
         let responses = this.props.responses.filter(response => response.participant === this.props.participant.id)
         let notes = this.props.notes.filter(note => note.participant === this.props.participant.id)
 
+        console.log(this.props.components)
+
         return (
             <div>
                 {responses.map(response =>
@@ -40,7 +42,7 @@ export class Responses extends Component {
                                 </Row>
                                 <Row style={{ marginBottom: "20px" }}>
                                     <Col>
-                                        <BulletEditor inSession={true} notes={notes.filter(note => note.response === response.id)} updateResponse={this.props.updateResponse} getTime={this.props.getTime} response={response} />
+                                        <BulletEditor inSession={true} components={this.props.components} componentItems={this.props.completedComponents} notes={notes.filter(note => note.response === response.id)} updateResponse={this.props.updateResponse} getTime={this.props.getTime} response={response} />
                                     </Col>
                                     <FaTrash
                                         className="icon--center"
@@ -56,7 +58,7 @@ export class Responses extends Component {
                                     {this.props.completedComponents[response.component]}
                                 </Col>
                                 <Col width={"62%"}>
-                                    <BulletEditor inSession={true} notes={notes.filter(note => note.response === response.id)} updateResponse={this.props.updateResponse} getTime={this.props.getTime} response={response} />   
+                                    <BulletEditor inSession={true} components={this.props.components} componentItems={this.props.completedComponents} notes={notes.filter(note => note.response === response.id)} updateResponse={this.props.updateResponse} getTime={this.props.getTime} response={response} />   
                                 </Col>
 
                                 <FaTrash
