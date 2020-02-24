@@ -47,8 +47,7 @@ export class Bullet extends Component {
                 }}
                 onBlur={event => {
                     let noteValue = event.target.textContent
-                    console.log(noteValue)
-                    this.props.setListState({ currentNote: null, noteValue: "" });
+                    this.props.setListState({ noteValue });
                     if (noteValue !== null) {
                         if (noteValue === "" && index > 0) {
                             this.props.deleteNote(note.id);

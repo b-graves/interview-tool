@@ -41,8 +41,7 @@ export class BulletEditor extends Component {
         noteValue: null,
         focus: null,
         isLinking: false,
-        linkFromComponent: null,
-        linkNote: null
+        linkFromComponent: null
     }
 
     onSubmit = (e, note, index) => {
@@ -72,8 +71,8 @@ export class BulletEditor extends Component {
         if (this.state.focus !== null) {
             let inputElement = document.getElementById(this.state.focus)
             if (inputElement !== null) {
-                document.activeElement.blur();
                 if (!this.props.linked) {
+                    document.activeElement.blur();
                     inputElement.focus();
                 }
             }
@@ -85,26 +84,26 @@ export class BulletEditor extends Component {
     }
 
     createLink(component) {
-        let noteText = this.props.notes.find(note => note.id === this.state.linkNote);
-        if (noteText) {
+        let note = this.props.notes.find(note => note.id === this.state.currentNote);
+        if (note) {
             let response = this.getResponseByComponent(component.id)
             if (response) {
-                this.props.addNote({text: noteText.text, response: response.id, moment: this.props.getTime(), level: 0, order: 100000000, participant: this.props.response.participant});
+                this.props.addNote({text: this.state.noteValue, response: response.id, moment: this.props.getTime(), level: 0, order: 100000000, participant: this.props.response.participant});
             } else {
                 this.props.addResponse({
                     participant: this.props.participant.id,
                     component: component.id,
                     moment: this.props.getTime(),
-                    link_note: this.state.linkNote,
+                    link_note: note.id,
                     linked: true
                 });
             }
         }
-        this.setState({isLinking: false, linkNote: null})
+        this.setState({isLinking: false})
     }
 
     openPopOver(note) {
-        this.setState({ target: this.btn, linkFromComponent: this.props.response.component, linkNote: note.id })
+        this.setState({ target: this.btn, linkFromComponent: this.props.response.component, currentNote: note.id })
         this.scrollTo(this.props.response.component); 
         setTimeout(function(){this.setState({ isLinking: true })}.bind(this), 300);
     }
@@ -156,7 +155,7 @@ export class BulletEditor extends Component {
                                 {this.state.currentNote === note.id ? <MdFormatIndentIncrease tabIndex={"-1"} style={{ fontSize: "120%" }} onMouseDown={e => e.preventDefault()} onClick={() => this.props.updateNote({ ...note, level: note.level + 1 })} /> : null}
                             </Col>
                             <Col width={"30px"}>
-                                {this.state.currentNote === note.id || this.state.linkNote === note.id ? <Button modifier={"quiet"} ref={(btn) => { this.btn = btn; }} tabIndex={"-1"} className="link-button" onMouseDown={e => this.openPopOver(note)} onClick={e => this.openPopOver(note)}><FaLink /></Button> : null}
+                                {this.state.currentNote === note.id ? <Button modifier={"quiet"} ref={(btn) => { this.btn = btn; }} tabIndex={"-1"} className="link-button" onMouseDown={e => {e.preventDefault();this.openPopOver(note)}} onClick={e => this.openPopOver(note)}><FaLink /></Button> : null}
                             </Col>
                         </Row>
                     </form>
