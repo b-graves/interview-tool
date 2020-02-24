@@ -99,7 +99,7 @@ export class BulletEditor extends Component {
                 });
             }
         }
-        this.setState({isLinking: false})
+        this.setState({isLinking: false, currentNote: null})
     }
 
     openPopOver(note) {
