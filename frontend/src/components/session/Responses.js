@@ -44,7 +44,7 @@ export class Responses extends Component {
                                     </Row>
                                     <Row style={{ marginBottom: "20px" }}>
                                         <Col>
-                                            <BulletEditor inSession={true} participant={this.props.participant} components={this.props.components} componentItems={this.props.completedComponents} notes={notes.filter(note => note.response === response.id)} updateResponse={this.props.updateResponse} getTime={this.props.getTime} response={response} />
+                                            <BulletEditor inSession={true} participant={this.props.participant} components={this.props.components} componentItems={this.props.completedComponents} notes={notes.filter(note => note.response === response.id)} updateResponse={this.props.updateResponse} getTime={this.props.getTime} response={response} responses={responses} />
                                         </Col>
                                         <FaTrash
                                             className="icon--center"
@@ -83,7 +83,7 @@ export class Responses extends Component {
                                     </Row>
                                     <Row style={{ marginBottom: "20px" }}>
                                         <Col>
-                                            <BulletEditor linked={true} scrollTo={this.props.scrollTo} inSession={true} participant={this.props.participant} components={this.props.components} componentItems={this.props.completedComponents} notes={notes.filter(note => note.response === response.id)} updateResponse={this.props.updateResponse} getTime={this.props.getTime} response={response} linkNote={this.getLinkNote(response.link_note)} />
+                                            <BulletEditor linked={true} scrollTo={this.props.scrollTo} inSession={true} participant={this.props.participant} components={this.props.components} componentItems={this.props.completedComponents} notes={notes.filter(note => note.response === response.id)} updateResponse={this.props.updateResponse} getTime={this.props.getTime} response={response} linkNote={this.getLinkNote(response.link_note)} responses={responses} />
                                         </Col>
                                         <FaTrash
                                             className="icon--center"

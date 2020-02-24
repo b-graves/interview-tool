@@ -203,7 +203,7 @@ export class BubbleView extends Component {
                     {
                         content: <Page title="Documentation" active={activeIndex === 1} tabbar={tabbar} id="documentationContainer">
                             <Content>
-                                <Documentation toggleCompletion={this.props.toggleCompletion} view={2} suggestions={suggestionBubbles} completedComponents={completedComponentBubbles} participant={this.props.participant} />
+                                <Documentation getTime={this.props.getTime} toggleCompletion={this.props.toggleCompletion} view={2} suggestions={suggestionBubbles} completedComponents={completedComponentBubbles} participant={this.props.participant} />
                             </Content>
                         </Page>,
                         tab: <Tab><FaRegClipboard className="ion-icon--larger" /> Notes</Tab>
