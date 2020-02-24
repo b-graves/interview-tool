@@ -146,7 +146,7 @@ export class BulletEditor extends Component {
                                 <FaCircle className="bullet-point" />
                             </Col>
                             <Col>
-                                <Bullet note={note} onEnter={(note, index) => this.onEnter(note, index)} setListState={(state) => this.setState(state)} response={this.props.response} index={index} />
+                                <Bullet note={note} isLinking={this.state.isLinking} onEnter={(note, index) => this.onEnter(note, index)} setListState={(state) => this.setState(state)} response={this.props.response} index={index} />
                             </Col>
                             <Col width={"30px"}>
                                 {this.state.currentNote === note.id && note.level > 0 ? <MdFormatIndentDecrease style={{ fontSize: "120%" }} tabIndex={"-1"} onMouseDown={e => e.preventDefault()} onClick={() => this.props.updateNote({ ...note, level: note.level - 1 })} /> : null}

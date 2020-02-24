@@ -47,6 +47,9 @@ export class Bullet extends Component {
                 }}
                 onBlur={event => {
                     let noteValue = event.target.textContent
+                    if (!this.props.isLinking) {
+                        this.props.setListState({ currentNote: null });
+                    }
                     this.props.setListState({ noteValue });
                     if (noteValue !== null) {
                         if (noteValue === "" && index > 0) {
