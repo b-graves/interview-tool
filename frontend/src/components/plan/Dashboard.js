@@ -80,7 +80,7 @@ export class Dashboard extends Component {
                                 {
                                 content: <Page title="Sessions" active={activeIndex === 2} tabbar={tabbar}>
                                         <Content>
-                                            <Participants navigator={this.props.navigator} planId={this.props.planId}/>
+                                            <Participants navigator={this.props.navigator} planId={this.props.planId} plan={this.props.plan} />
                                         </Content>
                                     </Page>,
                                 tab: <Tab><MdPeople className="ion-icon--larger" /> Sessions</Tab>

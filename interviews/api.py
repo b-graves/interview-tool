@@ -3,12 +3,14 @@ from interviews.models import Component
 from interviews.models import Group
 from interviews.models import Participant
 from interviews.models import Response
+from interviews.models import BiasDeclaration
 from interviews.models import Recording
 from interviews.models import Note
 from rest_framework import viewsets, permissions
 from .serializers import PlanSerializer
 from .serializers import ParticipantSerializer
 from .serializers import ResponseSerializer
+from .serializers import DeclarationSerializer
 from .serializers import RecordingSerializer
 from .serializers import ComponentSerializer
 from .serializers import NoteSerializer
@@ -61,6 +63,19 @@ class ResponseViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
+# Declaration Viewset
+class DeclarationViewSet(viewsets.ModelViewSet):
+    queryset = BiasDeclaration.objects.all()
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = DeclarationSerializer
+
+    def get_queryset(self):
+        return self.request.user.bias_declarations.all()
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 # Recording Viewset
 class RecordingViewSet(viewsets.ModelViewSet):

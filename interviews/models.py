@@ -6,7 +6,8 @@ class Plan(models.Model):
     owner = models.ForeignKey(User, related_name="plans", on_delete=models.CASCADE, null=True)
     duration = models.IntegerField(default=60)
     permitRecording = models.BooleanField(default=True)
-    automaticRecording = models.BooleanField(default=False) 
+    automaticRecording = models.BooleanField(default=False)
+    biasReflection = models.BooleanField(default=False)
     view = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -63,7 +64,7 @@ class Recording(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 class BiasDeclaration(models.Model):
-    text = models.TextField(default="")
+    text = models.TextField(default="", blank=True)
     owner = models.ForeignKey(User, related_name="bias_declarations", on_delete=models.CASCADE, null=True)
     participant = models.ForeignKey(Participant, related_name="bias_declarations", on_delete=models.CASCADE, null=True)
     component = models.ForeignKey(Component, related_name="bias_declarations", on_delete=models.CASCADE, null=True)
@@ -71,7 +72,7 @@ class BiasDeclaration(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 class BiasReflection(models.Model):
-    text = models.TextField(default="")
+    text = models.TextField(default="", blank=True)
     owner = models.ForeignKey(User, related_name="bias_reflections", on_delete=models.CASCADE, null=True)
     participant = models.ForeignKey(Participant, related_name="bias_reflections", on_delete=models.CASCADE, null=True)
     component = models.ForeignKey(Component, related_name="bias_reflections", on_delete=models.CASCADE, null=True)

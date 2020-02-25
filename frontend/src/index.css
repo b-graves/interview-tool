@@ -102,6 +102,11 @@ h3 {
     color: white;
 }
 
+.orange {
+    background-color: #f8981d;
+    color: white;
+}
+
 .button-icon {
     margin-right: 4px;
     position: relative;

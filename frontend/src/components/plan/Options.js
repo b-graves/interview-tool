@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Session from '../session/Session'
 import { Input, Button, Card, Checkbox } from 'react-onsenui';
 
-import { FaPlus, FaMinus, FaStopwatch, FaMicrophone } from 'react-icons/fa';
+import { FaPlus, FaMinus, FaStopwatch, FaMicrophone, FaBalanceScale } from 'react-icons/fa';
 
 export class Options extends Component {
 
@@ -49,6 +49,15 @@ export class Options extends Component {
                             />
                             <div className="explanation">When enabled, audio recording will begin automatically when the session starts and stop the session ends</div>
                         </div>
+                    </Card>
+                    <Card>
+                        <div className="title"><FaBalanceScale className="header-icon--larger" /> Bias Reflection</div>
+                        Bias Reflection <Checkbox
+                            modifier="material"
+                            checked={this.props.plan.biasReflection}
+                            onChange={event => { this.props.updatePlan({ ...this.props.plan, biasReflection: event.target.checked }) }}
+                        />
+                        <div className="explanation">When enabled, the interviewer will be able to declare their preconcieved ideas about what they expect to uncover in each session. Then, following the session they will be able to reflect on shifts in their points of view based on the actual data collected, helping to overcome bias and improve interview integrity</div>
                     </Card>
                 </form>
             </Fragment>

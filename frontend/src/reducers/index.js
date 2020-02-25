@@ -3,6 +3,7 @@ import plans from "./plans";
 import components from "./components";
 import notes from "./notes";
 import responses from "./responses";
+import declarations from "./declarations";
 import recordings from "./recordings";
 import groups from "./groups";
 import participants from "./participants";
@@ -15,6 +16,7 @@ export default combineReducers({
     components,
     responses,
     recordings,
+    declarations,
     groups,
     participants,
     errors,
