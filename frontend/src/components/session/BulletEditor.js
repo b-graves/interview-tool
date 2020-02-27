@@ -32,7 +32,7 @@ export class BulletEditor extends Component {
             smooth: true,
             containerId: "documentationContainer",
             offset: -20
-          })
+        })
     }
 
     state = {
@@ -88,7 +88,7 @@ export class BulletEditor extends Component {
         if (note) {
             let response = this.getResponseByComponent(component.id)
             if (response) {
-                this.props.addNote({text: this.state.noteValue, response: response.id, moment: this.props.getTime(), level: 0, order: 100000000, participant: this.props.response.participant});
+                this.props.addNote({ text: this.state.noteValue, response: response.id, moment: this.props.getTime(), level: 0, order: 100000000, participant: this.props.response.participant });
             } else {
                 this.props.addResponse({
                     participant: this.props.participant.id,
@@ -99,13 +99,13 @@ export class BulletEditor extends Component {
                 });
             }
         }
-        this.setState({isLinking: false, currentNote: null})
+        this.setState({ isLinking: false, currentNote: null })
     }
 
     openPopOver(note) {
         this.setState({ target: this.btn, linkFromComponent: this.props.response.component, currentNote: note.id })
-        this.scrollTo(this.props.response.component); 
-        setTimeout(function(){this.setState({ isLinking: true })}.bind(this), 300);
+        this.scrollTo(this.props.response.component);
+        setTimeout(function () { this.setState({ isLinking: true }) }.bind(this), 300);
     }
 
     btn = null;
@@ -154,37 +154,41 @@ export class BulletEditor extends Component {
                             <Col width={"30px"}>
                                 {this.state.currentNote === note.id ? <MdFormatIndentIncrease tabIndex={"-1"} style={{ fontSize: "120%" }} onMouseDown={e => e.preventDefault()} onClick={() => this.props.updateNote({ ...note, level: note.level + 1 })} /> : null}
                             </Col>
-                            <Col width={"30px"}>
-                                {this.state.currentNote === note.id ? <Button modifier={"quiet"} ref={(btn) => { this.btn = btn; }} tabIndex={"-1"} className="link-button" onMouseDown={e => {e.preventDefault();this.openPopOver(note)}} onClick={e => this.openPopOver(note)}><FaLink /></Button> : null}
-                            </Col>
+                            {this.props.inSession ?
+                                <Col width={"30px"}>
+                                    {this.state.currentNote === note.id ? <Button modifier={"quiet"} ref={(btn) => { this.btn = btn; }} tabIndex={"-1"} className="link-button" onMouseDown={e => { e.preventDefault(); this.openPopOver(note) }} onClick={e => this.openPopOver(note)}><FaLink /></Button> : null}
+                                </Col>
+                                : null
+                            }
                         </Row>
                     </form>
                 )}
-                <Popover
+                {this.props.inSession ? <Popover
                     isOpen={this.state.isLinking}
                     onCancel={() => this.setState({ isLinking: false })}
                     getTarget={() => this.state.target}
                     className="link-popover"
                 >
-                    <div style={{padding: "15px"}}>
-                        <div style={{paddingBottom: "10px"}}>Link note to another component...</div>
+                    <div style={{ padding: "15px" }}>
+                        <div style={{ paddingBottom: "10px" }}>Link note to another component...</div>
                         {groupIndices.map(groupIndex => {
-                        return groups[groupIndex].map((component, index) => 
-                            index % 3 === 0 ?
-                                <Row>
-                                    <Col onClick={() => this.createLink(component)}>
-                                        {this.props.componentItems[component.id]}
-                                    </Col>
-                                    <Col onClick={() => this.createLink(groups[groupIndex][index + 1 ])}>
-                                        {index+1 < groups[groupIndex].length ? this.props.componentItems[groups[groupIndex][index + 1 ].id] : null}
-                                    </Col>
-                                    <Col onClick={() => this.createLink(groups[groupIndex][index + 2 ])}>
-                                        {index+2 < groups[groupIndex].length ? this.props.componentItems[groups[groupIndex][index + 2 ].id] : null}
-                                    </Col>
-                                </Row>
-                        : null)})}
+                            return groups[groupIndex].map((component, index) =>
+                                index % 3 === 0 ?
+                                    <Row>
+                                        <Col onClick={() => this.createLink(component)}>
+                                            {this.props.componentItems[component.id]}
+                                        </Col>
+                                        <Col onClick={() => this.createLink(groups[groupIndex][index + 1])}>
+                                            {index + 1 < groups[groupIndex].length ? this.props.componentItems[groups[groupIndex][index + 1].id] : null}
+                                        </Col>
+                                        <Col onClick={() => this.createLink(groups[groupIndex][index + 2])}>
+                                            {index + 2 < groups[groupIndex].length ? this.props.componentItems[groups[groupIndex][index + 2].id] : null}
+                                        </Col>
+                                    </Row>
+                                    : null)
+                        })}
                     </div>
-                </Popover>
+                </Popover> : null}
             </div>
         )
     }

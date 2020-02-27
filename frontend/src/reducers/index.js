@@ -4,6 +4,7 @@ import components from "./components";
 import notes from "./notes";
 import responses from "./responses";
 import declarations from "./declarations";
+import reflections from "./reflections";
 import recordings from "./recordings";
 import groups from "./groups";
 import participants from "./participants";
@@ -17,6 +18,7 @@ export default combineReducers({
     responses,
     recordings,
     declarations,
+    reflections,
     groups,
     participants,
     errors,

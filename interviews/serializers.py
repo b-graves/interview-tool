@@ -5,6 +5,7 @@ from interviews.models import Note
 from interviews.models import Group
 from interviews.models import Response
 from interviews.models import BiasDeclaration
+from interviews.models import BiasReflection
 from interviews.models import Recording
 from interviews.models import Participant
 
@@ -36,6 +37,12 @@ class ResponseSerializer(serializers.ModelSerializer):
 class DeclarationSerializer(serializers.ModelSerializer):
     class Meta:
         model = BiasDeclaration
+        fields = '__all__'
+
+# Reflection Serializer
+class ReflectionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BiasReflection
         fields = '__all__'
 
 # Recording Serializer

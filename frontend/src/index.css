@@ -716,3 +716,36 @@ li {
     background-color: white !important;
     border-radius: 0px;
 }
+
+.reflection {
+    font-size: 90%
+}
+
+.quiet-grey {
+    font-size: 90%;
+    color: grey !important;
+    padding: 0 !important;
+}
+
+:checked + .segment--material__button {
+    background-color: #36474f !important;
+    color: white !important;
+}
+
+.segment--material__button {
+    background-color: white;
+    color: #36474f !important;
+}
+
+.reflection-input {
+    background-color: #efeff4 !important;
+    border-radius: 0px;
+    border: none;
+    margin: 5px 0;
+    padding: 5px;
+}
+
+.reflection-header {
+    font-size: 80%;
+    margin: 5px 0;
+}

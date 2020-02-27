@@ -134,6 +134,7 @@ export class BiasDeclaration extends Component {
                                     </Col>
                                     <Col>
                                         <div style={{padding: "20px"}}>
+                                        How do you expect the interviewee to respond?
                                         {declarations[component.id] ?
                                             <textarea 
                                                 class="textarea textarea--transparent note-input"

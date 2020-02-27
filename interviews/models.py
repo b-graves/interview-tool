@@ -76,6 +76,7 @@ class BiasReflection(models.Model):
     owner = models.ForeignKey(User, related_name="bias_reflections", on_delete=models.CASCADE, null=True)
     participant = models.ForeignKey(Participant, related_name="bias_reflections", on_delete=models.CASCADE, null=True)
     component = models.ForeignKey(Component, related_name="bias_reflections", on_delete=models.CASCADE, null=True)
+    confirmed_expectations = models.IntegerField(default=None, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

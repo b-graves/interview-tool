@@ -16,6 +16,7 @@ import SessionResults from '../results/SessionResults'
 
 import Session from '../session/Session'
 import BiasDeclaration from '../bias/BiasDeclaration'
+import BiasReflection from '../bias/BiasReflection'
 
 export class Participants extends Component {
     static propTypes = {
@@ -40,11 +41,15 @@ export class Participants extends Component {
         this.props.navigator.pushPage({ component: BiasDeclaration, props: { participantId, planId } });
     }
 
+    startBiasReflection(participantId, planId) {
+        this.props.navigator.pushPage({ component: BiasReflection, props: { participantId, planId } });
+    }
+
     state = {
         delete: false
     }
 
-    render() {
+    render() {22
         this.props.participants.sort(function (a, b) {
             return b.id - a.id;
         })
@@ -66,7 +71,7 @@ export class Participants extends Component {
                                         {/* <Button modifier="quiet" onClick={this.props.deleteParticipant.bind(this, participant.id)}>Remove</Button> */}
                                     </ListItem>
                                 </Col>
-                                {!this.props.plan.biasDeclaration && !participant.complete ?
+                                {this.props.plan.biasReflection && !participant.complete ?
                                     <Col width="178px">
                                         <ListItem
                                             style={{ textAlign: "center", alignItems: "flex-start" }}
@@ -78,7 +83,7 @@ export class Participants extends Component {
                                             <div style={{ textAlign: "center", alignItems: "flex-start", width: "100%" }}>
                                                 <FaBalanceScale
                                                     className="button-icon"
-                                                /> Bias Declaration
+                                                /> Expectations
                                             </div>
                                             {/* <Button modifier="quiet" onClick={this.props.deleteParticipant.bind(this, participant.id)}>Remove</Button> */}
                                         </ListItem>

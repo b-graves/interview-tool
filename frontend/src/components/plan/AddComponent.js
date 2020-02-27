@@ -107,7 +107,7 @@ export class AddComponent extends Component {
                             {this.state.openness < 0.4 ?
                                 <div className={"question-note closed"}>This looks like it could be a closed question. Closed questions can lead to bias in results. <div>Estimated Openness:<ProgressBar className="progress-closed" value={this.state.openness * 100} secondaryValue={100} /></div>
                                 <div className={"question-note"}>
-                                    <Button modifier="quiet" onClick={() => this.setState({ dismissedOpenness: true })}>Ignore</Button>
+                                    <Button modifier="quiet" onClick={() => this.setState({ dismissedOpenness: true })} className="quiet-grey">Ignore</Button>
                                 </div>
                                 </div>
                                 : this.state.openness > 0.6 ?
