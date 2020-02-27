@@ -671,3 +671,48 @@ li {
 .popover {
     border-radius: 0px !important;
 }
+
+.question-note {
+    font-size: 80%;
+    color: grey;
+}
+
+.progress-bar {
+    height: 10px;
+    width: 100px;
+}
+
+.progress-mid > .progress-bar {
+    border: 1px solid #f8971d !important;
+    border-radius: 0px;
+}
+
+.progress-open > .progress-bar {
+    border: 1px solid #009901 !important;
+    border-radius: 0px;
+}
+
+.progress-closed > .progress-bar {
+    border: 1px solid  #e7081f !important;
+    border-radius: 0px;
+}
+
+.progress-mid > .progress-bar > .progress-bar__primary {
+    background-color: #f8971d !important;
+    border-radius: 0px;
+}
+
+.progress-open > .progress-bar > .progress-bar__primary {
+    background-color: #009901 !important;
+    border-radius: 0px;
+}
+
+.progress-closed > .progress-bar > .progress-bar__primary {
+    background-color:  #e7081f !important;
+    border-radius: 0px;
+}
+
+.progress-bar__secondary {
+    background-color: white !important;
+    border-radius: 0px;
+}
