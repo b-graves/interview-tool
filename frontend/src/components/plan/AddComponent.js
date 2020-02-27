@@ -47,15 +47,20 @@ export class AddComponent extends Component {
         for (var structure in this.question_data) {
             let elements = structure.split(" ")
             let match = true
+            let word_match = false
             elements.forEach((element, index) => {
                 if (index < words.length) {
+                    if (words[index] === element) {
+                        word_match = true
+                    }
                     if (element !== "*" && element != words[index]) {
                         match = false
                     }
                 }
             });
 
-            if (match) {
+            if (match && word_match) {
+                console.log(structure)
                 return this.question_data[structure]
             }
         }

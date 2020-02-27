@@ -678,8 +678,8 @@ li {
 }
 
 .progress-bar {
-    height: 10px;
-    width: 100px;
+    height: 15px;
+    width: 150px;
 }
 
 .progress-mid > .progress-bar {
