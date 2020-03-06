@@ -80,14 +80,21 @@ class BiasReflection(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-class InsightTagType(models.Model):
+class Theme(models.Model):
     name = models.CharField(max_length=1000)
-    plan = models.ForeignKey(Plan, related_name="insight_tag_types", on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(User, related_name="themes", on_delete=models.CASCADE, null=True)
+    plan = models.ForeignKey(Plan, related_name="themes", on_delete=models.CASCADE, null=True)
 
-class InsightTag(models.Model):
+class CodingType(models.Model):
     name = models.CharField(max_length=1000)
-    tag_type = models.ForeignKey(InsightTagType, related_name="tags", on_delete=models.CASCADE, null=True)
-    response = models.ForeignKey(Response, related_name="insight_tags", on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(User, related_name="coding_types", on_delete=models.CASCADE, null=True)
+    plan = models.ForeignKey(Plan, related_name="coding_types", on_delete=models.CASCADE, null=True)
+    theme = models.ForeignKey(Theme, related_name="coding_types", on_delete=models.CASCADE, null=True)
+
+class Coding(models.Model):
+    owner = models.ForeignKey(User, related_name="codings", on_delete=models.CASCADE, null=True)
+    codingtype = models.ForeignKey(CodingType, related_name="codings", on_delete=models.CASCADE, null=True)
+    response = models.ForeignKey(Response, related_name="codings", on_delete=models.CASCADE, null=True)
 
 class DataTagType(models.Model):
     name = models.CharField(max_length=1000)

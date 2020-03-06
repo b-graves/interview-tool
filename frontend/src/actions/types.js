@@ -64,6 +64,27 @@ export const ADD_RECORDING = "ADD_RECORDING";
 export const UPDATE_RECORDING = "UPDATE_RECORDING";
 export const CLEAR_RECORDINGS = "CLEAR_RECORDINGS";
 
+// THEMES
+export const GET_THEMES = "GET_THEMES";
+export const GET_THEME = "GET_THEME";
+export const DELETE_THEME = "DELETE_THEME";
+export const ADD_THEME = "ADD_THEME";
+export const UPDATE_THEME = "UPDATE_THEME";
+
+// CODINGS
+export const GET_CODINGS = "GET_CODINGS";
+export const GET_CODING = "GET_CODING";
+export const DELETE_CODING = "DELETE_CODING";
+export const ADD_CODING = "ADD_CODING";
+export const UPDATE_CODING = "UPDATE_CODING";
+
+// CODING_TYPES
+export const GET_CODING_TYPES = "GET_CODING_TYPES";
+export const GET_CODING_TYPE = "GET_CODING_TYPE";
+export const DELETE_CODING_TYPE = "DELETE_CODING_TYPE";
+export const ADD_CODING_TYPE = "ADD_CODING_TYPE";
+export const UPDATE_CODING_TYPE = "UPDATE_CODING_TYPE";
+
 // ALERTS
 export const GET_ERRORS = "GET_ERRORS";
 export const CREATE_MESSAGE = "CREATE_MESSAGE";

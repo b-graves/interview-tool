@@ -14,9 +14,11 @@ import { Col, Row, Card, Button, Segment } from 'react-onsenui';
 
 import BulletEditor from '../session/BulletEditor'
 
-import { FaTrash } from 'react-icons/fa'
+import { FaTrash, FaBalanceScale } from 'react-icons/fa'
 
 import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+
+import Codings from './Codings'
 
 
 export class Responses extends Component {
@@ -46,11 +48,6 @@ export class Responses extends Component {
         let reflections = {};
         this.props.reflections.forEach(reflection => reflections[reflection.component] = reflection)
 
-        console.log(this.props.plan)
-        console.log(this.state)
-        console.log(this.props.plan.biasReflection)
-        console.log(this.state.showBias)
-
         return (
             <div>
                 {responses.map(response =>
@@ -63,14 +60,15 @@ export class Responses extends Component {
                                 <Row style={{ marginBottom: "20px" }}>
                                     <Col>
                                         <BulletEditor linked={response.linked} components={this.props.components} inSession={false} notes={notes.filter(note => note.response === response.id)} updateResponse={this.props.updateResponse} getTime={() => -1} response={response} />
+                                        <Codings response={response} planId={this.props.plan.id} />
                                     </Col>
                                     {this.props.plan.biasReflection && declarations[response.component] ?
                                         this.state.showBias ?
                                             <Col width="30%">
-                                                <Card style={{position: "relative"}}>
-                                                    Expectations
-                                                    <Button style={{position: "absolute", "top": 0, "right": "10px"}} modifier={"quiet"} className="quiet-grey" onClick={() => this.setState({showBias: false})}>Hide</Button>
-                                                <div>
+                                                <Card style={{ position: "relative" }}>
+                                                    <FaBalanceScale /> Expectations
+                                                    <Button style={{ position: "absolute", "top": 0, "right": "10px" }} modifier={"quiet"} className="quiet-grey" onClick={() => this.setState({ showBias: false })}>Hide</Button>
+                                                    <div>
                                                         <div className="reflection-header">How did you expect the interviewee to respond?</div>
                                                         <div className="textarea textarea--transparent note-input">
                                                             {declarations[response.component] ? declarations[response.component].text : "No expectations declared"}
@@ -90,7 +88,7 @@ export class Responses extends Component {
                                                                     className="textarea textarea--transparent note-input reflection-input"
                                                                     rows="6"
                                                                     placeholder="Type your thoughts here..."
-    
+
                                                                     onBlur={event => {
                                                                         this.props.updateReflection({ ...reflections[response.component], text: event.target.value });
                                                                     }}
@@ -105,7 +103,7 @@ export class Responses extends Component {
                                                 </Card>
                                             </Col>
                                             :
-                                            <Button modifier={"quiet"} className="quiet-grey" onClick={() => this.setState({showBias: true})}>Expectations</Button>
+                                            <Button modifier={"quiet"} className="quiet-grey" onClick={() => this.setState({ showBias: true })}>Expectations</Button>
                                         :
                                         null
                                     }
@@ -118,14 +116,15 @@ export class Responses extends Component {
                                 </Col>
                                 <Col>
                                     <BulletEditor linked={response.linked} components={this.props.components} inSession={false} notes={notes.filter(note => note.response === response.id)} updateResponse={this.props.updateResponse} getTime={() => -1} response={response} />
+                                    <Codings response={response} planId={this.props.plan.id} />
                                 </Col>
                                 {this.props.plan.biasReflection && declarations[response.component] ?
                                     this.state.showBias ?
                                         <Col width="30%">
-                                            <Card style={{position: "relative"}}>
-                                                Expectations
-                                                <Button style={{position: "absolute", "top": 0, "right": "10px"}} modifier={"quiet"} className="quiet-grey" onClick={() => this.setState({showBias: false})}>Hide</Button>
-                                            <div>
+                                            <Card style={{ position: "relative" }}>
+                                                <FaBalanceScale /> Expectations
+                                                <Button style={{ position: "absolute", "top": 0, "right": "10px" }} modifier={"quiet"} className="quiet-grey" onClick={() => this.setState({ showBias: false })}>Hide</Button>
+                                                <div>
                                                     <div className="reflection-header">How did you expect the interviewee to respond?</div>
                                                     <div className="textarea textarea--transparent note-input">
                                                         {declarations[response.component] ? declarations[response.component].text : "No expectations declared"}
@@ -160,7 +159,7 @@ export class Responses extends Component {
                                             </Card>
                                         </Col>
                                         :
-                                        <Button modifier={"quiet"} className="quiet-grey" onClick={() => this.setState({showBias: true})}>Expectations</Button>
+                                        <Button modifier={"quiet"} className="quiet-grey" onClick={() => this.setState({ showBias: true })}>Expectations</Button>
                                     :
                                     null
                                 }

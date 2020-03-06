@@ -8,6 +8,9 @@ from interviews.models import BiasDeclaration
 from interviews.models import BiasReflection
 from interviews.models import Recording
 from interviews.models import Participant
+from interviews.models import Theme
+from interviews.models import Coding
+from interviews.models import CodingType
 
 # Plan Serializer
 class PlanSerializer(serializers.ModelSerializer):
@@ -61,4 +64,22 @@ class ParticipantSerializer(serializers.ModelSerializer):
 class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
+        fields = '__all__'
+
+# Theme Serializer
+class ThemeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Theme
+        fields = '__all__'
+
+# CodingType Serializer
+class CodingTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CodingType
+        fields = '__all__'
+
+# Coding Serializer
+class CodingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Coding
         fields = '__all__'

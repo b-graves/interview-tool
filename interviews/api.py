@@ -7,6 +7,9 @@ from interviews.models import BiasDeclaration
 from interviews.models import BiasReflection
 from interviews.models import Recording
 from interviews.models import Note
+from interviews.models import Theme
+from interviews.models import Coding
+from interviews.models import CodingType
 from rest_framework import viewsets, permissions
 from .serializers import PlanSerializer
 from .serializers import ParticipantSerializer
@@ -17,6 +20,9 @@ from .serializers import RecordingSerializer
 from .serializers import ComponentSerializer
 from .serializers import NoteSerializer
 from .serializers import GroupSerializer
+from .serializers import ThemeSerializer
+from .serializers import CodingSerializer
+from .serializers import CodingTypeSerializer
 
 from rest_framework.decorators import api_view
 
@@ -145,6 +151,48 @@ class NoteViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return self.request.user.notes.all()
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+# Theme Viewset
+class ThemeViewSet(viewsets.ModelViewSet):
+    queryset = Theme.objects.all()
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = ThemeSerializer
+
+    def get_queryset(self):
+        return self.request.user.themes.all()
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+# Coding Viewset
+class CodingViewSet(viewsets.ModelViewSet):
+    queryset = Coding.objects.all()
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = CodingSerializer
+
+    def get_queryset(self):
+        return self.request.user.codings.all()
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+# CodingType Viewset
+class CodingTypeViewSet(viewsets.ModelViewSet):
+    queryset = CodingType.objects.all()
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+    serializer_class = CodingTypeSerializer
+
+    def get_queryset(self):
+        return self.request.user.coding_types.all()
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

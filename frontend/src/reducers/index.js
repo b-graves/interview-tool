@@ -8,6 +8,9 @@ import reflections from "./reflections";
 import recordings from "./recordings";
 import groups from "./groups";
 import participants from "./participants";
+import themes from "./themes";
+import codings from "./codings";
+import codingTypes from "./codingtypes";
 import errors from "./errors"
 import messages from "./messages"
 import auth from './auth'
@@ -24,6 +27,9 @@ export default combineReducers({
     errors,
     messages,
     auth,
+    themes,
+    codings,
+    codingTypes,
     notes
 });
 
