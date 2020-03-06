@@ -29,7 +29,7 @@ export class Responses extends Component {
     }
 
     state = {
-        showBias: true
+        showBias: false
     }
 
     render() {
@@ -64,7 +64,7 @@ export class Responses extends Component {
                                     <Col>
                                         <BulletEditor linked={response.linked} components={this.props.components} inSession={false} notes={notes.filter(note => note.response === response.id)} updateResponse={this.props.updateResponse} getTime={() => -1} response={response} />
                                     </Col>
-                                    {this.props.plan.biasReflection ?
+                                    {this.props.plan.biasReflection && declarations[response.component] ?
                                         this.state.showBias ?
                                             <Col width="30%">
                                                 <Card style={{position: "relative"}}>
@@ -119,7 +119,7 @@ export class Responses extends Component {
                                 <Col>
                                     <BulletEditor linked={response.linked} components={this.props.components} inSession={false} notes={notes.filter(note => note.response === response.id)} updateResponse={this.props.updateResponse} getTime={() => -1} response={response} />
                                 </Col>
-                                {this.props.plan.biasReflection ?
+                                {this.props.plan.biasReflection && declarations[response.component] ?
                                     this.state.showBias ?
                                         <Col width="30%">
                                             <Card style={{position: "relative"}}>

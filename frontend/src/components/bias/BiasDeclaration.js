@@ -10,7 +10,7 @@ import { FiChevronUp, FiChevronDown, FiChevronsDown, FiChevronsUp, FiMinus } fro
 import { getComponents } from '../../actions/components';
 import { getGroups } from '../../actions/groups';
 
-import {Row,Col, Page, Card, Navigator, Button, Toolbar, Dialog, BackButton, ProgressCircular, Radio, ProgressBar, Splitter, SplitterContent, SplitterSide, Checkbox, List, ListItem } from 'react-onsenui';
+import { Row, Col, Page, Card, Navigator, Button, Toolbar, Dialog, BackButton, ProgressCircular, Radio, ProgressBar, Splitter, SplitterContent, SplitterSide, Checkbox, List, ListItem } from 'react-onsenui';
 
 import Content from '../layout/Content'
 
@@ -133,23 +133,25 @@ export class BiasDeclaration extends Component {
                                         </Card>
                                     </Col>
                                     <Col>
-                                        <div style={{padding: "20px"}}>
-                                        How do you expect the interviewee to respond?
-                                        {declarations[component.id] ?
-                                            <textarea 
-                                                class="textarea textarea--transparent note-input"
-                                                rows="6"
-                                                placeholder="Type your thoughts here..."
-                                                
-                                                onBlur={event => {
-                                                    this.props.updateDeclaration({ ...declarations[component.id], text: event.target.value });
-                                                }}
-                                            >
-                                                {declarations[component.id].text}
-                                            </textarea>
-                                            :
-                                        <Button modifier={"quiet"} onClick={() => this.props.addDeclaration({participant: this.props.participantId, component: component.id})}>Add Declaration</Button>
-                                        }
+                                        <div style={{ padding: "20px" }}>
+                                            {declarations[component.id] ?
+                                                <div>
+                                                    How do you expect the interviewee to respond?
+                                            <textarea
+                                                        class="textarea textarea--transparent note-input"
+                                                        rows="4"
+                                                        placeholder="Type your thoughts here..."
+
+                                                        onBlur={event => {
+                                                            this.props.updateDeclaration({ ...declarations[component.id], text: event.target.value });
+                                                        }}
+                                                    >
+                                                        {declarations[component.id].text}
+                                                    </textarea>
+                                                </div>
+                                                :
+                                                <Button modifier={"quiet"} onClick={() => this.props.addDeclaration({ participant: this.props.participantId, component: component.id })}>Add Expectations</Button>
+                                            }
                                         </div>
                                     </Col>
                                 </Row>

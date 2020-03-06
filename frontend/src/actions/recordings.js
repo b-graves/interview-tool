@@ -59,7 +59,6 @@ export const addRecording = (recording) => (dispatch, getState) => {
                 payload: res.data
             });
             dispatch(createMessage({ genericMessage: "Recording Saved" }));
-            window.open(recording.blobURL, "_blank")
         }) 
         .catch(err => dispatch(returnErrors(err.recording.data, err.recording.status)));
 }

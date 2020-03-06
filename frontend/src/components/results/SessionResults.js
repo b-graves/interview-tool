@@ -89,9 +89,11 @@ class SessionResults extends Component {
     }
 
     getReponse(moment) {
-        console.log(moment)
-        console.log(this.props.responses)
         return this.props.responses.find((response, index) => response.moment <= moment && (index === this.props.responses.length-1 || this.props.responses[index+1].moment > moment))
+    }
+
+    getReponseByComponent(component) {
+        return this.props.responses.find((response, index) => response.component == component.id)
     }
 
     scrollTo(response) {
@@ -178,6 +180,12 @@ class SessionResults extends Component {
                 completedComponentCards[component.id] = <Card
                     style={{ backgroundColor: this.backgroundColors[groupColors[component.group]], color: this.colors[groupColors[component.group]] }}
                     className={'card__uniform'}
+                    onClick={() => {
+                        let response = this.getReponseByComponent(component)
+                        if (response !== undefined) {
+                            this.progressClick(this.calculatePercentage(response.moment));
+                        }
+                    }}
                 >
                     <div className="title">
                         {component.name}
@@ -225,7 +233,7 @@ class SessionResults extends Component {
                                         null
                                     }
                                 </div>
-                                <Responses view={1} completedComponents={completedComponentCards} participant={this.props.participant} />
+                                <Responses progressClick={this.progressClick} view={1} completedComponents={completedComponentCards} participant={this.props.participant} />
                             </Content>
                         </Page>
                     </SplitterContent>
