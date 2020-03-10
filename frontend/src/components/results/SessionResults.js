@@ -19,6 +19,8 @@ import { IoMdPlay, IoMdPause } from "react-icons/io";
 
 import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
+import Themes from './Themes'
+import ThemeResults from './ThemeResults'
 
 import Players from "./Players"
 
@@ -234,6 +236,8 @@ class SessionResults extends Component {
                                     }
                                 </div>
                                 <Responses progressClick={this.progressClick} view={1} completedComponents={completedComponentCards} participant={this.props.participant} />
+                                <Themes planId={this.props.planId}/>
+                                <ThemeResults planId={this.props.planId}/>
                             </Content>
                         </Page>
                     </SplitterContent>

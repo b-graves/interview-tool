@@ -761,8 +761,10 @@ div.timeline-bookmark.visited::before {
 .coding {
     display: inline-block;
     background-color: white;
-    padding: 5px 10px;
-    margin: 3px;
+    padding: 3px 6px;
+    margin: 2px;
+    font-size: 13px;
+    
 }
 
 .coding-input {
@@ -770,4 +772,67 @@ div.timeline-bookmark.visited::before {
     padding: 5px 10px;
     margin: 3px;
     background: #f2f2f6;
+}
+
+.theme-header {
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+.sc-fzoXzr.iysiLr {
+    display: none;
+}
+
+
+.hEvedf {
+    background-color: #ffffff !important;
+    height: fit-content !important;
+}
+
+.lloQnn {
+    background-color: #e3e3e3 !important;
+    border-radius: 0px !important;
+}
+
+.hqbuHK {
+    background: #e3e3e3 !important;
+    border: none !important;
+    color: #000 !important;
+}
+
+.kTYiy {
+    background-color: #efeff4;
+    opacity: 0.7;
+    padding: 5px;
+    margin-bottom: 0px !important;
+}
+
+.gPdGXw {
+    min-width: 0px;
+    align-self: auto;
+}
+
+.eMMIYx {
+    margin: 5px;
+    min-width: 0px !important;
+    padding: 0px !important;
+    border-bottom: none !important;
+    float: left;
+}
+
+.krrJph {
+    border-radius: 0px !important;
+}
+
+.smooth-dnd-container.horizontal {
+    white-space: normal !important;
+}
+
+.krrJph {
+    width: 48% !important;
+    min-width: 280px !important;
+}
+
+.hPQLma {
+    width: 100% !important;
 }

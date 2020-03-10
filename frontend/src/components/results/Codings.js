@@ -47,6 +47,7 @@ export class Codings extends Component {
         let coding = enabledCodings.find(coding => coding.codingtype === codingtype)
         if (coding) {
             this.props.deleteCoding(coding.id);
+            this.props.deleteCodingType(codingtype);
         }
     }
 
