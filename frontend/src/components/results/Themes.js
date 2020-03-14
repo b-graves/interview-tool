@@ -21,7 +21,7 @@ export class Codings extends Component {
         this.props.getCodings();
         this.props.getThemes(this.props.planId);
         this.props.getCodingTypes(this.props.planId);
-        setInterval(function () {
+        let intervalId = setInterval(function () {
             let classes = ["hqbuHK", "hctKJM", "gmyBzk", "iychAC", "cqDPIl", "cSXhct" ,"gSVBBi"]
             classes.forEach(classToChange => {
                 let elements = document.getElementsByClassName(classToChange)
@@ -29,8 +29,13 @@ export class Codings extends Component {
                     element.innerHTML = element.innerHTML.replace('lane', 'theme').replace('Lane', 'Theme');
                 }
             });
-        }, 500);
+        }, 1000);
+        this.setState({ intervalId: intervalId })
     }
+
+    componentWillUnmount(){
+        clearInterval(this.state.intervalId)
+      }
 
     state = {
         show: false,
@@ -84,39 +89,11 @@ export class Codings extends Component {
             ]
         }
 
-        let themes = {}
-        let wordcloudData = []
-        this.props.themes.forEach(theme => {
-            let themeData = {
-                ...theme,
-                count: 0,
-                codingTypes: []
-            }
-            this.props.codingTypes.forEach(codingType => {
-                if (codingType.theme === theme.id) {
-                    let count = this.countCodings(codingType.id);
-                    themeData.count += count
-                    if (count > 0) {
-                        wordcloudData.push({
-                            text: codingType.name,
-                            value: count
-                        })
-                    }
-                }
-            });
-            themes[themeData.id] = themeData;
-            if (themeData.count > 0) {
-                wordcloudData.push({
-                    text: themeData.name,
-                    value: themeData.count
-                })
-            }
-        });
 
         this.props.themes.forEach((theme, index) => {
             data["lanes"].push({
                 id: theme.id,
-                title: theme.name + " - " + themes[theme.id].count +" instances",
+                title: theme.name,
                 style:{backgroundColor: this.colors[index % this.colors.length]},
                 cards: []
             })
@@ -161,7 +138,6 @@ export class Codings extends Component {
                     canAddCards={false}
                     hideCardDeleteIcon={true}
                     editLaneTitle={true}
-
                     handleDragEnd={this.handleDragEnd.bind(this)}
                     onLaneAdd={this.onLaneAdd.bind(this)}
                     onLaneDelete={this.onLaneDelete.bind(this)}

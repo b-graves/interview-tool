@@ -16,6 +16,8 @@ import Options from "./Options";
 import { IoIosChatbubbles, IoIosOptions } from 'react-icons/io';
 import { MdPeople } from 'react-icons/md';
 
+import Themes from "../results/Themes";
+
 
 export class Dashboard extends Component {
     static propTypes = {
@@ -81,6 +83,7 @@ export class Dashboard extends Component {
                                 content: <Page title="Sessions" active={activeIndex === 2} tabbar={tabbar}>
                                         <Content>
                                             <Participants navigator={this.props.navigator} planId={this.props.planId} plan={this.props.plan} />
+                                            <Themes planId={this.props.planId}/>
                                         </Content>
                                     </Page>,
                                 tab: <Tab><MdPeople className="ion-icon--larger" /> Sessions</Tab>
