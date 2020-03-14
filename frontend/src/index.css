@@ -796,40 +796,40 @@ div.timeline-bookmark.visited::before {
     padding-bottom: 5px;
 }
 
-.sc-fzoXzr.iysiLr {
+.sc-fzoXzr .iysiLr .sc-fzpkJw .hctKJM {
     display: none;
 }
 
 
-.hEvedf {
+.hEvedf .react-trello-board {
     background-color: #ffffff !important;
     height: fit-content !important;
 }
 
-.lloQnn {
+.lloQnn .sc-fznxsB .sc-fznJRM .bTIjTR {
     background-color: #e3e3e3 !important;
     border-radius: 0px !important;
 }
 
-.hqbuHK {
+.hqbuHK .sc-fzpkJw .hctKJM {
     background: #e3e3e3 !important;
     border: none !important;
     color: #000 !important;
 }
 
-.kTYiy {
+.kTYiy .sc-AxheI .sc-fznZeY .gJlwEu{
     background-color: #efeff4;
     opacity: 0.7;
     padding: 5px;
     margin-bottom: 0px !important;
 }
 
-.gPdGXw {
+.gPdGXw .sc-fzoLsD .fYZyZu {
     min-width: 0px;
     align-self: auto;
 }
 
-.eMMIYx {
+.eMMIYx .react-trello-card {
     margin: 5px;
     min-width: 0px !important;
     padding: 0px !important;
@@ -837,7 +837,7 @@ div.timeline-bookmark.visited::before {
     float: left;
 }
 
-.krrJph {
+.krrJph .react-trello-lane {
     border-radius: 0px !important;
 }
 
@@ -845,7 +845,7 @@ div.timeline-bookmark.visited::before {
     white-space: normal !important;
 }
 
-.krrJph {
+.krrJph .react-trello-lane {
     width: 48% !important;
     min-width: 280px !important;
 }
