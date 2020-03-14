@@ -30,7 +30,7 @@ export class Codings extends Component {
         //         }
         //     });
         // }, 1000);
-        this.setState({ intervalId: intervalId })
+        // this.setState({ intervalId: intervalId })
     }
 
     componentWillUnmount(){
