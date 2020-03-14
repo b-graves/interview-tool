@@ -8,7 +8,6 @@ const initialState = {
 export default function(state = initialState, action) {
     switch(action.type) {
         case GET_RECORDINGS:
-            console.log(action)
             return {
                 ...state,
                 recordings: action.payload.filter(recording => recording.participant === action.participant)

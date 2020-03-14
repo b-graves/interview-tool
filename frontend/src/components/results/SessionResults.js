@@ -64,13 +64,9 @@ class SessionResults extends Component {
     }
 
     handleSeek = moment => {
-        console.log("SEEK")
-        console.log(this.state.recording)
-        console.log(this.state.ready)
-        console.log(this.state.recording && this.state.ready)
+
         if (this.state.recording && this.state.ready) {
             let seconds = moment - this.state.recording.start;
-            console.log(seconds)
             if (seconds < 1) {
                 seconds = 0;
             }
@@ -80,7 +76,6 @@ class SessionResults extends Component {
     }
 
     handleOnReady = () => {
-        console.log("READY")
         this.setState({ ready: true });
         // let seconds = this.state.moment - this.state.recording.start;
         // this.player.seekTo(parseFloat(seconds));
@@ -99,7 +94,6 @@ class SessionResults extends Component {
     }
 
     scrollTo(response) {
-        console.log("scrolling to "+response.id)
         scroller.scrollTo(response.id, {
             duration: 750,
             smooth: true,

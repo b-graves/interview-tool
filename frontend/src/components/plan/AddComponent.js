@@ -32,7 +32,6 @@ export class AddComponent extends Component {
         e.preventDefault();
         const { name } = this.state;
         const component = { name, plan: this.props.planId, group: this.props.groupId };
-        console.log("here")
         if (!this.state.question || (this.state.openness > 0.4 || this.state.dismissedOpenness)) {
             this.props.addComponent(component);
             this.setState({
@@ -47,7 +46,6 @@ export class AddComponent extends Component {
     predict_open = question => {
         let candidates = {}
         let words = question.toLowerCase().replace("?", "").split(" ")
-        console.log(words)
         for (var structure in this.question_data) {
             let elements = structure.split(" ")
             let match = true
@@ -71,7 +69,7 @@ export class AddComponent extends Component {
         let top_candidate = null;
         let top_matches = 0
 
-        console.log(candidates)
+        (candidates)
 
         for (var candidate in candidates) {
             if (top_candidate === null || candidates[candidate] > top_matches) {
@@ -80,7 +78,6 @@ export class AddComponent extends Component {
             }
         }
 
-        console.log(top_candidate)
 
         if (top_candidate) {
             return this.question_data[top_candidate]

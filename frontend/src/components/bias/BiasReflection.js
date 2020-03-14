@@ -28,7 +28,6 @@ export class BiasReflection extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props)
         this.props.getResponses(this.props.participantId);
         this.props.getPlan(this.props.planId);
         this.props.getNotes(this.props.participantId);

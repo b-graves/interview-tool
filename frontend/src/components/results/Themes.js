@@ -22,8 +22,8 @@ export class Codings extends Component {
         this.props.getThemes(this.props.planId);
         this.props.getCodingTypes(this.props.planId);
         let intervalId = setInterval(function () {
-            // let classes = ["hqbuHK", "hctKJM"]
-            let classes = [];
+            let classes = ["hqbuHK", "hctKJM"]
+            // let classes = [];
             classes.forEach(classToChange => {
                 let elements = document.getElementsByClassName(classToChange)
                 for (let element of elements) {
@@ -48,11 +48,8 @@ export class Codings extends Component {
         if (targetLaneId === 'unsorted-codings') {
             theme = null
         }
-        console.log(theme)
         let coding = this.props.codingTypes.find(coding => cardId === coding.id);
-        console.log(coding)
         if (coding !== undefined) {
-            console.log(coding)
             this.props.updateCodingType({...coding, theme})
         }
     }
@@ -62,7 +59,6 @@ export class Codings extends Component {
     }
 
     onLaneDelete(laneId) {
-        console.log(laneId)
         this.props.codingTypes.forEach(codingType => {
             if (codingType.theme === laneId) {
                 this.props.updateCodingType({...codingType, theme: null});
@@ -101,12 +97,8 @@ export class Codings extends Component {
         });
 
         this.props.codingTypes.forEach(codingType => {
-            console.log(codingType)
             if (codingType.theme !== null) {
                 data.lanes.forEach((lane, index) => {
-                    console.log(lane.id === codingType.theme)
-                    console.log(lane)
-                    console.log(codingType)
                     if (lane.id === codingType.theme) {
                         data.lanes[index].cards.push({
                             id: codingType.id,

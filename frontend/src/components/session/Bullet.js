@@ -20,8 +20,6 @@ export class Bullet extends Component {
 
     componentDidMount() {
         if (this.node) {
-            console.log(this.state.value)
-            console.log(this.props.note)
             this.node.innerText = this.state.value;
         }
     }

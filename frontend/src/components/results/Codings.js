@@ -56,9 +56,7 @@ export class Codings extends Component {
         let enabledCodings = this.props.codings.filter(coding => coding.response === this.props.response.id)
 
         let enabledCodingTypes = enabledCodings.map(coding => coding.codingtype)
-        if (this.state.show) {
-            console.log(this.props.codings)
-        }
+
         return (
             <Content>
                 {this.state.show ?
