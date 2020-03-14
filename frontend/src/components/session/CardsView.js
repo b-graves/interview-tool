@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addResponse } from '../../actions/responses'
 
+import Help from "../Help";
 
 import { Col, Row, Card, Tabbar, Tab, Page } from 'react-onsenui';
 
@@ -213,7 +214,7 @@ export class TickboxesView extends Component {
                                 }
                             </Content>
                         </Page>,
-                        tab: <Tab><IoIosApps className="ion-icon--larger" /> Components</Tab>
+                        tab: <Tab><IoIosApps className="ion-icon--larger" /> Components <Help text="When you are start each component during the session, tap it below to make notes and timestamp the recording if you are using this" /></Tab>
                     },
                     {
                         content: <Page title="Documentation" active={activeIndex === 1} tabbar={tabbar} id="documentationContainer">
@@ -221,7 +222,7 @@ export class TickboxesView extends Component {
                                 <Documentation view={1} scrollTo={this.props.scrollTo} getTime={this.props.getTime} suggestions={suggestionCards} completedComponents={completedComponentCards} participant={this.props.participant} />
                             </Content>
                         </Page>,
-                        tab: <Tab><FaRegClipboard className="ion-icon--larger" /> Notes</Tab>
+                        tab: <Tab><FaRegClipboard className="ion-icon--larger" /> Notes <Help text="Notes allow you to annotate components with the information obtained" /></Tab>
                     }
                 ]
                 }

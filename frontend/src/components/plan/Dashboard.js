@@ -45,7 +45,7 @@ export class Dashboard extends Component {
                 <Toolbar>
                     <div className="left">
                         <BackButton>
-                            Back
+                            Session Plans
                         </BackButton>
                     </div>
                     <div className="center">

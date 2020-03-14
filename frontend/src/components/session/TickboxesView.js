@@ -12,6 +12,8 @@ import { FaList } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import Help from "../Help";
+
 export class TickboxesView extends Component {
 
     backgroundColors = ["#fff", "#a5007d", "#0e5eaa", "#1ea2e7", "#090", "#f8981d", "#e6001f"]
@@ -226,7 +228,7 @@ export class TickboxesView extends Component {
                                 }
                             </Content>
                         </Page>,
-                        tab: <Tab><FaList className="ion-icon--larger" /> Components</Tab>
+                        tab: <Tab><FaList className="ion-icon--larger" /> Components <Help text="When you are start each component during the session, tap it below to make notes and timestamp the recording if you are using this" /></Tab>
                     },
                     {
                         content: <Page title="Documentation" active={activeIndex === 1} tabbar={tabbar} id="documentationContainer">
@@ -234,7 +236,7 @@ export class TickboxesView extends Component {
                                 <Documentation getTime={this.props.getTime} view={0} toggleCompletion={this.props.toggleCompletion} suggestions={suggestionItems} completedComponents={completedComponentItems} participant={this.props.participant} hideSuggestions={this.state.hideSuggestions} />
                             </Content>
                         </Page>,
-                        tab: <Tab><FaRegClipboard className="ion-icon--larger" /> Notes</Tab>
+                        tab: <Tab><FaRegClipboard className="ion-icon--larger" /> Notes <Help text="Notes allow you to annotate components with the information obtained" /></Tab>
                     }
                 ]
                 }

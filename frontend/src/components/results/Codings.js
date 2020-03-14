@@ -11,6 +11,7 @@ import { Col, Row, Card, Button, Segment, Input } from 'react-onsenui';
 
 import Content from '../layout/Content'
 
+import Help from "../Help";
 
 export class Codings extends Component {
     componentDidMount() {
@@ -63,6 +64,7 @@ export class Codings extends Component {
                 {this.state.show ?
                     <div>
                         <Button modifier="quiet" className="quiet-grey" onClick={() => this.setState({ show: false })}><FaSearch /> Thematic Analysis Coding</Button>
+                        <Help text={"Thematic analysis helps you to systematically process qualitative data. The first step is coding. Coding means coming up with shorthand labels or “codes” to describe the content of sections of data. For each response you can add and enable codings, to help you identify recurring themes in the data."}/>
                         <div style={{paddingTop: "10px"}}>
                             {this.props.codingTypes.map(codingType =>
                                 enabledCodingTypes.includes(codingType.id) ?
@@ -80,7 +82,7 @@ export class Codings extends Component {
                                 type="text"
                                 name="coding"
                                 className="coding-input"
-                                placeholder="+ Add Coding"
+                                placeholder="Add Coding"
                                 onChange={this.onChange}
                                 value={this.state.name}
                             />

@@ -14,6 +14,7 @@ import Board from 'react-trello';
 
 import Content from '../layout/Content'
 
+import Help from "../Help";
 
 export class Codings extends Component {
     componentDidMount() {
@@ -150,6 +151,7 @@ export class Codings extends Component {
         return (
             <div>
                 <div style={{paddingBottom: "15px"}}><FaSearch /> Thematic Analysis</div>
+                <Help text={"The second step of thematic analysis is generating themes, we look over the codes we’ve created, identify patterns among them, and start coming up with themes. Themes are generally broader than codes. Most of the time, you’ll combine several codes into a single theme. Below you can add themes then click drag codes into them."}/>
                 <Board
                     data={data}
                     draggable={true}

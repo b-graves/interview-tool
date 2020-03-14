@@ -18,7 +18,9 @@ import { FaTrash, FaBalanceScale } from 'react-icons/fa'
 
 import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
-import Codings from './Codings'
+import Codings from './Codings';
+
+import Help from '../Help';
 
 
 export class Responses extends Component {
@@ -66,7 +68,7 @@ export class Responses extends Component {
                                         this.state.showBias ?
                                             <Col width="30%">
                                                 <Card style={{ position: "relative" }}>
-                                                    <FaBalanceScale /> Expectations
+                                                    <FaBalanceScale /> Expectations <Help text="This gives you the opportunity to reflect on how the response compared to your expectations. This can be useful in identifying shifts in your point of view and mitigating bias" />
                                                     <Button style={{ position: "absolute", "top": 0, "right": "10px" }} modifier={"quiet"} className="quiet-grey" onClick={() => this.setState({ showBias: false })}>Hide</Button>
                                                     <div>
                                                         <div className="reflection-header">How did you expect the interviewee to respond?</div>
@@ -122,7 +124,7 @@ export class Responses extends Component {
                                     this.state.showBias ?
                                         <Col width="30%">
                                             <Card style={{ position: "relative" }}>
-                                                <FaBalanceScale /> Expectations
+                                                <FaBalanceScale /> Expectations <Help text="This gives you the opportunity to reflect on how the response compared to your expectations. This can be useful in identifying shifts in your point of view and mitigating bias" />
                                                 <Button style={{ position: "absolute", "top": 0, "right": "10px" }} modifier={"quiet"} className="quiet-grey" onClick={() => this.setState({ showBias: false })}>Hide</Button>
                                                 <div>
                                                     <div className="reflection-header">How did you expect the interviewee to respond?</div>

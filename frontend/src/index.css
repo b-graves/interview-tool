@@ -113,6 +113,20 @@ h3 {
     top: 2px;
 }
 
+.button-icon-help {
+    margin-right: 4px;
+    margin-left: 4px;
+    position: relative;
+    top: 2px;
+}
+
+.button-icon-help-extra {
+    margin-right: 6px;
+    margin-left: 2px;
+    position: relative;
+    top: 6px;
+}
+
 .button {
     border-radius: 0px !important;
 }
@@ -656,10 +670,13 @@ div.timeline-bookmark.visited::before {
     top: -3px;
 }
 
-.popover__content {
+.link-popover > .popover > .popover__content {
     width: 80vw;
     height: 70vh;
     margin-right: 10vw;
+}
+
+.popover__content {
     background-color: #efeff4;
     border-radius: 0px !important;
 }

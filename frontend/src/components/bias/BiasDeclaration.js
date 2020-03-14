@@ -14,6 +14,8 @@ import { Row, Col, Page, Card, Navigator, Button, Toolbar, Dialog, BackButton, P
 
 import Content from '../layout/Content'
 
+import Help from "../Help";
+
 
 export class BiasDeclaration extends Component {
     static propTypes = {
@@ -106,7 +108,7 @@ export class BiasDeclaration extends Component {
                         </BackButton>
                     </div>
                     <div className="center">
-                        {this.props.participant ? "Bias Declarations: " + this.props.participant.name : ""}
+                        {this.props.participant ? "Expectations: " + this.props.participant.name : ""}
                     </div>
                 </Toolbar>}>
                 {this.props.groups.map((group, groupIdx) => {
@@ -150,7 +152,10 @@ export class BiasDeclaration extends Component {
                                                     </textarea>
                                                 </div>
                                                 :
-                                                <Button modifier={"quiet"} onClick={() => this.props.addDeclaration({ participant: this.props.participantId, component: component.id })}>Add Expectations</Button>
+                                                <div>
+                                                    <Button modifier={"quiet"} onClick={() => this.props.addDeclaration({ participant: this.props.participantId, component: component.id })}>Add Expectations</Button>
+                                                    <Help text="Adding expectations gives you the opportunity to express before the session how you expect the interviewee to respond. This may not be relevant for all types of session but it may be useful for reflecting on points of view and bias mitigation in areas such as qualitative research." />
+                                                </div>
                                             }
                                         </div>
                                     </Col>

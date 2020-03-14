@@ -20,9 +20,6 @@ export default class Dashboard extends Component {
             <Page renderToolbar={() =>
                 <Toolbar>
                     <div className="left">
-                        <BackButton>
-                            Back
-                        </BackButton>
                     </div>
                     <div className="center">
                         Interview Tool

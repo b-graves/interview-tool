@@ -51,8 +51,8 @@ export class Options extends Component {
                         </div>
                     </Card>
                     <Card>
-                        <div className="title"><FaBalanceScale className="header-icon--larger" /> Bias Reflection</div>
-                        Bias Reflection <Checkbox
+                        <div className="title"><FaBalanceScale className="header-icon--larger" /> Reflect on Expectations</div>
+                        Reflect on Expectations <Checkbox
                             modifier="material"
                             checked={this.props.plan.biasReflection}
                             onChange={event => { this.props.updatePlan({ ...this.props.plan, biasReflection: event.target.checked }) }}

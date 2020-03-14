@@ -5,6 +5,8 @@ import { addComponent } from "../../actions/components"
 
 import { Col, Row, List, ListItem, Button, Input, Icon, ProgressBar } from 'react-onsenui';
 
+import Help from "../Help";
+
 export class AddComponent extends Component {
     state = {
         name: '',
@@ -93,13 +95,14 @@ export class AddComponent extends Component {
         return (
             <ListItem style={{ backgroundColor: "#f0eff4" }}>
                 <form onSubmit={this.onSubmit} style={{ width: "100%" }}>
+                    <Help extra={true} text="A component should represent a piece of information that is to be conveyed or elicited. This could be as specific as a question or a more broad topic of discussion." />
                     <Input
                         type="text"
                         name="name"
-                        placeholder="+ Add New Component"
+                        placeholder="Add New Component"
                         onChange={this.onChange}
                         value={this.state.name}
-                        style={{ width: "80%" }}
+                        style={{ width: "70%" }}
                     />
                     {this.state.name !== '' && (!this.state.question || (this.state.openness >= 0.4 || this.state.dismissedOpenness)) ? <button type="submit" className="button button--quiet" style={{ width: "20%" }}>Create</button> : null}
                     {this.state.question && !this.state.dismissedOpenness ?

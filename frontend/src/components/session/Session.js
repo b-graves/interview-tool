@@ -238,7 +238,7 @@ export class Session extends Component {
                                         // setTimeout(function(){this.setState({hideList: false})}.bind(this), 10);
                                     }}
                                 >
-                                    Filter completed <Checkbox modifier="material" checked={this.state.hideCompletedComponents} />
+                                Hide completed components <Checkbox modifier="material" checked={this.state.hideCompletedComponents} />
                                 </Card>
                                     : null}
                             </div>

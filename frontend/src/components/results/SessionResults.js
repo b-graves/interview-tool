@@ -203,7 +203,7 @@ class SessionResults extends Component {
                 <Toolbar>
                     <div className="left">
                         <BackButton>
-                            Back
+                            Sessions
                         </BackButton>
                     </div>
                     <div className="center">

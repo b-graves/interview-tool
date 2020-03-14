@@ -16,6 +16,7 @@ import Content from '../layout/Content'
 
 import ReactWordcloud from 'react-wordcloud';
 
+import Help from "../Help";
 
 export class ThemeResults extends Component {
     componentDidMount() {
@@ -68,7 +69,10 @@ export class ThemeResults extends Component {
         })
 
         return <div>
-            <div className="theme-header">Word Cloud</div>
+            <div className="theme-header">
+                Word Cloud
+                <Help text="A wordcloud displays the most common themes and codings in your session, sized by the number of occurances." />
+            </div>
             {this.state.show ? <div style={{ height: '80vh', width: '100%' }}>
                 <ReactWordcloud
                     options={{

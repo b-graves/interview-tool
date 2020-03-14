@@ -5,7 +5,7 @@ import { getComponents, deleteComponent } from '../../actions/components'
 
 import { addResponse } from '../../actions/responses'
 
-
+import Help from "../Help";
 
 import { Col, Row, List, ListItem, Button, Card, Tabbar, Tab, Page } from 'react-onsenui';
 
@@ -198,7 +198,7 @@ export class BubbleView extends Component {
                                 {this.makeBubbles(this.props.components, groupColors)}
                             </div>
                         </Page>,
-                        tab: <Tab><MdBubbleChart className="ion-icon--larger" /> Components</Tab>
+                        tab: <Tab><MdBubbleChart className="ion-icon--larger" /> Components <Help text="When you are start each component during the session, tap the bubble containing it to make notes and timestamp the recording if you are using this" /></Tab>
                     },
                     {
                         content: <Page title="Documentation" active={activeIndex === 1} tabbar={tabbar} id="documentationContainer">
@@ -206,7 +206,7 @@ export class BubbleView extends Component {
                                 <Documentation getTime={this.props.getTime} toggleCompletion={this.props.toggleCompletion} view={2} suggestions={suggestionBubbles} completedComponents={completedComponentBubbles} participant={this.props.participant} />
                             </Content>
                         </Page>,
-                        tab: <Tab><FaRegClipboard className="ion-icon--larger" /> Notes</Tab>
+                        tab: <Tab><FaRegClipboard className="ion-icon--larger" /> Notes <Help text="Notes allow you to annotate components with the information obtained" /></Tab>
                     }
                 ]
                 }

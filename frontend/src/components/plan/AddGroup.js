@@ -5,6 +5,8 @@ import { addGroup } from "../../actions/groups"
 
 import { Col, Row, List, ListItem, Button, Input, Icon } from 'react-onsenui';
 
+import Help from "../Help";
+
 export class AddGroup extends Component {
     state = {
         name: ''
@@ -33,16 +35,18 @@ export class AddGroup extends Component {
         return (
             <h3>
                 <form onSubmit={this.onSubmit} style={{width: "100%"}}>
+                    <Help text="A session stage is group of questions or components that form part of the plan for the session." />
                     <Input
                         type="text"
                         name="name"
-                        placeholder={this.props.first ? "+ Add First Session Stage (E.g. Introductory Questions)" :"+ Add New Stage"}
+                        placeholder={this.props.first ? "Add First Session Stage (E.g. Introductory Questions)" :"Add New Stage"}
                         onChange={this.onChange}
                         value={this.state.name}
-                        style={{width: "80%", color: this.backgroundColors[this.props.colors], fontSize: "24px"}}
+                        style={{width: "70%", color: this.backgroundColors[this.props.colors], fontSize: "24px"}}
                     />
                     {this.state.name !== '' ? <button type="submit" className="button button--quiet" style={{width: "20%"}}>Create</button> : null}
                 </form>
+                
             </h3>
         )
     }
