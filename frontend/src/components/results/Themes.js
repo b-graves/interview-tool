@@ -22,7 +22,8 @@ export class Codings extends Component {
         this.props.getThemes(this.props.planId);
         this.props.getCodingTypes(this.props.planId);
         let intervalId = setInterval(function () {
-            let classes = ["hqbuHK", "hctKJM"]
+            // let classes = ["hqbuHK", "hctKJM"]
+            let classes = [];
             classes.forEach(classToChange => {
                 let elements = document.getElementsByClassName(classToChange)
                 for (let element of elements) {
