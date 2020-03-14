@@ -69,7 +69,7 @@ export class ThemeResults extends Component {
 
         return <div>
             <div className="theme-header">Word Cloud</div>
-            <div style={{ height: '80vh', width: '100%' }}>
+            {this.state.show ? <div style={{ height: '80vh', width: '100%' }}>
                 <ReactWordcloud
                     options={{
                         fontFamily: 'Helvetica Neue',
@@ -80,7 +80,7 @@ export class ThemeResults extends Component {
                     }}
                     words={wordcloudData}
                 />
-            </div>
+            </div>: <Button onClick={() => this.setState({show: true})}>Generate Word Cloud</Button>}
         </div>
 
     }

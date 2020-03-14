@@ -159,7 +159,7 @@ export class Responses extends Component {
                                             </Card>
                                         </Col>
                                         :
-                                        <Button modifier={"quiet"} className="quiet-grey" onClick={() => this.setState({ showBias: true })}>Expectations</Button>
+                                        <Button modifier={"quiet"} className="quiet-grey" onClick={() => this.setState({ showBias: true })}><FaBalanceScale /> Expectations</Button>
                                     :
                                     null
                                 }

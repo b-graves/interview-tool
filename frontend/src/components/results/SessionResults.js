@@ -250,7 +250,7 @@ class SessionResults extends Component {
                     >
                         <div style={{ paddingRight: "6px" }}>
                             <Timeline
-                                height={650}
+                                height={600}
                                 onSelect={this.progressClickAndScroll}
                                 progress={this.state.progress}
                             >
