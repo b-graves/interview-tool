@@ -21,15 +21,15 @@ export class Codings extends Component {
         this.props.getCodings();
         this.props.getThemes(this.props.planId);
         this.props.getCodingTypes(this.props.planId);
-        let intervalId = setInterval(function () {
-            let classes = ["hqbuHK", "hctKJM", "gmyBzk", "iychAC", "cqDPIl", "cSXhct" ,"gSVBBi"]
-            classes.forEach(classToChange => {
-                let elements = document.getElementsByClassName(classToChange)
-                for (let element of elements) {
-                    element.innerHTML = element.innerHTML.replace('lane', 'theme').replace('Lane', 'Theme');
-                }
-            });
-        }, 1000);
+        // let intervalId = setInterval(function () {
+        //     let classes = ["hqbuHK", "hctKJM", "gmyBzk", "iychAC", "cqDPIl", "cSXhct" ,"gSVBBi"]
+        //     classes.forEach(classToChange => {
+        //         let elements = document.getElementsByClassName(classToChange)
+        //         for (let element of elements) {
+        //             element.innerHTML = element.innerHTML.replace('lane', 'theme').replace('Lane', 'Theme');
+        //         }
+        //     });
+        // }, 1000);
         this.setState({ intervalId: intervalId })
     }
 
