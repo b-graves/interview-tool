@@ -80,7 +80,6 @@ export class AddComponent extends Component {
         if (top_candidate) {
             return this.question_data[top_candidate]
         }
-
         return 0.5
     }
 
