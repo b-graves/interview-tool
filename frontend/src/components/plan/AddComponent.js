@@ -69,8 +69,6 @@ export class AddComponent extends Component {
         let top_candidate = null;
         let top_matches = 0
 
-        (candidates)
-
         for (var candidate in candidates) {
             if (top_candidate === null || candidates[candidate] > top_matches) {
                 top_candidate = candidate
