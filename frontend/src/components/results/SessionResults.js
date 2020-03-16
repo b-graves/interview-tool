@@ -86,7 +86,7 @@ class SessionResults extends Component {
     }
 
     getReponse(moment) {
-        return this.props.responses.find((response, index) => response.moment <= moment && (index === this.props.responses.length-1 || this.props.responses[index+1].moment > moment))
+        return this.props.responses.find((response, index) => response.moment <= moment && (index === this.props.responses.length - 1 || this.props.responses[index + 1].moment > moment))
     }
 
     getReponseByComponent(component) {
@@ -99,7 +99,7 @@ class SessionResults extends Component {
             smooth: true,
             containerId: "responsesContainer",
             offset: -20
-          })
+        })
     }
 
     progressClick(progress) {
@@ -135,7 +135,7 @@ class SessionResults extends Component {
             progress: this.calculatePercentage(moment),
             moment: moment
         });
-        
+
     }
 
     handleSetActive = to => {
@@ -159,7 +159,7 @@ class SessionResults extends Component {
     }
 
     str_pad_left(string, pad, length) {
-        return (new Array(length+1).join(pad)+string).slice(-length);
+        return (new Array(length + 1).join(pad) + string).slice(-length);
     }
 
     render() {
@@ -230,8 +230,8 @@ class SessionResults extends Component {
                                     }
                                 </div>
                                 <Responses progressClick={this.progressClick} view={1} completedComponents={completedComponentCards} participant={this.props.participant} />
-                                <Themes planId={this.props.planId}/>
-                                <ThemeResults planId={this.props.planId}/>
+                                <Themes planId={this.props.planId} />
+                                <ThemeResults planId={this.props.planId} />
                             </Content>
                         </Page>
                     </SplitterContent>
@@ -250,7 +250,7 @@ class SessionResults extends Component {
                             >
                                 {this.props.responses.map(response =>
                                     <div className={this.colorNames[groupColors[completedComponents[response.component].group]] + "-marker"}>
-                                        <Moment onSelect={(progress) => {this.progressClick(progress); this.scrollTo(response)}} progress={this.calculatePercentage(response.moment)}>
+                                        <Moment onSelect={(progress) => { this.progressClick(progress); this.scrollTo(response) }} progress={this.calculatePercentage(response.moment)}>
                                         </Moment>
                                     </div>
                                 )}
@@ -259,12 +259,12 @@ class SessionResults extends Component {
                                     let stop = this.calculatePercentage(recording.stop);
                                     return <div className="timeline-progress timeline-recording" style={{ height: (stop - start) + "%", top: start + "%" }}></div>
                                 })}
-                                {this.state.progress < 100 ? 
-                                <div className="timeline-timer" style={{height: this.state.progress+"%"}}>
-                                    <span>{this.str_pad_left(Math.floor(this.state.moment / 60), '0', 2)}:{this.str_pad_left(Math.floor(this.state.moment % 60), '0', 2)}</span>
-                                </div>
-                                : null }
-                                <div className="timeline-timer" style={{height: "100%"}}>
+                                {this.state.progress < 100 ?
+                                    <div className="timeline-timer" style={{ height: this.state.progress + "%" }}>
+                                        <span>{this.str_pad_left(Math.floor(this.state.moment / 60), '0', 2)}:{this.str_pad_left(Math.floor(this.state.moment % 60), '0', 2)}</span>
+                                    </div>
+                                    : null}
+                                <div className="timeline-timer" style={{ height: "100%" }}>
                                     <span>{this.str_pad_left(Math.floor(this.props.participant.duration / 60), '0', 2)}:{this.str_pad_left(Math.floor(this.props.participant.duration % 60), '0', 2)}</span>
                                 </div>
                             </Timeline>
