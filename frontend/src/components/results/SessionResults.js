@@ -268,7 +268,7 @@ class SessionResults extends Component {
                                     <span>{this.str_pad_left(Math.floor(this.props.participant.duration / 60), '0', 2)}:{this.str_pad_left(Math.floor(this.props.participant.duration % 60), '0', 2)}</span>
                                 </div>
                             </Timeline>
-                            <div style={{ opacity: this.state.recording ? 1 : 0.4, padding: "10px 20px", fontSize: "40px" }}>
+                            <div style={{ opacity: this.state.recording ? 1 : 0, padding: "10px 20px", fontSize: "40px" }}>
                                 {this.state.playing ?
                                     <IoMdPause onClick={this.handlePlayPause} />
                                     :
