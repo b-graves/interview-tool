@@ -84,7 +84,7 @@ export class ThemeResults extends Component {
                     }}
                     words={wordcloudData}
                 />
-            </div>: <Button onClick={() => this.setState({show: true})}>Generate Word Cloud</Button>}
+            </div> : <Button onClick={() => this.setState({ show: true })}>Generate Word Cloud</Button>}
         </div>
 
     }
